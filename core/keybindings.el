@@ -1,87 +1,87 @@
-(global-set-key (kbd "<f1>") nil)
-(global-set-key (kbd "<f12>") nil)
-(global-set-key (kbd "<f13>") nil)
-(global-set-key (kbd "<f14>") nil)
+(defconst rubicon-leader-key "SPC")
 
-;; (defconst rubicon-leader-key "SPC")
+(defconst rubicon-nvm-states
+  '(normal visual motion))
 
-;;(general-create-definer rubicon-leader
-;;  :prefix rubicon-leader-key)
+;; (general-create-definer
+;;  rubicon-leader
+;;   :prefix "<SPC>"
+;;  :keymaps 'override
+;;   :states rubicon-nvm-states)
 
-;; (general-define-key
-;;  :states nil
-;;  :wk-full-keys nil
-;;  :keymaps rubicon-leader-map)
+(defmacro rubicon-define-leader (prefix)
+  (let ((rb-definer-name (intern
+			  (concat "rubicon-leader-" prefix))))
+    `(general-create-definer
+      ,rb-definer-name
+      :prefix ,prefix
+      :keymaps 'override
+      :states rubicon-nvm-states)))
 
+(rubicon-define-leader "SPC")
+(rubicon-define-leader "<f14>")
 
-(general-nmap
-  "e" 'evil-embrace-evil-surround-region
-  "z g" 'evil-scroll-line-to-bottom
-  "r"  'undo-fu-only-redo
-  "-"  'counsel-M-x
+(general-define-key
+ :states rubicon-nvm-states
+ :keymaps 'override
 
-  ;; In Buffer movement
-  "J"  (lambda () (interactive) (evil-next-line 10))
-  "K"  (lambda () (interactive) (evil-previous-line 10))
-  "L"  (lambda () (interactive) (right-char 10))
-  "H"  (lambda () (interactive) (left-char 10))
-  "l"  'right-char
-  "h"  'left-char
+ "J"  (ilm (evil-next-line 10))
+ "K"  (ilm (evil-previous-line 10))
+ "L"  (ilm (right-char 10))
+ "H"  (ilm (left-char 10))
+ "TAB" 'evil-jump-item
 
-  ;; other
-  "TAB" 'evil-jump-item
-  "M-b" 'evil-buffer-new
-  "<f14> t" '+vterm/here
-  "<f14> T" 'evil-collection-vterm-toggle-send-escape
-  "<f14> s" 'save-buffer
-  "<f14> d" '+doom-dashboard/open
-  "<SPC> z" (lambda () (interactive) (evil-edit "."))
-  "<f14> h" 'hs-hide-level
-  "<f14> <f14>" '+default/search-project
-  "<f14> P" 'proced
-  "<f14> p" 'helm-top
-  "<f14> 3" 'swiper-isearch-thing-at-point
-  "<f14> f" 'helm-google-suggest
-  "<f14> F" '+lookup/online-select
-  "<f14> c" 'org-goto-calendar
-  "<f14> C" '=calendar
-  "<f14> M-c" 'org-date-from-calendar
-  "<f14> l" 'magit-log-all
-  "<f14> b" 'ibuffer
-  "<f14> e" '+eshell/here
-  "<f14> m" 'my/make-run
-  "<f14> r" 'rename-buffer
-  ;; "<f14> z" 'my-open-neotree-at-root
-  "<f14> z" '+neotree/open
-  "<f14> <f1> c" 'org-schedule
-  "S-<SPC> <SPC>" 'counsel-locate
-  ;; "<f1>" 'org-agenda
-  "<f12>" 'switch-window
+ "/" 'swiper
+ "e" 'evil-embrace-evil-surround-region
+ "z g" 'evil-scroll-line-to-bottom
+ "<DEL>" 'execute-extended-command
+ "S-<SPC>" 'counsel-locate
 
-  ;; Resizing
-  "+" 'evil-window-increase-width
-  "_" 'evil-window-decrease-width
-  "M-=" 'evil-window-increase-height
-  "M--" 'evil-window-decrease-height
+ ;; split navigation
+ "<down>" 'evil-window-down
+ "<left>" 'evil-window-left
+ "<up>" 'evil-window-up
+ "<right>" 'evil-window-right )
 
-  ;; split navigation
-  "<down>" 'evil-window-down
-  "<left>" 'evil-window-left
-  "<up>" 'evil-window-up
-  "<right>" 'evil-window-right
+(rubicon-leader-SPC
+  "SPC" 'counsel-find-file
+
+  "h o" 'find-function-on-key
+  "h f" 'find-function
+  "h v" 'find-variable
+
+  "." 'counsel-find-file
+  
+  "s" 'counsel-switch-buffer
+  "g" 'magit-status
+  "b" 'ibuffer
+  "k" 'kill-other-buffers
+
+  "z"  (ilm (evil-edit "."))
+  "<right>" (ilm (my-split-window "right"))
+  "<up>" (ilm (my-split-window "up"))
+  "<left>" (ilm (my-split-window "left"))
+  "<down>" (ilm (my-split-window "down")))
+
+(rubicon-leader-<f14>
+  "<f14>" 'counsel-rg
+  "h" 'hs-hide-level
+  "p" 'proced
+  "3" 'swiper-isearch-thing-at-point
+  "c" 'org-goto-calendar
+  "l" 'magit-log-all
+  ;; "<f14> b" 'ibuffer
+  "r" 'rename-buffer
+  "<f1> c" 'org-schedule
+
+  "<f1>" 'org-agenda
 
   ;; moving windows
-  "<f13> <right>" #'+evil/window-move-right
-  "<f13> <up>" #'+evil/window-move-up
-  "<f13> <left>" #'+evil/window-move-left
-  "<f13> <down>" #'+evil/window-move-down
-
-  ;; split creation
-  "<SPC> <right>" (lambda () (interactive) (my-split-window "right"))
-  "<SPC> <up>" (lambda () (interactive) (my-split-window "up"))
-  "<SPC> <left>" (lambda () (interactive) (my-split-window "left"))
-  "<SPC> <down>" (lambda () (interactive) (my-split-window "down")))
-
+  ;; "<f13> <right>" #'+evil/window-move-right
+  ;; "<f13> <up>" #'+evil/window-move-up
+  ;; "<f13> <left>" #'+evil/window-move-left
+  ;; "<f13> <down>" #'+evil/window-move-down
+)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -111,8 +111,14 @@
   "<f15> b" (lambda () (interactive) (evil-edit "~/org/books.org"))
   "<f15> c" (lambda () (interactive) (evil-edit "~/.emacs.d/init.el")))
 
-
-
 (global-set-key [remap keyboard-quit] #'doom/escape)
 (global-set-key [remap evil-force-normal-state] #'doom/escape)
 (global-set-key [escape] #'doom/escape)
+
+
+;;;###autoload
+
+
+
+
+

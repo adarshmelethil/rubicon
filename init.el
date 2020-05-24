@@ -19,10 +19,9 @@
 (load (concat user-emacs-directory "core/core"))
 (load (concat user-emacs-directory "core/keybindings"))
 
-
+(setq gc-cons-threshold 16777216)
 
 ;; (setq gc-cons-threshold most-positive-fixnum)
-(setq gc-cons-threshold 16777216)
 
 ;; (add-to-list 'load-path 
 ;; 	(concat user-emacs-directory "core"))

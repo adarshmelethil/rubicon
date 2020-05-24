@@ -128,6 +128,8 @@
    :host github
    :repo "Yevgnen/ivy-rich"))
 
+(use-package wgrep)
+
 (use-package counsel-projectile)
 
 (use-package avy)
@@ -141,7 +143,7 @@
    dashboard-set-heading-icons nil
    dashboard-set-file-icons t
    dashboard-startup-banner nil
-   dashboard-items '((recents  . 20)
+   dashboard-items '((recents  . 30)
 		     (projects . 5)
 		     (agenda . 5)))
   :config
@@ -161,3 +163,36 @@
 (use-package doom-modeline
   :ensure t
   :init (doom-modeline-mode 1))
+
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1))
+
+(use-package  evil-indent-plus
+  :config
+  (evil-indent-plus-default-bindings)
+  :straight
+  (evil-indent-plus
+   :type git
+   :host github
+   :repo "TheBB/evil-indent-plus"))
+
+;; (use-package dash
+;;   :straight
+;;   (dash
+;;    :type git
+;;    :host github
+;;    :repo "magnars/dash.el"))
+;; 
+
+(use-package persp-mode
+  :config
+  (setq persp-autokill-buffer-on-remove 'kill-weak
+        persp-reset-windows-on-nil-window-conf nil
+        persp-nil-hidden t
+        persp-auto-save-fname "autosave"
+        persp-set-last-persp-for-new-frames t
+        persp-switch-to-added-buffer nil
+        persp-remove-buffers-from-nil-persp-behaviour nil
+        persp-auto-resume-time -1
+        persp-auto-save-opt (if noninteractive 0 1)))

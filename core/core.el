@@ -1,5 +1,6 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
+
 (setq visible-bell -1)
 (setq ring-bell-function 'ignore)
 (setq display-line-numbers-type 'relative)
@@ -61,3 +62,23 @@
         ;; Back to the default
         ((keyboard-quit))))
 
+(defmacro ilm (&rest body)
+  `(lambda ()
+     (interactive)
+     ,@body))
+
+
+
+(defun kill-dired-buffers ()
+  (interactive)
+  (mapc (lambda (buffer) 
+	  (when (eq 'dired-mode (buffer-local-value 'major-mode buffer)) 
+	    (kill-buffer buffer))) 
+	(buffer-list)))
+
+
+(defun kill-other-buffers ()
+  "Kill all other buffers."
+  (interactive)
+  (kill-dired-buffers)
+  (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
