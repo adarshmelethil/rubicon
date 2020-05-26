@@ -4,7 +4,7 @@
   I have copied some functions from Doom ( e.g. doom escape, org mode keywords, packages, and other features that I commonly use ) to make it have a "doomish" feel.
 
 * Features
-  1. Extremly minimalistic
+  1. Extremely minimalistic
   2. Vim keybindings through Evil
   3. Functional package manager through straight.el
   4. Tries as much as possible to reduce the number of keys required to do something.
