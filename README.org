@@ -9,9 +9,12 @@
   3. Functional package manager through straight.el
   4. Tries as much as possible to reduce the number of keys required to do something.
   5. Packages over configurations. Tries to provide all of its functionality through packages instead of increasing the size of its code base. If the functionality is worth having then it should be a package.
+
      The reasoning is that configurations are a leaky abstraction. You need to understand 100% of your configuration and how everything is glued together in order to successfully debug stuff when things go wrong.
+
      In contrast, packages tend to be a good abstraction since you don't need to understand how they work. They tend to have dedicated maintainers and good documentation.
-     In addition, this makes updating stuff easier since you can just update a specific package that does one thing. If something went wrong you know exactly which package caused it. If you couldn't debug it you can just revert by checking out an older commit. Life is just much easier.
+
+     In addition, this makes updating stuff easier since you can just update a specific package that does one thing. If something went wrong you know exactly which package caused it. If you couldn't debug it you can just revert by checking out an older commit. Life is just easier.
 
 * File structure
  The files are ordered by the order of evaluation
