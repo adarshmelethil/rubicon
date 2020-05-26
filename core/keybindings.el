@@ -1,4 +1,5 @@
-(defconst rubicon-leader-key "SPC")
+(setq mac-command-modifier 'super
+      mac-option-modifier  'meta)
 
 (defconst rubicon-nvm-states
   '(normal visual motion))
@@ -13,17 +14,41 @@
   (let ((rb-definer-name (intern
 			  (concat "rubicon-leader-" prefix))))
     `(general-create-definer
-      ,rb-definer-name
-      :prefix ,prefix
-      :keymaps 'override
-      :states rubicon-nvm-states)))
+       ,rb-definer-name
+       :prefix ,prefix
+       :keymaps 'override
+       :states rubicon-nvm-states)))
 
 (rubicon-define-leader "SPC")
+(rubicon-define-leader "g")
 (rubicon-define-leader "<f14>")
+(rubicon-define-leader "<f13>")
+(rubicon-define-leader "<f15>")
+(rubicon-define-leader "M")
+
+(general-define-key
+ :states rubicon-nvm-states
+ :keymaps 'org-mode-map
+ "<return>" '+org/dwim-at-point)
+
+
+(general-nmap
+ "u" 'undo-fu-only-undo
+ "r" 'undo-fu-only-redo
+ "g c" 'evilnc-comment-operator)
+
 
 (general-define-key
  :states rubicon-nvm-states
  :keymaps 'override
+
+ "#" 'swiper-isearch-thing-at-point
+
+ "+" 'evil-window-increase-width
+ "_" 'evil-window-decrease-width
+ "M-=" 'evil-window-increase-height
+ "M--" 'evil-window-decrease-height
+
 
  "J"  (ilm (evil-next-line 10))
  "K"  (ilm (evil-previous-line 10))
@@ -32,9 +57,10 @@
  "TAB" 'evil-jump-item
 
  "/" 'swiper
+ "?" 'swiper-all
  "e" 'evil-embrace-evil-surround-region
  "z g" 'evil-scroll-line-to-bottom
- "<DEL>" 'execute-extended-command
+ "<DEL>" 'counsel-M-x
  "S-<SPC>" 'counsel-locate
 
  ;; split navigation
@@ -44,15 +70,52 @@
  "<right>" 'evil-window-right )
 
 (rubicon-leader-SPC
-  "SPC" 'counsel-find-file
+  "o" 'kill-other-buffers
+  "s" 'eshell
+  "t" 'vterm
+  "r" 'ielm
+  "e" 'eval-last-sexp
+  "E" 'eval-buffer
+  "'" 'ivy-resume
 
+  "w s" 'persp-switch 
+  "w c" 'persp-add-new
+  
+  "n" 'eyebrowse-create-window-config
+  "0" 'eyebrowse-switch-to-window-config-10
+  "1" 'eyebrowse-switch-to-window-config-1
+  "2" 'eyebrowse-switch-to-window-config-2
+  "3" 'eyebrowse-switch-to-window-config-3
+  "4" 'eyebrowse-switch-to-window-config-4
+  "5" 'eyebrowse-switch-to-window-config-5
+  "6" 'eyebrowse-switch-to-window-config-6
+  "7" 'eyebrowse-switch-to-window-config-7
+  "8" 'eyebrowse-switch-to-window-config-8
+  "9" 'eyebrowse-switch-to-window-config-9
+  
+  "SPC" 'counsel-projectile-find-file-dwim
+
+  "h w" 'what-cursor-position
   "h o" 'find-function-on-key
   "h f" 'find-function
   "h v" 'find-variable
 
+  ;;Describe
+  "d v" 'describe-variable
+  "d k" 'describe-key
+  "d m" 'describe-mode
+  "d f" 'describe-face
+  "d o" 'describe-font
+  "d c" 'describe-char
+  "d t" 'describe-theme
+  "d a" 'describe-keymap
+  "d s" 'describe-symbol
+  "d b" 'describe-binding
+  "d n" 'describe-fontset
+
   "." 'counsel-find-file
   
-  "s" 'counsel-switch-buffer
+  "," 'counsel-switch-buffer
   "g" 'magit-status
   "b" 'ibuffer
   "k" 'kill-other-buffers
@@ -74,20 +137,19 @@
   "r" 'rename-buffer
   "<f1> c" 'org-schedule
 
-  "<f1>" 'org-agenda
+  "<f1>" 'org-agenda)
 
-  ;; moving windows
-  ;; "<f13> <right>" #'+evil/window-move-right
-  ;; "<f13> <up>" #'+evil/window-move-up
-  ;; "<f13> <left>" #'+evil/window-move-left
-  ;; "<f13> <down>" #'+evil/window-move-down
-)
+(rubicon-leader-<f13>
+  "<right>" #'+evil/window-move-right
+  "<up>" #'+evil/window-move-up
+  "<left>" #'+evil/window-move-left
+  "<down>" #'+evil/window-move-down)
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; dirs/files navigation
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 (create-folder-nmap "<f15> H" ~/                 )
 (create-folder-nmap "<f15> P" ~/projects/        )
 (create-folder-nmap "<f15> S" ~/scrap/           )
@@ -99,26 +161,19 @@
 (create-folder-nmap "<f15> D" ~/.doom.d          )
 (create-folder-nmap "<f15> O" ~/org              )
 
-(general-nmap
-  "<f15> l" (lambda () (interactive) (evil-edit "~/org/timeline.org"))
-  "<f15> i" (lambda () (interactive) (evil-edit "~/org/triage.org"))
-  "<f15> t" (lambda () (interactive) (evil-edit "~/org/todo.org"))
-  "<f15> g" (lambda () (interactive) (evil-edit "~/org/gist.org"))
-  "<f15> n" (lambda () (interactive) (evil-edit "~/org/notes.org"))
-  "<f15> s" (lambda () (interactive) (evil-edit "~/org/scrap.org"))
-  "<f15> r" (lambda () (interactive) (evil-edit "~/.zshrc"))
-  "<f15> p" (lambda () (interactive) (evil-edit "~/org/projects.org"))
-  "<f15> b" (lambda () (interactive) (evil-edit "~/org/books.org"))
-  "<f15> c" (lambda () (interactive) (evil-edit "~/.emacs.d/init.el")))
+(rubicon-leader-<f15>
+  "l" (ilm (evil-edit "~/org/timeline.org"))
+  "i" (ilm (evil-edit "~/org/triage.org"))
+  "t" (ilm (evil-edit "~/org/todo.org"))
+  "g" (ilm (evil-edit "~/org/gist.org"))
+  "n" (ilm (evil-edit "~/org/notes.org"))
+  "s" (ilm (evil-edit "~/org/scrap.org"))
+  "r" (ilm (evil-edit "~/.zshrc"))
+  "p" (ilm (evil-edit "~/org/projects.org"))
+  "b" (ilm (evil-edit "~/org/books.org"))
+  "C" (ilm (evil-edit "~/.emacs.d/core"))
+  "c" (ilm (evil-edit "~/.emacs.d/init.el")))
 
-(global-set-key [remap keyboard-quit] #'doom/escape)
-(global-set-key [remap evil-force-normal-state] #'doom/escape)
-(global-set-key [escape] #'doom/escape)
-
-
-;;;###autoload
-
-
-
-
-
+(global-set-key [remap keyboard-quit] #'rubicon/escape)
+(global-set-key [remap evil-force-normal-state] #'rubicon/escape)
+(global-set-key [escape] #'rubicon/escape)

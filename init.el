@@ -19,6 +19,7 @@
 (load (concat user-emacs-directory "core/core"))
 (load (concat user-emacs-directory "core/keybindings"))
 
+
 (setq gc-cons-threshold 16777216)
 
 ;; (setq gc-cons-threshold most-positive-fixnum)
@@ -299,3 +300,4 @@
 ;; (global-set-key [remap keyboard-quit] #'doom/escape)
 ;; (global-set-key [remap evil-force-normal-state] #'doom/escape)
 ;; (global-set-key [escape] #'doom/escape)
+(put 'upcase-region 'disabled nil)

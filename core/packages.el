@@ -24,14 +24,25 @@
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
   :config 
-  ;;(require 'evil)
-  (evil-mode 1))
+  (evil-mode 1)
+  (evil-select-search-module 'evil-search-module 'evil-search))
 
 (use-package counsel
   :config
   (ivy-mode 1)
-  (setq ivy-use-virtual-buffers t)
-  (setq ivy-count-format "%d/%d"))
+  (setq ivy-use-virtual-buffers t
+	ivy-height 17
+	ivy-wrap t
+	ivy-magic-slash-non-match-action nil
+	ivy-fixed-height-minibuffer t
+	projectile-completion-system 'ivy
+	ivy-use-virtual-buffers nil
+	ivy-virtual-abbreviate 'full
+	ivy-on-del-error-function #'ignore
+	ivy-use-selectable-prompt t
+	ivy-count-format "%d/%d")
+  (setf (alist-get 't ivy-format-functions-alist)
+	#'ivy-format-function-line))
 
 (use-package doom-themes
   :config
@@ -50,7 +61,10 @@
   :config
   (evil-collection-init))
 
-(use-package evil-nerd-commenter)
+(use-package evil-nerd-commenter
+  :commands 'evilnc-comment-operator
+  :config
+  (evilnc-default-hotkeys nil t))
 
   ;;(straight-use-package
 ;; '(el-patch :type git :host github :repo "your-name/el-patch"))
@@ -100,7 +114,7 @@
 
 (use-package smartparens-config
   :config
-  ;;(require 'smartparens-config)
+  (smartparens-global-mode)
   :straight
   (smartparens-config
    :type git
@@ -113,20 +127,27 @@
   :init
   (projectile-mode +1))
 
-(use-package prescient)
+(use-package prescient
+  :config
+  (prescient-persist-mode))
 
-(use-package ivy-prescient)
+(use-package ivy-prescient
+  :after counsel
+  :config
+  (ivy-prescient-mode))
 
 (use-package org-superstar)
 
 (use-package ob-async)
 
 (use-package ivy-rich
-  :straight
-  (ivy-rich
-   :type git
-   :host github
-   :repo "Yevgnen/ivy-rich"))
+  :after ivy
+  :config
+  (setq ivy-rich-parse-remote-buffer nil)
+  (ivy-rich-mode 1)
+  (setcdr
+   (assq t ivy-format-functions-alist)
+   #'ivy-format-function-line))
 
 (use-package wgrep)
 
@@ -158,7 +179,9 @@
          ("g l " . evil-lion-left)
          ("g L " . evil-lion-right)))
 
-(use-package eyebrowse)
+(use-package eyebrowse
+  :config
+  (eyebrowse-mode))
 
 (use-package doom-modeline
   :ensure t
@@ -177,22 +200,139 @@
    :host github
    :repo "TheBB/evil-indent-plus"))
 
-;; (use-package dash
-;;   :straight
-;;   (dash
-;;    :type git
-;;    :host github
-;;    :repo "magnars/dash.el"))
-;; 
-
 (use-package persp-mode
   :config
+  (persp-mode)
   (setq persp-autokill-buffer-on-remove 'kill-weak
         persp-reset-windows-on-nil-window-conf nil
         persp-nil-hidden t
         persp-auto-save-fname "autosave"
+;;        persp-save-dir (concat doom-etc-dir "workspaces/")
         persp-set-last-persp-for-new-frames t
         persp-switch-to-added-buffer nil
         persp-remove-buffers-from-nil-persp-behaviour nil
-        persp-auto-resume-time -1
+        persp-auto-resume-time -1 ; Don't auto-load on startup
         persp-auto-save-opt (if noninteractive 0 1)))
+
+
+(use-package hl-todo
+  :hook (prog-mode . hl-todo-mode)
+  :config
+  (global-hl-todo-mode)
+  (setq hl-todo-highlight-punctuation ":"
+        hl-todo-keyword-faces
+        `(;; For things that need to be done, just not today.
+          ("TODO" warning bold)
+          ;; For problems that will become bigger problems later if not
+          ;; fixed ASAP.
+          ("FIXME" error bold)
+          ;; For tidbits that are unconventional and not intended uses of the
+          ;; constituent parts, and may break in a future update.
+          ("HACK" font-lock-constant-face bold)
+          ;; For things that were done hastily and/or hasn't been thoroughly
+          ;; tested. It may not even be necessary!
+          ("REVIEW" font-lock-keyword-face bold)
+          ;; For especially important gotchas with a given implementation,
+          ;; directed at another user other than the author.
+          ("NOTE" success bold)
+          ;; For things that just gotta go and will soon be gone.
+          ("DEPRECATED" font-lock-doc-face bold))))
+
+(use-package highlight-indent-guides
+  :hook ((prog-mode text-mode conf-mode) . highlight-indent-guides-mode)
+  :init
+  (setq highlight-indent-guides-method 'character))
+
+(use-package which-key
+  :config
+  (which-key-mode))
+
+(use-package undo-fu
+  :config
+  (global-undo-tree-mode -1)
+  (define-key evil-normal-state-map "u" 'undo-fu-only-undo)
+  (define-key evil-normal-state-map "r" 'undo-fu-only-redo))
+
+(use-package undo-fu-session
+  :config
+  (global-undo-fu-session-mode))
+
+
+(use-package lsp-mode)
+
+(use-package lsp-ui
+  :config
+  (setq lsp-ui-doc-max-height 8
+	lsp-ui-doc-max-width 35
+	lsp-ui-sideline-ignore-duplicate t
+	;; lsp-ui-doc is redundant with and more invasive than
+	;; `+lookup/documentation'
+	lsp-ui-doc-enable nil
+	;; Don't show symbol definitions in the sideline. They are pretty noisy,
+	;; and there is a bug preventing Flycheck errors from being shown (the
+	;; errors flash briefly and then disappear).
+	lsp-ui-sideline-show-hover nil))
+
+(use-package lsp-ivy
+  :after lsp-mode)
+
+(use-package go-mode)
+(use-package yaml-mode)
+
+(use-package vterm
+  :ensure t)
+
+(use-package all-the-icons-ivy
+  :init (add-hook 'after-init-hook 'all-the-icons-ivy-setup))
+
+(use-package no-littering
+  :config
+  (require 'no-littering))
+
+(use-package git-gutter
+  :config
+  (global-git-gutter-mode +1))
+
+(use-package dired-rsync
+  :hook (dired-mode . diredfl-mode)
+  :config
+  (bind-key "C-c C-r" 'dired-rsync dired-mode-map))
+
+(use-package diredfl
+  :hook (dired-mode . diredfl-mode))
+
+(use-package diff-hl
+  :hook (dired-mode . diff-hl-dired-mode-unless-remote)
+  :hook (magit-post-refresh . diff-hl-magit-post-refresh)
+  :config
+  ;; use margin instead of fringe
+  (diff-hl-margin-mode))
+
+
+(use-package all-the-icons-dired
+  :config
+  (defvar +wdired-icons-enabled -1)
+)
+
+;; (use-package dired-x
+;;   :hook (dired-mode . dired-omit-mode)
+;;   :config
+;;     (setq dired-omit-verbose nil
+;; 	  dired-clean-confirm-killing-deleted-buffers nil))
+
+
+(use-package fd-dired
+  :defer t
+  :init
+  (global-set-key [remap find-dired] #'fd-dired))
+
+(use-package multiple-cursors)
+
+;; (use-package yasnippet)
+;; (use-package auto-yasnippet)
+;; (use-package doom-snippets
+;;   :straight
+;;   (doom-snippets
+;;    :type git
+;;    :host github
+;;    :repo "hlissner/doom-snippets"))
