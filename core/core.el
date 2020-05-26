@@ -70,11 +70,7 @@
 	    (kill-buffer buffer))) 
 	(buffer-list)))
 
-(defun kill-other-buffers ()
-  "Kill all other buffers."
-  (interactive)
-  (kill-dired-buffers)
-  (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
+
 
 
 (defun +evil--window-swap (direction)
