@@ -38,7 +38,14 @@
       (split-window-vertically)
       (evil-window-down 1)))))
 
-
+(defun kill-other-buffers ()
+  "Kill all other buffers."
+  (interactive)
+  (delete-other-windows)
+  (mapc 'kill-buffer
+	(delq
+	 (current-buffer)
+	 (buffer-list))))
 
 (defun rubicon/escape ()
   (interactive)
@@ -136,7 +143,46 @@ the only window, use evil-window-move-* (e.g. `evil-window-move-far-left')."
        (intern
 	(concat "cd-to-"
 		(symbol-name (quote ,file-name)))))))
+;; Eshell
+(setq eshell-scroll-to-bottom-on-input 'all
+      eshell-scroll-to-bottom-on-output 'all
+      eshell-kill-processes-on-exit t
+      eshell-hist-ignoredups t
+      eshell-glob-case-insensitive t
+      eshell-error-if-no-glob t)
 
+;; Dired
+(setq dired-auto-revert-buffer t  ; don't prompt to revert; just do it
+      dired-dwim-target t  ; suggest a target for moving/copying intelligently
+      dired-hide-details-hide-symlink-targets nil
+      ;; Always copy/delete recursively
+      dired-recursive-copies  'always
+      dired-recursive-deletes 'top)
+
+;; ORG mode
+(setq org-todo-keywords
+        '((sequence
+           "TODO(t)"  ; A task that needs doing & is ready to do
+           "PROJ(p)"  ; A project, which usually contains other tasks
+           "STRT(s)"  ; A task that is in progress
+           "WAIT(w)"  ; Something external is holding up this task
+           "HOLD(h)"  ; This task is paused/on hold because of me
+           "|"
+           "DONE(d)"  ; Task successfully completed
+           "KILL(k)") ; Task was cancelled, aborted or is no longer applicable
+          (sequence
+           "[ ](T)"   ; A task that needs doing
+           "[-](S)"   ; Task is in progress
+           "[?](W)"   ; Task is being held up or paused
+           "|"
+           "[X](D)")) ; Task was completed
+        org-todo-keyword-faces
+        '(("[-]"  . +org-todo-active)
+          ("STRT" . +org-todo-active)
+          ("[?]"  . +org-todo-onhold)
+          ("WAIT" . +org-todo-onhold)
+          ("HOLD" . +org-todo-onhold)
+          ("PROJ" . +org-todo-project)))
 
 (defun +org--refresh-inline-images-in-subtree ()
   "Refresh image previews in the current heading/tree."
@@ -265,30 +311,3 @@ If on a:
 	     if (eq type 'sequence)
 	     if (member keyword keywords)
 	     return keywords)))
-
-
-(defun kill-other-buffers ()
-  "Kill all other buffers."
-  (interactive)
-  (delete-other-windows)
-  (mapc 'kill-buffer
-	(delq
-	 (current-buffer)
-	 (buffer-list))))
-
-
-;; Eshell
-(setq eshell-scroll-to-bottom-on-input 'all
-      eshell-scroll-to-bottom-on-output 'all
-      eshell-kill-processes-on-exit t
-      eshell-hist-ignoredups t
-      eshell-glob-case-insensitive t
-      eshell-error-if-no-glob t)
-
-;; Dired
-(setq dired-auto-revert-buffer t  ; don't prompt to revert; just do it
-      dired-dwim-target t  ; suggest a target for moving/copying intelligently
-      dired-hide-details-hide-symlink-targets nil
-      ;; Always copy/delete recursively
-      dired-recursive-copies  'always
-      dired-recursive-deletes 'top)
