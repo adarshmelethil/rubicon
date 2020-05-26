@@ -4,11 +4,11 @@
   I have copied some functions from Doom ( e.g. doom escape, org mode keywords, packages, and other features that I commonly use ) to make it have a "doomish" feel.
 
 * Features
-** Extremly minimalistic
-** Vim keybindings through Evil
-** Functional package manager through straight.el
-** Tries as much as possible to reduce the number of keys required to do something.
-** Packages over configurations. Tries to provide all of its functionality through packages instead of increasing the size of its code base. If the functionality is worth having then it should be a package.
+  1. Extremly minimalistic
+  2. Vim keybindings through Evil
+  3. Functional package manager through straight.el
+  4. Tries as much as possible to reduce the number of keys required to do something.
+  5. Packages over configurations. Tries to provide all of its functionality through packages instead of increasing the size of its code base. If the functionality is worth having then it should be a package.
 
 * File structure
  The files are ordered by the order of evaluation
