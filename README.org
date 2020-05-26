@@ -1,9 +1,14 @@
 * A skeleton Doom
   I have used Emacs Doom for a while. I moved to my own Dotfiles because I want less Doom magic and full control of my editor.
-
   I try to have Doom like functionality with the least amount of configuration. I mostly focus on the functionality that I have used extensively ( so it probably excludes most of Doom's features ).
-
   I have copied some functions from Doom ( e.g. doom escape, org mode keywords, packages, and other features that I commonly use ) to make it have a "doomish" feel.
+
+* Features
+** Extremly minimalistic
+** Vim keybindings through Evil
+** Functional package manager through straight.el
+** Tries as much as possible to reduce the number of keys required to do something.
+** Packages over configurations. Tries to provide all of its functionality through packages instead of increasing the size of its code base. If the functionality is worth having then it should be a package.
 
 * File structure
  The files are ordered by the order of evaluation
