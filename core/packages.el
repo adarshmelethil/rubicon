@@ -182,11 +182,9 @@
 
 (use-package doom-modeline
   :ensure t
-  :init (doom-modeline-mode 1))
-
-(use-package doom-modeline
-  :ensure t
-  :init (doom-modeline-mode 1))
+  :init (doom-modeline-mode 1)
+  :config
+  )
 
 (use-package  evil-indent-plus
   :config
@@ -238,7 +236,7 @@
 (use-package highlight-indent-guides
   :hook ((prog-mode text-mode conf-mode) . highlight-indent-guides-mode)
   :init
-  (setq highlight-indent-guides-method 'character))
+  (setq highlight-indent-guides-method 'fill))
 
 (use-package which-key
   :config
@@ -342,3 +340,33 @@
           dap-java-test-runner (concat lsp-java-server-install-dir "test-runner/junit-platform-console-standalone.jar")))
 
 (use-package haskell-mode)
+
+(rubicon/github-package highlight-thing "fgeller/highlight-thing.el")
+(setq highlight-thing-delay-seconds 0.1)
+(global-highlight-thing-mode)
+
+(rubicon/github-package goto-line-preview "jcs-elpa/goto-line-preview")
+
+(use-package company
+  :config
+  (add-hook 'after-init-hook 'global-company-mode))
+
+(use-package toc-org
+  :config
+  (add-hook 'org-mode-hook 'toc-org-mode)
+  (add-hook 'markdown-mode-hook 'toc-org-mode))
+
+(use-package git-timemachine)
+
+(use-package highlight-parentheses
+  :config
+  (global-highlight-parentheses-mode))
+
+(use-package forge
+  :after magit)
+
+
+(use-package exec-path-from-shell
+  :config
+  (exec-path-from-shell-initialize))
+
