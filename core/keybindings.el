@@ -74,6 +74,17 @@
   "8" (ilm (rubicon/switch-workspace "8"))
   "9" (ilm (rubicon/switch-workspace "9"))
 
+  "TAB 0" (ilm (rubicon/switch-workspace "10"))
+  "TAB 1" (ilm (rubicon/switch-workspace "11"))
+  "TAB 2" (ilm (rubicon/switch-workspace "12"))
+  "TAB 3" (ilm (rubicon/switch-workspace "13"))
+  "TAB 4" (ilm (rubicon/switch-workspace "14"))
+  "TAB 5" (ilm (rubicon/switch-workspace "15"))
+  "TAB 6" (ilm (rubicon/switch-workspace "16"))
+  "TAB 7" (ilm (rubicon/switch-workspace "17"))
+  "TAB 8" (ilm (rubicon/switch-workspace "18"))
+  "TAB 9" (ilm (rubicon/switch-workspace "19"))
+
   ;; Workspaces
   "TAB d" 'rubicon/delete-workspace
   "TAB TAB" 'rubicon/show-workspaces
