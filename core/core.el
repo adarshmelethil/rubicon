@@ -2,12 +2,10 @@
 (scroll-bar-mode -1)
 (show-paren-mode)
 (blink-cursor-mode 0)
-
+(desktop-save-mode 1)
 (setq org-hide-leading-stars t
-      
       org-adapt-indentation t
       org-odd-levels-only t     
-
       backup-inhibited t
       visible-bell -1
       ring-bell-function 'ignore

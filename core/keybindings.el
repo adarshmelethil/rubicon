@@ -22,8 +22,8 @@
 
 (general-define-key
  :states 'insert
- :keymaps 'org-mode-map
- "<tab>" 'completion-at-point)
+ :keymaps 'override
+ "TAB" 'completion-at-point)
 
 (general-define-key
  :states rubicon/nvm-states
