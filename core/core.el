@@ -481,13 +481,17 @@ If on a:
   (persp-kill (persp-current-name))
   (rubicon/show-workspaces))
 
+
+(defun rubicon/marked-workspace-list ()
+  (--map
+   (if (string= (persp-current-name) it)
+       (concat ">" it "<")
+     (concat " " it " "))
+   (persp-names)))
+
 (defun rubicon/show-workspaces ()
   (interactive)
   (message
-   (concat "Workspaces: "
-	   (string-join
-	    (--map (if (string= (persp-current-name) it)
-		       (concat "[ " it " ]") it)
-		   (persp-names)) " "))))
+   (string-join (rubicon/marked-workspace-list) " ")))
 
 
