@@ -6,9 +6,9 @@
       (bootstrap-version 5))
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
+	(url-retrieve-synchronously
+	 "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+	 'silent 'inhibit-cookies)
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
@@ -164,11 +164,11 @@
 (use-package evil-lion
   :ensure t
   :bind (:map evil-normal-state-map
-         ("g l " . evil-lion-left)
-         ("g L " . evil-lion-right)
-         :map evil-visual-state-map
-         ("g l " . evil-lion-left)
-         ("g L " . evil-lion-right)))
+	      ("g l " . evil-lion-left)
+	      ("g L " . evil-lion-right)
+	      :map evil-visual-state-map
+	      ("g l " . evil-lion-left)
+	      ("g L " . evil-lion-right)))
 
 (use-package eyebrowse
   :config
@@ -189,19 +189,7 @@
    :host github
    :repo "TheBB/evil-indent-plus"))
 
-(use-package persp-mode
-  :config
-  (persp-mode)
-  (setq persp-autokill-buffer-on-remove 'kill-weak
-        persp-reset-windows-on-nil-window-conf nil
-        persp-nil-hidden t
-        persp-auto-save-fname "autosave"
-;;        persp-save-dir (concat doom-etc-dir "workspaces/")
-        persp-set-last-persp-for-new-frames t
-        persp-switch-to-added-buffer nil
-        persp-remove-buffers-from-nil-persp-behaviour nil
-        persp-auto-resume-time -1 ; Don't auto-load on startup
-        persp-auto-save-opt (if noninteractive 0 1)))
+
 
 
 (use-package hl-todo
@@ -362,3 +350,14 @@
 (use-package exec-path-from-shell
   :config
   (exec-path-from-shell-initialize))
+
+
+(use-package rainbow-mode
+  :ensure t
+  :init (rainbow-mode 1))
+
+(use-package perspective
+  :after ivy
+  :config
+  (setq persp-initial-frame-name "1")
+  (persp-mode))

@@ -1,9 +1,9 @@
 (dirtrack-mode)
 (tool-bar-mode -1)
-(scroll-bar-mode -1)
+(scroll-bar-mode 1)
 (show-paren-mode)
 (blink-cursor-mode 0)
-(desktop-save-mode 1)
+;; (desktop-save-mode 1)
 (setq org-hide-leading-stars t
       org-adapt-indentation t
       org-odd-levels-only t     
@@ -51,7 +51,7 @@
   (-let ((this-buffer (current-buffer)))
     (--map (if (eq this-buffer it) nil
 	     (kill-buffer it))
-	   (buffer-list))))
+	   (persp-current-buffers))))
 
 (defun rubicon/escape ()
   (interactive)
@@ -466,3 +466,28 @@ If on a:
   (vt-alias "...." "cd ../../..")
   (vt-alias "..." "cd ../..")
   (vt-alias ".." "cd .."))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Workspaces
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun rubicon/switch-workspace (name)
+  (interactive)
+  (persp-switch name)
+  (rubicon/show-workspaces))
+
+
+(defun rubicon/delete-workspace ()
+  (interactive)
+  (persp-kill (persp-current-name))
+  (rubicon/show-workspaces))
+
+(defun rubicon/show-workspaces ()
+  (interactive)
+  (message
+   (concat "Workspaces: "
+	   (string-join
+	    (--map (if (string= (persp-current-name) it)
+		       (concat "[ " it " ]") it)
+		   (persp-names)) " "))))
+
+

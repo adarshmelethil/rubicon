@@ -20,8 +20,6 @@
 (rubicon/define-leader "<f15>")
 (rubicon/define-leader "M")
 
-
-
 (general-nmap
  "TAB" 'evil-jump-item
   "u" 'undo-fu-only-undo
@@ -54,13 +52,40 @@
  "S-<SPC>" 'counsel-locate
 
  ;; split navigation
+ "S-<down>" 'evil-scroll-down
+ "S-<up>" 'evil-scroll-up
+
+ 
  "<down>" 'evil-window-down
  "<left>" 'evil-window-left
  "<up>" 'evil-window-up
  "<right>" 'evil-window-right )
 
 (rubicon/leader-SPC
-  "l" 'goto-line-preview
+
+  "0" (ilm (rubicon/switch-workspace "0"))
+  "1" (ilm (rubicon/switch-workspace "1"))
+  "2" (ilm (rubicon/switch-workspace "2"))
+  "3" (ilm (rubicon/switch-workspace "3"))
+  "4" (ilm (rubicon/switch-workspace "4"))
+  "5" (ilm (rubicon/switch-workspace "5"))
+  "6" (ilm (rubicon/switch-workspace "6"))
+  "7" (ilm (rubicon/switch-workspace "7"))
+  "8" (ilm (rubicon/switch-workspace "8"))
+  "9" (ilm (rubicon/switch-workspace "9"))
+
+  ;; Workspaces
+  "TAB d" 'rubicon/delete-workspace
+  
+  "TAB TAB" 'rubicon/show-workspaces
+  "TAB s" 'persp-switch 
+  
+  ;; Navigation
+  "c" 'avy-goto-char
+  "l" 'avy-goto-line
+  "\"" 'avy-resume
+
+  "L" 'goto-line-preview
   "o" 'rubicon/kill-other-buffers
   "s" 'eshell
   "t" 'vterm
@@ -70,11 +95,10 @@
   "E" 'eval-buffer
   "'" 'ivy-resume
 
-  "w s" 'persp-switch 
-  "w c" 'persp-add-new
   
   "SPC" 'counsel-projectile-find-file-dwim
 
+  ;; Find functions, variables, etc
   "h w" 'what-cursor-position
   "h o" 'find-function-on-key
   "h f" 'find-function
@@ -95,7 +119,8 @@
 
   "." 'counsel-find-file
   
-  "," 'counsel-switch-buffer
+  "," 'persp-counsel-switch-buffer
+  
   "g" 'magit-status
   "b" 'ibuffer
 
@@ -236,4 +261,3 @@
  "<f14>" 'vterm-send-escape)
 
 (global-set-key [remap goto-line] 'goto-line-preview)
-
