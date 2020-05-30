@@ -76,7 +76,6 @@
 
   ;; Workspaces
   "TAB d" 'rubicon/delete-workspace
-  
   "TAB TAB" 'rubicon/show-workspaces
   "TAB s" 'persp-switch 
   
@@ -84,6 +83,8 @@
   "c" 'avy-goto-char
   "l" 'avy-goto-line
   "\"" 'avy-resume
+  "m" 'avy-move-line
+  "M" 'avy-move-region
 
   "L" 'goto-line-preview
   "o" 'rubicon/kill-other-buffers
