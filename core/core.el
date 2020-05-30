@@ -1,6 +1,13 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
+(show-paren-mode)
+(blink-cursor-mode 0)
+
 (setq org-hide-leading-stars t
+      
+      org-adapt-indentation t
+      org-odd-levels-only t     
+
       backup-inhibited t
       visible-bell -1
       ring-bell-function 'ignore
@@ -23,7 +30,7 @@
 (add-hook 'text-mode-hook #'display-line-numbers-mode)
 
 ;; split creation and navigation
-(defun my-split-window (pos)
+(defun rubicon/split-window (pos)
   (cond
    ((string= pos "right")
     (progn
@@ -38,14 +45,14 @@
       (split-window-vertically)
       (evil-window-down 1)))))
 
-(defun kill-other-buffers ()
-  "Kill all other buffers."
+
+(defun rubicon/kill-other-buffers ()
   (interactive)
   (delete-other-windows)
-  (mapc 'kill-buffer
-	(delq
-	 (current-buffer)
-	 (buffer-list))))
+  (-let ((this-buffer (current-buffer)))
+    (--map (if (eq this-buffer it) nil
+	     (kill-buffer it))
+	   (buffer-list))))
 
 (defun rubicon/escape ()
   (interactive)
@@ -63,16 +70,20 @@
      (interactive)
      ,@body))
 
-(defun kill-dired-buffers ()
-  (interactive)
-  (mapc (lambda (buffer) 
-	  (when (eq 'dired-mode (buffer-local-value 'major-mode buffer)) 
-	    (kill-buffer buffer))) 
-	(buffer-list)))
+(defmacro create-folder-nmap (shortcut file-name)
+  `(progn
+     (defalias (intern (concat "cd-to-" (symbol-name (quote ,file-name))))
+       (lambda ()
+	 (interactive)
+	 (cd
+	  (symbol-name
+	   (quote ,file-name)))))
+     (general-nmap ,shortcut
+       (intern
+	(concat "cd-to-"
+		(symbol-name (quote ,file-name)))))))
 
-
-
-
+;; Doom helper functions
 (defun +evil--window-swap (direction)
   "Move current window to the next window in DIRECTION.
 If there are no windows there and there is only one window, split in that
@@ -125,18 +136,7 @@ the only window, use evil-window-move-* (e.g. `evil-window-move-far-left')."
   "Swap windows downward."
   (interactive) (+evil--window-swap 'down))
 
-(defmacro create-folder-nmap (shortcut file-name)
-  `(progn
-     (defalias (intern (concat "cd-to-" (symbol-name (quote ,file-name))))
-       (lambda ()
-	 (interactive)
-	 (cd
-	  (symbol-name
-	   (quote ,file-name)))))
-     (general-nmap ,shortcut
-       (intern
-	(concat "cd-to-"
-		(symbol-name (quote ,file-name)))))))
+
 ;; Eshell
 (setq eshell-scroll-to-bottom-on-input 'all
       eshell-scroll-to-bottom-on-output 'all
@@ -154,29 +154,53 @@ the only window, use evil-window-move-* (e.g. `evil-window-move-far-left')."
       dired-recursive-deletes 'top)
 
 ;; ORG mode
+(with-eval-after-load 'org
+  (set-face-attribute 'org-level-1 nil :weight 'ultra-light :height 1.1 :foreground "#34ace0" )
+  (set-face-attribute 'org-level-2 nil :weight 'ultra-light  :height 1.2 :foreground "#ebe8e8" )
+  (set-face-attribute 'org-level-3 nil :weight 'ultra-light :height 1.05 :foreground "#aaa69d" ))
+
+
+(with-no-warnings
+    (custom-declare-face '+org-todo-active  '((t (:inherit (bold font-lock-constant-face org-todo)))) "")
+    (custom-declare-face '+org-todo-project '((t (:inherit (bold font-lock-doc-face org-todo)))) "")
+    (custom-declare-face '+org-todo-onhold  '((t (:inherit (bold warning org-todo)))) ""))
+
 (setq org-todo-keywords
-        '((sequence
-           "TODO(t)"  ; A task that needs doing & is ready to do
-           "PROJ(p)"  ; A project, which usually contains other tasks
-           "STRT(s)"  ; A task that is in progress
-           "WAIT(w)"  ; Something external is holding up this task
-           "HOLD(h)"  ; This task is paused/on hold because of me
-           "|"
-           "DONE(d)"  ; Task successfully completed
-           "KILL(k)") ; Task was cancelled, aborted or is no longer applicable
-          (sequence
-           "[ ](T)"   ; A task that needs doing
-           "[-](S)"   ; Task is in progress
-           "[?](W)"   ; Task is being held up or paused
-           "|"
-           "[X](D)")) ; Task was completed
-        org-todo-keyword-faces
-        '(("[-]"  . +org-todo-active)
-          ("STRT" . +org-todo-active)
-          ("[?]"  . +org-todo-onhold)
-          ("WAIT" . +org-todo-onhold)
-          ("HOLD" . +org-todo-onhold)
-          ("PROJ" . +org-todo-project)))
+      '((sequence
+	 "TODO(t)"  ; A task that needs doing & is ready to do
+	 "PROJ(p)"  ; A project, which usually contains other tasks
+	 "STRT(s)"  ; A task that is in progress
+	 "WAIT(w)"  ; Something external is holding up this task
+	 "HOLD(h)"  ; This task is paused/on hold because of me
+	 "|"
+	 "DONE(d)"  ; Task successfully completed
+	 "KILL(k)") ; Task was cancelled, aborted or is no longer applicable
+	(sequence
+	 "[ ](T)"   ; A task that needs doing
+	 "[-](S)"   ; Task is in progress
+	 "[?](W)"   ; Task is being held up or paused
+	 "|"
+	 "[X](D)")) ; Task was completed
+      org-todo-keyword-faces
+      '(
+	("STRT" . +org-todo-active)
+	("[?]"  . +org-todo-onhold)
+	("WAIT" . +org-todo-onhold)
+	("HOLD" . +org-todo-onhold)
+	("PROJ" . +org-todo-project)))
+
+
+;; (setq hl-todo-keyword-faces
+;;       '(("TODO"   . "#FF0000")
+;;         ("FIXME"  . "#FF0000")
+;;         ("PROJ"  . "#A020F0")
+;;         ("STRT" . "#34ace0")
+;;         ("WAIT"   . "#1E90FF")
+;; 	("HOLD"   . "#1E90FF")
+;; 	("DONE"   . "#1E90FF")
+;; 	("KILL"   . "#1E90FF")))
+
+
 
 (defun +org--refresh-inline-images-in-subtree ()
   "Refresh image previews in the current heading/tree."
@@ -305,3 +329,5 @@ If on a:
 	     if (eq type 'sequence)
 	     if (member keyword keywords)
 	     return keywords)))
+
+(add-hook 'org-mode-hook 'org-indent-mode)

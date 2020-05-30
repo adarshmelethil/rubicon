@@ -4,12 +4,6 @@
 (defconst rubicon-nvm-states
   '(normal visual motion))
 
-;; (general-create-definer
-;;  rubicon-leader
-;;   :prefix "<SPC>"
-;;  :keymaps 'override
-;;   :states rubicon-nvm-states)
-
 (defmacro rubicon-define-leader (prefix)
   (let ((rb-definer-name (intern
 			  (concat "rubicon-leader-" prefix))))
@@ -27,15 +21,20 @@
 (rubicon-define-leader "M")
 
 (general-define-key
+ :states 'insert
+ :keymaps 'org-mode-map
+ "<tab>" 'completion-at-point)
+
+(general-define-key
  :states rubicon-nvm-states
  :keymaps 'org-mode-map
  "<return>" '+org/dwim-at-point)
 
 
 (general-nmap
- "u" 'undo-fu-only-undo
- "r" 'undo-fu-only-redo
- "g c" 'evilnc-comment-operator)
+  "u" 'undo-fu-only-undo
+  "r" 'undo-fu-only-redo
+  "g c" 'evilnc-comment-operator)
 
 
 (general-define-key
@@ -70,10 +69,11 @@
  "<right>" 'evil-window-right )
 
 (rubicon-leader-SPC
-  "o" 'kill-other-buffers
+  "o" 'rubicon/kill-other-buffers
   "s" 'eshell
   "t" 'vterm
-  "r" 'ielm
+  "r" 'counsel-recentf
+  "R" 'ielm
   "e" 'eval-last-sexp
   "E" 'eval-buffer
   "'" 'ivy-resume
@@ -118,13 +118,12 @@
   "," 'counsel-switch-buffer
   "g" 'magit-status
   "b" 'ibuffer
-  "k" 'kill-other-buffers
 
   "z"  (ilm (evil-edit "."))
-  "<right>" (ilm (my-split-window "right"))
-  "<up>" (ilm (my-split-window "up"))
-  "<left>" (ilm (my-split-window "left"))
-  "<down>" (ilm (my-split-window "down")))
+  "<right>" (ilm (rubicon/split-window "right"))
+  "<up>" (ilm (rubicon/split-window "up"))
+  "<left>" (ilm (rubicon/split-window "left"))
+  "<down>" (ilm (rubicon/split-window "down")))
 
 (rubicon-leader-<f14>
   "<f14>" 'counsel-rg
@@ -150,11 +149,26 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; dirs/files navigation
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defmacro create-folder-nmap (shortcut file-name)
+  `(progn
+     (defalias (intern (concat "cd-to-" (symbol-name (quote ,file-name))))
+       (lambda ()
+	 (interactive)
+	 (cd
+	  (symbol-name
+	   (quote ,file-name)))))
+     (general-nmap ,shortcut
+       (intern
+	(concat "cd-to-"
+		(symbol-name (quote ,file-name)))))))
+
+
 (create-folder-nmap "<f15> H" ~/                 )
 (create-folder-nmap "<f15> P" ~/projects/        )
 (create-folder-nmap "<f15> S" ~/scrap/           )
 (create-folder-nmap "<f15> R" ~/repos/           )
-(create-folder-nmap "<f15> S" ~/repos/scenario/  )
+(create-folder-nmap "<f15> S" ~/repos/scrap/     )
 (create-folder-nmap "<f15> T" ~/repos/test-ngp/  )
 (create-folder-nmap "<f15> N" ~/repos/norby/     )
 (create-folder-nmap "<f15> E" ~/.emacs.d         )

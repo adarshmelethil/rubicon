@@ -18,6 +18,11 @@
 (straight-use-package 'use-package)
 
 ;; Installing and configuring packages 
+(use-package no-littering
+  :config
+  (require 'no-littering))
+
+(use-package dash)
 
 (use-package evil
   :init
@@ -258,7 +263,11 @@
   (global-undo-fu-session-mode))
 
 
-(use-package lsp-mode)
+(use-package lsp-mode
+  :config
+  (lsp-mode)
+  )
+
 
 (use-package lsp-ui
   :config
@@ -285,9 +294,7 @@
 (use-package all-the-icons-ivy
   :init (add-hook 'after-init-hook 'all-the-icons-ivy-setup))
 
-(use-package no-littering
-  :config
-  (require 'no-littering))
+
 
 (use-package git-gutter
   :config
@@ -336,3 +343,19 @@
 ;;    :type git
 ;;    :host github
 ;;    :repo "hlissner/doom-snippets"))
+
+
+(use-package flycheck
+  :config
+  (flycheck-mode)
+  (setq flycheck-emacs-lisp-load-path 'inherit)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled idle-buffer-switch))
+  (setq flycheck-buffer-switch-check-intermediate-buffers t)
+  (setq flycheck-display-errors-delay 0.25))
+
+(use-package lsp-java
+  :config
+  (setq lsp-jt-root (concat lsp-java-server-install-dir "java-test/server/")
+          dap-java-test-runner (concat lsp-java-server-install-dir "test-runner/junit-platform-console-standalone.jar")))
+
+(use-package haskell-mode)
