@@ -189,17 +189,7 @@ the only window, use evil-window-move-* (e.g. `evil-window-move-far-left')."
 	("PROJ" . +org-todo-project)))
 
 
-;; (setq hl-todo-keyword-faces
-;;       '(("TODO"   . "#FF0000")
-;;         ("FIXME"  . "#FF0000")
-;;         ("PROJ"  . "#A020F0")
-;;         ("STRT" . "#34ace0")
-;;         ("WAIT"   . "#1E90FF")
-;; 	("HOLD"   . "#1E90FF")
-;; 	("DONE"   . "#1E90FF")
-;; 	("KILL"   . "#1E90FF")))
-
-
+(setq org-log-done 'time)
 
 (defun +org--refresh-inline-images-in-subtree ()
   "Refresh image previews in the current heading/tree."
