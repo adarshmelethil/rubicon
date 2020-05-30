@@ -121,7 +121,7 @@
 
 (use-package undo-tree)
 
-(use-package smartparens-config
+(use-package smartparens
   :config
   (smartparens-global-mode))
 
