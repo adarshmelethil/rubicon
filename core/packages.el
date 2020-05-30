@@ -360,3 +360,7 @@
   :config
   (setq persp-initial-frame-name "1")
   (persp-mode))
+
+(use-package ns-auto-titlebar
+  :config
+  (ns-auto-titlebar-mode))

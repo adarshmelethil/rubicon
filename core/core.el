@@ -6,6 +6,8 @@
 ;; (desktop-save-mode 1)
 (setq org-hide-leading-stars t
       org-adapt-indentation t
+
+      ns-use-native-fullscreen nil
       org-odd-levels-only t     
       backup-inhibited t
       visible-bell -1
