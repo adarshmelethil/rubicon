@@ -167,19 +167,6 @@
 
 (use-package all-the-icons)
 
-(use-package dashboard
-  :ensure t
-  :init
-  (setq
-   dashboard-set-heading-icons nil
-   dashboard-set-file-icons t
-   dashboard-startup-banner nil
-   dashboard-items '((recents  . 30)
-		     (projects . 5)
-		     (agenda . 5)))
-  :config
-  (dashboard-setup-startup-hook))
-
 (use-package evil-lion
   :ensure t
   :bind (:map evil-normal-state-map
@@ -323,8 +310,7 @@
 
 (use-package all-the-icons-dired
   :config
-  (defvar +wdired-icons-enabled -1)
-)
+  (defvar +wdired-icons-enabled -1))
 
 ;; (use-package dired-x
 ;;   :hook (dired-mode . dired-omit-mode)
