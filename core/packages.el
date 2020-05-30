@@ -22,6 +22,12 @@
   :config
   (require 'no-littering))
 
+
+(defmacro rubicon/github-package (package-name repo)
+  `(use-package  ,package-name
+     :straight (,package-name :type git :host github :repo ,repo)))
+
+
 (use-package dash)
 
 (use-package evil
@@ -71,7 +77,6 @@
   :config
   (evilnc-default-hotkeys nil t))
 
-  ;;(straight-use-package
 ;; '(el-patch :type git :host github :repo "your-name/el-patch"))
 
 (use-package evil-embrace
@@ -335,15 +340,7 @@
 
 (use-package multiple-cursors)
 
-;; (use-package yasnippet)
-;; (use-package auto-yasnippet)
-;; (use-package doom-snippets
-;;   :straight
-;;   (doom-snippets
-;;    :type git
-;;    :host github
-;;    :repo "hlissner/doom-snippets"))
-
+(rubicon/github-package doom-snippets "hlissner/doom-snippets")
 
 (use-package flycheck
   :config
