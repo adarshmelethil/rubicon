@@ -23,6 +23,7 @@
 
 
 (general-nmap
+ "TAB" 'evil-jump-item
   "u" 'undo-fu-only-undo
   "r" 'undo-fu-only-redo
   "g c" 'evilnc-comment-operator)
@@ -44,7 +45,6 @@
  "K"  (ilm (evil-previous-line 10))
  "L"  (ilm (right-char 10))
  "H"  (ilm (left-char 10))
- "TAB" 'evil-jump-item
 
  "/" 'swiper
  "?" 'swiper-all
