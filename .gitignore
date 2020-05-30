@@ -1,6 +1,4 @@
 var/
 etc/
-straight/build
-straight/repos
-straight/build-cache.el
-straight/modified/
+straight/*
+!straight/versions/*
