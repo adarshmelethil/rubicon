@@ -27,7 +27,6 @@
   `(use-package  ,package-name
      :straight (,package-name :type git :host github :repo ,repo)))
 
-
 (use-package dash)
 
 (use-package evil
@@ -124,12 +123,7 @@
 
 (use-package smartparens-config
   :config
-  (smartparens-global-mode)
-  :straight
-  (smartparens-config
-   :type git
-   :host github
-   :repo "Fuco1/smartparens"))
+  (smartparens-global-mode))
 
 (use-package restart-emacs)
 
@@ -342,7 +336,7 @@
 (use-package haskell-mode)
 
 (rubicon/github-package highlight-thing "fgeller/highlight-thing.el")
-(setq highlight-thing-delay-seconds 0.1)
+(setq highlight-thing-delay-seconds 0.6)
 (global-highlight-thing-mode)
 
 (rubicon/github-package goto-line-preview "jcs-elpa/goto-line-preview")
@@ -365,8 +359,6 @@
 (use-package forge
   :after magit)
 
-
 (use-package exec-path-from-shell
   :config
   (exec-path-from-shell-initialize))
-
