@@ -20,15 +20,6 @@
 (rubicon/define-leader "<f15>")
 (rubicon/define-leader "M")
 
-(general-define-key
- :states 'insert
- :keymaps 'override
- "TAB" 'completion-at-point)
-
-(general-define-key
- :states rubicon/nvm-states
- :keymaps 'org-mode-map
- "<return>" '+org/dwim-at-point)
 
 
 (general-nmap
@@ -69,6 +60,7 @@
  "<right>" 'evil-window-right )
 
 (rubicon/leader-SPC
+  "l" 'goto-line-preview
   "o" 'rubicon/kill-other-buffers
   "s" 'eshell
   "t" 'vterm
@@ -80,18 +72,6 @@
 
   "w s" 'persp-switch 
   "w c" 'persp-add-new
-  
-  "n" 'eyebrowse-create-window-config
-  "0" 'eyebrowse-switch-to-window-config-10
-  "1" 'eyebrowse-switch-to-window-config-1
-  "2" 'eyebrowse-switch-to-window-config-2
-  "3" 'eyebrowse-switch-to-window-config-3
-  "4" 'eyebrowse-switch-to-window-config-4
-  "5" 'eyebrowse-switch-to-window-config-5
-  "6" 'eyebrowse-switch-to-window-config-6
-  "7" 'eyebrowse-switch-to-window-config-7
-  "8" 'eyebrowse-switch-to-window-config-8
-  "9" 'eyebrowse-switch-to-window-config-9
   
   "SPC" 'counsel-projectile-find-file-dwim
 
@@ -254,3 +234,6 @@
  "M-<f13>" 'vt-rc
  "<f13>" 'vterm-send-C-c
  "<f14>" 'vterm-send-escape)
+
+(global-set-key [remap goto-line] 'goto-line-preview)
+
