@@ -1,24 +1,24 @@
 (setq mac-command-modifier 'super
       mac-option-modifier  'meta)
 
-(defconst rubicon-nvm-states
+(defconst rubicon/nvm-states
   '(normal visual motion))
 
-(defmacro rubicon-define-leader (prefix)
+(defmacro rubicon/define-leader (prefix)
   (let ((rb-definer-name (intern
-			  (concat "rubicon-leader-" prefix))))
+			  (concat "rubicon/leader-" prefix))))
     `(general-create-definer
        ,rb-definer-name
        :prefix ,prefix
        :keymaps 'override
-       :states rubicon-nvm-states)))
+       :states rubicon/nvm-states)))
 
-(rubicon-define-leader "SPC")
-(rubicon-define-leader "g")
-(rubicon-define-leader "<f14>")
-(rubicon-define-leader "<f13>")
-(rubicon-define-leader "<f15>")
-(rubicon-define-leader "M")
+(rubicon/define-leader "SPC")
+(rubicon/define-leader "g")
+(rubicon/define-leader "<f14>")
+(rubicon/define-leader "<f13>")
+(rubicon/define-leader "<f15>")
+(rubicon/define-leader "M")
 
 (general-define-key
  :states 'insert
@@ -26,7 +26,7 @@
  "<tab>" 'completion-at-point)
 
 (general-define-key
- :states rubicon-nvm-states
+ :states rubicon/nvm-states
  :keymaps 'org-mode-map
  "<return>" '+org/dwim-at-point)
 
@@ -38,7 +38,7 @@
 
 
 (general-define-key
- :states rubicon-nvm-states
+ :states rubicon/nvm-states
  :keymaps 'override
 
  "#" 'swiper-isearch-thing-at-point
@@ -68,7 +68,7 @@
  "<up>" 'evil-window-up
  "<right>" 'evil-window-right )
 
-(rubicon-leader-SPC
+(rubicon/leader-SPC
   "o" 'rubicon/kill-other-buffers
   "s" 'eshell
   "t" 'vterm
@@ -125,7 +125,7 @@
   "<left>" (ilm (rubicon/split-window "left"))
   "<down>" (ilm (rubicon/split-window "down")))
 
-(rubicon-leader-<f14>
+(rubicon/leader-<f14>
   "<f14>" 'counsel-rg
   "h" 'hs-hide-level
   "p" 'proced
@@ -138,7 +138,7 @@
 
   "<f1>" 'org-agenda)
 
-(rubicon-leader-<f13>
+(rubicon/leader-<f13>
   "<right>" #'+evil/window-move-right
   "<up>" #'+evil/window-move-up
   "<left>" #'+evil/window-move-left
@@ -175,7 +175,7 @@
 (create-folder-nmap "<f15> D" ~/.doom.d          )
 (create-folder-nmap "<f15> O" ~/org              )
 
-(rubicon-leader-<f15>
+(rubicon/leader-<f15>
   "l" (ilm (evil-edit "~/org/timeline.org"))
   "i" (ilm (evil-edit "~/org/triage.org"))
   "t" (ilm (evil-edit "~/org/todo.org"))
