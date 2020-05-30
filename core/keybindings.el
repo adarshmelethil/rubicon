@@ -191,3 +191,66 @@
 (global-set-key [remap keyboard-quit] #'rubicon/escape)
 (global-set-key [remap evil-force-normal-state] #'rubicon/escape)
 (global-set-key [escape] #'rubicon/escape)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Vterm 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(general-define-key
+ :states '(normal)
+ :keymaps 'vterm-copy-mode-map
+ "a" 'my-vterm-append
+ "i" 'my-vterm-insert)
+
+(general-define-key
+ :states '(normal insert)
+ :keymaps 'vterm-mode-map
+ "<f1>" 'my-vterm-clear
+ "<f15> e" (lambda () (interactive) (vt-insert-command "echo "))
+ "<f15> x" 'vt-add-chmod
+ "<f15> C" 'vterm-copy-mode-map
+ "<f15> s" 'vt-add-sudo
+ "<f15> H" (lambda () (interactive) (vt-cd-to "~") (vt-ls))
+ "<f15> P" (lambda () (interactive) (vt-cd-to "~/projects") (vt-ls))
+ "<f15> e" (lambda () (interactive) (vt-insert-command "echo "))
+ "<f15> R" (lambda () (interactive) (vt-cd-to "~/repos") (vt-ls))
+ "<f15> O" (lambda () (interactive) (vt-cd-to "~/org") (vt-ls))
+ "<f15> B" (lambda () (interactive) (vt-cd-to "~/books") (vt-ls))
+ "<f15> S" (lambda () (interactive) (vt-cd-to "~/scrap") (vt-ls)))
+
+(general-define-key
+ :states 'normal
+ :keymaps 'vterm-mode-map
+
+ "{" (lambda () (interactive) (vt-pusdh "..") (vt-exec "ls"))
+ "}" (lambda () (interactive) (vt-popd) (vt-exec "ls"))
+ "[" (lambda () (interactive) (vt-pusdh "..") (vt-ls))
+ "]" (lambda () (interactive) (vt-popd) (vt-ls))
+ "o" (lambda () (interactive) (vt-ls))
+ "O" (lambda () (interactive) (vt-exec "ls"))
+ "c" (lambda () (interactive) (vt-insert-command "cd "))
+ "C" (lambda () (interactive) (vt-insert-command "cat "))
+
+ "x" (lambda () (interactive) (vt-insert-command "rm -rf "))
+ "X" (lambda () (interactive) (vt-insert-command "sudo rm -rf "))
+
+ "d" (lambda () (interactive) (vt-insert-command "mkdir "))
+ "D" (lambda () (interactive) (vt-insert-command "touch "))
+
+ "<f13> <f13>" 'vterm-send-C-c
+
+ ;; "r" (lambda () (interactive))
+ "R" 'vt-source-zshrc)
+
+
+(general-define-key
+ :states 'insert
+ :keymaps 'vterm-mode-map
+
+ "`" (lambda () (interactive) (vt-exec "fzf-history-widget"))
+ "TAB" 'vterm-send-tab
+ "S-<return>" 'vterm-run-and-go-up
+ "M-<f13>" 'vt-rc
+ "<f13>" 'vterm-send-C-c
+ "<f14>" 'vterm-send-escape)

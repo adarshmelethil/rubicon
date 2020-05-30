@@ -1,3 +1,4 @@
+(dirtrack-mode)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (show-paren-mode)
@@ -329,3 +330,149 @@ If on a:
 	     return keywords)))
 
 (add-hook 'org-mode-hook 'org-indent-mode)
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Vterm
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+(defun vterm-send-escape()
+  (interactive)
+  (vterm-send-key "<escape>"))
+
+(with-eval-after-load 'vterm
+  (defun vterm (&optional buffer-name)
+    "Create a new vterm."
+    (interactive)
+    (let ((buffer (generate-new-buffer (or buffer-name "vterm"))))
+      (with-current-buffer buffer
+        (vterm-mode))
+      (switch-to-buffer buffer))))
+
+(defun vterm-run-and-go-up ()
+  (interactive)
+  (vterm-send-return)
+  (vterm-send-up))
+
+(defun my-vterm-normal-mode ()
+  (interactive)
+  (evil-force-normal-state)
+  (vterm-copy-mode))
+
+(defun my-vterm-insert ()
+  (interactive)
+  (vterm-copy-mode -1)
+  (evil-insert 1))
+
+(defun my-vterm-append ()
+  (interactive)
+  (vterm-copy-mode -1)
+  (evil-append 1))
+
+(defun my-vterm-clear ()
+  (interactive)
+  (vterm-clear-scrollback)
+  (vterm-clear))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; Vterm auto configurations.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun vt-exec (str)
+  (vterm-send-string str)
+  (vterm-send-return))
+
+(defun vt-eq (key val)
+  (vt-exec
+   (format "%s=\"%s\"" key val)))
+
+(defun vt-alias (key val)
+  (vt-exec
+   (format "alias %s=\"%s\"" key val)))
+
+(defun vt-export (key val)
+  (vt-exec
+   (format "export %s=%s" key val)))
+
+(defun vt-append-path (path)
+  (vt-export
+   "PATH"
+   (format "%s:$PATH" path)))
+
+(defun vt-source-zshrc ()
+  (interactive)
+  (vt-exec "source ~/.zshrc"))
+
+(defun vt-cd-to (path)
+  (interactive)
+  (vt-exec
+   (format "cd %s" path)))
+
+(defun vt-pusdh (path)
+  (vt-exec
+   (format "pushd %s" path)))
+
+(defun vt-popd ()
+  (vt-exec
+   (format "popd")))
+
+(defun vt-insert-command (cmd)
+    (vterm-send-string cmd)
+    (evil-insert 1))
+
+(defun vt-ls ()
+    (vt-exec "ls -la"))
+
+(defun vt-clear-current-command ()
+  (vterm-send-escape)
+  (vterm-send-string "dd")
+  (vterm-send-string "i"))
+
+(defun vt-insert-at-start (cmd) ;; requires vi mode
+  (vterm-send-escape)
+  (vterm-send-string "m")
+  (vterm-send-string "p")
+  (vterm-send-string "0i")
+  (vterm-send-string cmd)
+  (vterm-send-escape)
+  (vterm-send-string "`p")
+  (let ((cmd-size (length cmd))
+        (cursor 0))
+    (while (< cursor cmd-size)
+      (vterm-send-string "l")
+      (setq cursor (+ cursor 1))))
+  (vterm-send-string "a"))
+
+(defun vt-inset-at-point (cmd)
+  (vterm-send-escape)
+  (vterm-send-string "i")
+  (vterm-send-string cmd))
+
+(defun vt-add-sudo ()
+    (interactive)
+    (vt-insert-at-start "sudo "))
+
+(defun vt-add-chmod ()
+  (interactive)
+  (vt-insert-at-start "chmod u+x "))
+
+(defun vt-rc ()
+  (interactive)
+  (vt-append-path "~/bin/")
+  (vt-exec "bindkey -v")
+  (vt-eq "PROMPT" "%n %5~# ")
+  (vt-alias "l" "ls")
+  (vt-alias "c" "clear")
+  (vt-alias "ktl" "kubectl")
+  ;; (vt-alias "la" "ls -lAh")
+  (vt-alias "la" "ls -lAh")
+  (vt-alias "ll" "ls -lh")
+  (vt-alias "pod" "popd")
+  (vt-alias "pd" "pushd")
+  (vt-alias "...." "cd ../../..")
+  (vt-alias "..." "cd ../..")
+  (vt-alias ".." "cd .."))
