@@ -1,3 +1,4 @@
+(global-hl-line-mode)
 (dirtrack-mode)
 (tool-bar-mode -1)
 (scroll-bar-mode 1)
@@ -6,7 +7,6 @@
 ;; (desktop-save-mode 1)
 (setq org-hide-leading-stars t
       org-adapt-indentation t
-
       ns-use-native-fullscreen nil
       org-odd-levels-only t     
       backup-inhibited t
@@ -23,9 +23,9 @@
 
 (with-eval-after-load 'hl-line
   (set-face-attribute 'hl-line nil :background "#333333"))
-(set-face-attribute 'show-paren-match nil :background "#FFFF00")
 
 (set-face-attribute 'show-paren-match nil :background "#FFFF00")
+
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 (add-hook 'conf-mode-hook #'display-line-numbers-mode)
 (add-hook 'text-mode-hook #'display-line-numbers-mode)
@@ -497,3 +497,8 @@ If on a:
    (string-join (rubicon/marked-workspace-list) " ")))
 
 
+(defun rubicon/workspace-kill-current-buffer ()
+  (interactive)
+  (if (> (length (persp-current-buffer-names)) 1)
+      (kill-current-buffer)
+    (message "Can't delete last workspace buffer")))

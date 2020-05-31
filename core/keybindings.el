@@ -272,3 +272,7 @@
  "<f14>" 'vterm-send-escape)
 
 (global-set-key [remap goto-line] 'goto-line-preview)
+
+(global-set-key [remap kill-current-buffer]
+		'rubicon/workspace-kill-current-buffer)
+
