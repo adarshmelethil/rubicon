@@ -287,7 +287,6 @@
   ;; use margin instead of fringe
   (diff-hl-margin-mode))
 
-
 (use-package all-the-icons-dired
   :config
   (defvar +wdired-icons-enabled -1))
@@ -364,3 +363,37 @@
 (use-package ns-auto-titlebar
   :config
   (ns-auto-titlebar-mode))
+
+
+(use-package docker
+  :ensure t)
+
+
+(use-package treemacs
+  :config
+  (treemacs-resize-icons 16))
+
+(use-package treemacs-evil
+  :after treemacs evil
+  :ensure t)
+
+(use-package treemacs-projectile
+  :after treemacs projectile
+  :ensure t)
+
+(use-package treemacs-icons-dired
+  :after treemacs dired
+  :ensure t
+  :config (treemacs-icons-dired-mode))
+
+(use-package treemacs-magit
+  :after treemacs magit
+  :ensure t)
+
+
+(use-package dired-rainbow)
+
+(use-package dired-subtree)
+(use-package dired-ranger)
+
+(use-package dired-collapse)
