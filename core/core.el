@@ -502,3 +502,6 @@ If on a:
   (if (> (length (persp-current-buffer-names)) 1)
       (kill-current-buffer)
     (message "Can't delete last workspace buffer")))
+
+
+(defalias 'e 'evil-edit)
