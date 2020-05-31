@@ -89,7 +89,7 @@
   "TAB s" 'persp-switch 
   
   ;; Navigation
-  "c" 'avy-goto-char
+  "c" 'avy-goto-char-2
   "l" 'avy-goto-line
   "\"" 'avy-resume
   "m" 'avy-move-line
