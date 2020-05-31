@@ -26,7 +26,6 @@
   "r" 'undo-fu-only-redo
   "g c" 'evilnc-comment-operator)
 
-
 (general-define-key
  :states rubicon/nvm-states
  :keymaps 'override
@@ -52,9 +51,8 @@
  "S-<SPC>" 'counsel-locate
 
  ;; split navigation
- "S-<down>" 'evil-scroll-down
- "S-<up>" 'evil-scroll-up
-
+ "(" 'evil-scroll-down
+ ")" 'evil-scroll-up
  
  "<down>" 'evil-window-down
  "<left>" 'evil-window-left
@@ -143,6 +141,7 @@
   "<down>" (ilm (rubicon/split-window "down")))
 
 (rubicon/leader-<f14>
+  "z" 'treemacs
   "<f14>" 'counsel-rg
   "h" 'hs-hide-level
   "p" 'proced
