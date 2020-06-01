@@ -61,42 +61,44 @@
 
 (rubicon/leader-SPC
 
-  "0" (ilm (rubicon/switch-workspace "0"))
-  "1" (ilm (rubicon/switch-workspace "1"))
-  "2" (ilm (rubicon/switch-workspace "2"))
-  "3" (ilm (rubicon/switch-workspace "3"))
-  "4" (ilm (rubicon/switch-workspace "4"))
-  "5" (ilm (rubicon/switch-workspace "5"))
-  "6" (ilm (rubicon/switch-workspace "6"))
-  "7" (ilm (rubicon/switch-workspace "7"))
-  "8" (ilm (rubicon/switch-workspace "8"))
-  "9" (ilm (rubicon/switch-workspace "9"))
+  "0" (ilm (rubicon/workspace-switch "0"))
+  "1" (ilm (rubicon/workspace-switch "1"))
+  "2" (ilm (rubicon/workspace-switch "2"))
+  "3" (ilm (rubicon/workspace-switch "3"))
+  "4" (ilm (rubicon/workspace-switch "4"))
+  "5" (ilm (rubicon/workspace-switch "5"))
+  "6" (ilm (rubicon/workspace-switch "6"))
+  "7" (ilm (rubicon/workspace-switch "7"))
+  "8" (ilm (rubicon/workspace-switch "8"))
+  "9" (ilm (rubicon/workspace-switch "9"))
 
-  "TAB 0" (ilm (rubicon/switch-workspace "10"))
-  "TAB 1" (ilm (rubicon/switch-workspace "11"))
-  "TAB 2" (ilm (rubicon/switch-workspace "12"))
-  "TAB 3" (ilm (rubicon/switch-workspace "13"))
-  "TAB 4" (ilm (rubicon/switch-workspace "14"))
-  "TAB 5" (ilm (rubicon/switch-workspace "15"))
-  "TAB 6" (ilm (rubicon/switch-workspace "16"))
-  "TAB 7" (ilm (rubicon/switch-workspace "17"))
-  "TAB 8" (ilm (rubicon/switch-workspace "18"))
-  "TAB 9" (ilm (rubicon/switch-workspace "19"))
+  "TAB 0" (ilm (rubicon/workspace-switch "10"))
+  "TAB 1" (ilm (rubicon/workspace-switch "11"))
+  "TAB 2" (ilm (rubicon/workspace-switch "12"))
+  "TAB 3" (ilm (rubicon/workspace-switch "13"))
+  "TAB 4" (ilm (rubicon/workspace-switch "14"))
+  "TAB 5" (ilm (rubicon/workspace-switch "15"))
+  "TAB 6" (ilm (rubicon/workspace-switch "16"))
+  "TAB 7" (ilm (rubicon/workspace-switch "17"))
+  "TAB 8" (ilm (rubicon/workspace-switch "18"))
+  "TAB 9" (ilm (rubicon/workspace-switch "19"))
 
   ;; Workspaces
-  "TAB d" 'rubicon/delete-workspace
-  "TAB TAB" 'rubicon/show-workspaces
+  "TAB d" 'rubicon/workspace-delete
+  "TAB TAB" 'rubicon/workspace-show-all
   "TAB s" 'persp-switch 
   
   ;; Navigation
-  "c" 'avy-goto-char-2
+  "f" 'avy-goto-char-2
   "l" 'avy-goto-line
   "\"" 'avy-resume
   "m" 'avy-move-line
   "M" 'avy-move-region
 
   "L" 'goto-line-preview
-  "o" 'rubicon/kill-other-buffers
+  "o" 'rubicon/workspace-kill-invisible-buffers
+  "O" 'rubicon/workspace-kill-other-buffers
+
   "s" 'eshell
   "t" 'vterm
   "r" 'counsel-recentf
@@ -113,19 +115,17 @@
   "h o" 'find-function-on-key
   "h f" 'find-function
   "h v" 'find-variable
-
-  ;;Describe
-  "d v" 'describe-variable
-  "d k" 'describe-key
-  "d m" 'describe-mode
-  "d f" 'describe-face
-  "d o" 'describe-font
-  "d c" 'describe-char
-  "d t" 'describe-theme
-  "d a" 'describe-keymap
-  "d s" 'describe-symbol
-  "d b" 'describe-binding
-  "d n" 'describe-fontset
+  "h r" 'describe-variable
+  "h k" 'describe-key
+  "h m" 'describe-mode
+  "h e" 'describe-face
+  "h n" 'describe-font
+  "h c" 'describe-char
+  "h t" 'describe-theme
+  "h a" 'describe-keymap
+  "h s" 'describe-symbol
+  "h b" 'describe-binding
+  "h F" 'describe-fontset
 
   "." 'counsel-find-file
   
@@ -192,17 +192,23 @@
 (create-folder-nmap "<f15> O" ~/org              )
 
 (rubicon/leader-<f15>
-  "l" (ilm (evil-edit "~/org/timeline.org"))
-  "i" (ilm (evil-edit "~/org/triage.org"))
-  "t" (ilm (evil-edit "~/org/todo.org"))
-  "g" (ilm (evil-edit "~/org/gist.org"))
-  "n" (ilm (evil-edit "~/org/notes.org"))
-  "s" (ilm (evil-edit "~/org/scrap.org"))
-  "r" (ilm (evil-edit "~/.zshrc"))
-  "p" (ilm (evil-edit "~/org/projects.org"))
-  "b" (ilm (evil-edit "~/org/books.org"))
-  "C" (ilm (evil-edit "~/.emacs.d/core"))
-  "c" (ilm (evil-edit "~/.emacs.d/init.el")))
+  "e k" (ilm (e "~/.emacs.d/core/keybindings.el"))
+  "e c" (ilm (e "~/.emacs.d/core/core.el"))
+  "e p" (ilm (e "~/.emacs.d/core/packages.el"))
+  "e i" (ilm (e "~/.emacs.d/init.el"))
+
+  "l" (ilm (e "~/org/timeline.org"))
+  "i" (ilm (e "~/org/triage.org"))
+  "t" (ilm (e "~/org/todo.org"))
+  "g" (ilm (e "~/org/gist.org"))
+  "n" (ilm (e "~/org/notes.org"))
+  "s" (ilm (e "~/org/scrap.org"))
+  "r" (ilm (e "~/.zshrc"))
+  "p" (ilm (e "~/org/projects.org"))
+  "a" (ilm (e "~/org/agenda.org"))
+  "b" (ilm (e "~/org/books.org"))
+  "C" (ilm (e "~/.emacs.d/core"))
+  "c" (ilm (e "~/.emacs.d/init.el")))
 
 (global-set-key [remap keyboard-quit] #'rubicon/escape)
 (global-set-key [remap evil-force-normal-state] #'rubicon/escape)
@@ -261,6 +267,11 @@
 
 
 (general-define-key
+ :states 'normal
+ :keymaps 'org-mode-map
+ "<return>" '+org/dwim-at-point)
+
+(general-define-key
  :states 'insert
  :keymaps 'vterm-mode-map
 
@@ -275,4 +286,3 @@
 
 (global-set-key [remap kill-current-buffer]
 		'rubicon/workspace-kill-current-buffer)
-
