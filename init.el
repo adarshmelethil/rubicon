@@ -17,6 +17,5 @@
 (load (concat user-emacs-directory "core/packages"))
 (load (concat user-emacs-directory "core/core"))
 (load (concat user-emacs-directory "core/keybindings"))
-
-
+(e "~/org/agenda.org")
 (setq gc-cons-threshold 16777216)
