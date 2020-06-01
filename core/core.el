@@ -4,18 +4,25 @@
 (scroll-bar-mode 1)
 (show-paren-mode)
 (blink-cursor-mode 0)
-;; (desktop-save-mode 1)
-(setq org-hide-leading-stars t
-      org-adapt-indentation t
-      ns-use-native-fullscreen nil
-      org-odd-levels-only t     
-      backup-inhibited t
-      visible-bell -1
-      ring-bell-function 'ignore
-      display-line-numbers-type 'relative
-      +ivy-buffer-preview t
-      org-use-property-inheritance t
-      show-paren-style 'parenthesis)
+
+(defalias 'yes-or-no-p 'y-or-n-p)
+(defalias 'e 'evil-edit)
+;;(hs-minor-mode)
+;;(desktop-save-mode 1)
+
+(setq
+ inhibit-startup-screen t
+ org-hide-leading-stars t
+ org-adapt-indentation t
+ ns-use-native-fullscreen nil
+ org-odd-levels-only t     
+ backup-inhibited t
+ visible-bell -1
+ ring-bell-function 'ignore
+ display-line-numbers-type 'relative
+ +ivy-buffer-preview t
+ org-use-property-inheritance t
+ show-paren-style 'parenthesis)
 
 (customize-set-variable 'horizontal-scroll-bar-mode nil)
 (display-battery-mode t)
@@ -47,13 +54,7 @@
       (evil-window-down 1)))))
 
 
-(defun rubicon/kill-other-buffers ()
-  (interactive)
-  (delete-other-windows)
-  (-let ((this-buffer (current-buffer)))
-    (--map (if (eq this-buffer it) nil
-	     (kill-buffer it))
-	   (persp-current-buffers))))
+
 
 (defun rubicon/escape ()
   (interactive)
@@ -472,30 +473,27 @@ If on a:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Workspaces
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defun rubicon/switch-workspace (name)
+(defun rubicon/workspace-switch (name)
   (interactive)
   (persp-switch name)
-  (rubicon/show-workspaces))
+  (rubicon/workspace-show-all))
 
-
-(defun rubicon/delete-workspace ()
+(defun rubicon/workspace-delete ()
   (interactive)
   (persp-kill (persp-current-name))
-  (rubicon/show-workspaces))
+  (rubicon/workspace-show-all))
 
-
-(defun rubicon/marked-workspace-list ()
+(defun rubicon/workspace-get-marked-list ()
   (--map
    (if (string= (persp-current-name) it)
        (concat ">" it "<")
      (concat " " it " "))
    (persp-names)))
 
-(defun rubicon/show-workspaces ()
+(defun rubicon/workspace-show-all ()
   (interactive)
   (message
-   (string-join (rubicon/marked-workspace-list) " ")))
-
+   (string-join (rubicon/workspace-get-marked-list) " ")))
 
 (defun rubicon/workspace-kill-current-buffer ()
   (interactive)
@@ -503,5 +501,39 @@ If on a:
       (kill-current-buffer)
     (message "Can't delete last workspace buffer")))
 
+(defun rubicon/visible-buffers ()
+  "Returns a list of all currently visible buffers"
+  (mapcar 'window-buffer (window-list)))
 
-(defalias 'e 'evil-edit)
+(defun rubicon/workspace-current-get-all-buffers ()
+  "Returns a list of all buffers in current perspective"
+  (persp-current-buffers))
+
+(defun rubicon/workspace-current-get-invisible-buffers ()
+  "returns a list of all invisible buffers in current perspective"
+  (-difference (rubicon/workspace-current-get-all-buffers)
+	       (rubicon/visible-buffers)))
+
+(defun rubicon/kill-selected-buffers (selected-buffers)
+  "Kills all buffers given to it"
+  (--map (kill-buffer it) selected-buffers))
+
+
+(defun rubicon/workspace-current-get-other-buffers ()
+  "Get buffers other than the current buffers in the current perspective"
+  (-difference
+   (rubicon/workspace-current-get-all-buffers)
+   (list (current-buffer))))
+
+(defun rubicon/workspace-kill-invisible-buffers ()
+  "Kills all invisible buffers in perspective"
+  (interactive)
+  (rubicon/kill-selected-buffers
+   (rubicon/workspace-current-get-invisible-buffers)))
+
+(defun rubicon/workspace-kill-other-buffers ()
+  "Kills all buffers other than current one in perspective"
+  (interactive)
+  (delete-other-windows)
+  (rubicon/kill-selected-buffers
+   (rubicon/workspace-current-get-other-buffers)))
