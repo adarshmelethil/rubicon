@@ -20,6 +20,8 @@
 (rubicon/define-leader "<f15>")
 (rubicon/define-leader "M")
 
+
+
 (general-nmap
  "TAB" 'evil-jump-item
   "u" 'undo-fu-only-undo
@@ -48,6 +50,8 @@
  "e" 'evil-embrace-evil-surround-region
  "z g" 'evil-scroll-line-to-bottom
  "<DEL>" 'counsel-M-x
+ [backspace] 'counsel-M-x
+
  "S-<SPC>" 'counsel-locate
 
  ;; split navigation
@@ -271,6 +275,8 @@
  :keymaps 'org-mode-map
  "<return>" '+org/dwim-at-point)
 
+
+
 (general-define-key
  :states 'insert
  :keymaps 'vterm-mode-map
@@ -282,7 +288,13 @@
  "<f13>" 'vterm-send-C-c
  "<f14>" 'vterm-send-escape)
 
+(general-define-key
+ :keymaps 'dired-mode-map
+ "[" 'dired-create-directory)
+
+
 (global-set-key [remap goto-line] 'goto-line-preview)
+
 
 (global-set-key [remap kill-current-buffer]
 		'rubicon/workspace-kill-current-buffer)
