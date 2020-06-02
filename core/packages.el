@@ -397,3 +397,9 @@
 (use-package dired-ranger)
 
 (use-package dired-collapse)
+
+(use-package evil-goggles
+  :ensure t
+  :config
+  (evil-goggles-mode)
+  (setq evil-goggles-duration 0.08))
