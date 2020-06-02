@@ -324,7 +324,21 @@ If on a:
 
 (add-hook 'org-mode-hook 'org-indent-mode)
 
-
+;;; Babel
+(org-babel-do-load-languages
+ 'org-babel-load-languages '((shell . t)
+			     (awk . t)
+			     (clojure . t)
+			     (emacs-lisp . t)
+			     (haskell . t)
+			     (gnuplot . t)
+			     (lisp . t)
+			     (makefile . t)
+			     (org . t)
+			     (ruby . t)
+			     (sqlite . t)
+			     (sql . t)
+			     (C . t)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
