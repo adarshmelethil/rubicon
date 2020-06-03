@@ -29,7 +29,7 @@
 (display-time-mode t)
 
 (with-eval-after-load 'hl-line
-  (set-face-attribute 'hl-line nil :background "#333333"))
+  (set-face-attribute 'hl-line nil :background "#404038"))
 
 (set-face-attribute 'show-paren-match nil :background "#FFFF00")
 
@@ -551,3 +551,9 @@ If on a:
   (delete-other-windows)
   (rubicon/kill-selected-buffers
    (rubicon/workspace-current-get-other-buffers)))
+
+(defun rubicon/copy-path-to-buffer-file ()
+  (interactive)
+  (let ((path-to-file (buffer-file-name)))
+    (message path-to-file)
+    (kill-new path-to-file)))

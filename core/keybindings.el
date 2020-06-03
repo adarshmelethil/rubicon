@@ -64,6 +64,7 @@
  "<right>" 'evil-window-right )
 
 (rubicon/leader-SPC
+  "y" 'rubicon/copy-path-to-buffer-file
 
   "0" (ilm (rubicon/workspace-switch "0"))
   "1" (ilm (rubicon/workspace-switch "1"))
