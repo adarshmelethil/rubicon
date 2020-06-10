@@ -1,3 +1,4 @@
+(require 'org-tempo)
 (global-hl-line-mode)
 (dirtrack-mode)
 (tool-bar-mode -1)
@@ -554,6 +555,6 @@ If on a:
 
 (defun rubicon/copy-path-to-buffer-file ()
   (interactive)
-  (let ((path-to-file (buffer-file-name)))
+  (let ((path-to-file (or (buffer-file-name) default-directory)))
     (message path-to-file)
     (kill-new path-to-file)))
