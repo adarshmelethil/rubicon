@@ -403,3 +403,7 @@
   :config
   (evil-goggles-mode)
   (setq evil-goggles-duration 0.08))
+
+(use-package clojure-mode)
+
+(use-package sass-mode)
