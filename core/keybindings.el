@@ -20,8 +20,6 @@
 (rubicon/define-leader "<f15>")
 (rubicon/define-leader "M")
 
-
-
 (general-nmap
  "TAB" 'evil-jump-item
   "u" 'undo-fu-only-undo
@@ -146,7 +144,8 @@
   "<down>" (ilm (rubicon/split-window "down")))
 
 (rubicon/leader-<f14>
-  "z" 'treemacs
+  "z" 'treemacs-select-window
+;;  "Z" 'treemacs
   "<f14>" 'counsel-rg
   "h" 'hs-hide-level
   "p" 'proced
@@ -155,7 +154,7 @@
   "l" 'magit-log-all
   ;; "<f14> b" 'ibuffer
   "r" 'rename-buffer
-  "<f1> c" 'org-schedule
+;;  "<f1> c" 'org-schedule
 
   "<f1>" 'org-agenda)
 
@@ -190,8 +189,6 @@
 (create-folder-nmap "<f15> S" ~/scrap/           )
 (create-folder-nmap "<f15> R" ~/repos/           )
 (create-folder-nmap "<f15> S" ~/repos/scrap/     )
-(create-folder-nmap "<f15> T" ~/repos/test-ngp/  )
-(create-folder-nmap "<f15> N" ~/repos/norby/     )
 (create-folder-nmap "<f15> E" ~/.emacs.d         )
 (create-folder-nmap "<f15> D" ~/.doom.d          )
 (create-folder-nmap "<f15> O" ~/org              )
