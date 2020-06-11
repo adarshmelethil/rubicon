@@ -407,3 +407,35 @@
 (use-package clojure-mode)
 
 (use-package sass-mode)
+
+(use-package org-superstar
+  :config
+  (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
+
+(use-package evil-org
+
+  :straight
+  (evil-org
+   :type git
+   :host github
+   :repo "hlissner/evil-org-mode")
+
+  :ensure t
+  :after org
+  :config
+  (add-hook 'org-mode-hook 'evil-org-mode)
+  (add-hook 'evil-org-mode-hook
+            (lambda ()
+              (evil-org-set-key-theme)))
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
+
+(use-package ob-async)
+
+(use-package ob-restclient)
+
+(use-package ox-pandoc)
+
+(use-package ox-hugo
+  :ensure t            ;Auto-install the package from Melpa (optional)
+  :after ox)
