@@ -518,10 +518,20 @@ If on a:
   (message
    (string-join (rubicon/workspace-get-marked-list) " ")))
 
+(defun rubicon/workspace-is-last-buffer? ()
+  (interactive)
+  (not (> (length (persp-current-buffer-names)) 1)))
+
 (defun rubicon/workspace-kill-current-buffer ()
   (interactive)
-  (if (> (length (persp-current-buffer-names)) 1)
+  (if (not (rubicon/workspace-is-last-buffer?))
       (kill-current-buffer)
+    (message "Can't delete last workspace buffer")))
+
+(defun rubicon/workspace-quit-window ()
+  (interactive)
+  (if (not (rubicon/workspace-is-last-buffer?))
+      (quit-window)
     (message "Can't delete last workspace buffer")))
 
 (defun rubicon/visible-buffers ()
