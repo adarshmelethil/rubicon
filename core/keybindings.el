@@ -208,7 +208,7 @@
   "r" (ilm (e "~/.zshrc"))
   "p" (ilm (e "~/org/projects.org"))
   "a" (ilm (e "~/org/agenda.org"))
-  "b" (ilm (e "~/org/books.org"))
+  "b" (ilm (e "~/org/notebooks.org"))
   "C" (ilm (e "~/.emacs.d/core"))
   "c" (ilm (e "~/.emacs.d/init.el")))
 
@@ -240,7 +240,7 @@
  "<f15> e" (lambda () (interactive) (vt-insert-command "echo "))
  "<f15> R" (lambda () (interactive) (vt-cd-to "~/repos") (vt-ls))
  "<f15> O" (lambda () (interactive) (vt-cd-to "~/org") (vt-ls))
- "<f15> B" (lambda () (interactive) (vt-cd-to "~/books") (vt-ls))
+ "<f15> B" (lambda () (interactive) (vt-cd-to "~/notebooks") (vt-ls))
  "<f15> S" (lambda () (interactive) (vt-cd-to "~/scrap") (vt-ls)))
 
 (general-define-key
