@@ -296,3 +296,5 @@
 
 (global-set-key [remap kill-current-buffer]
 		'rubicon/workspace-kill-current-buffer)
+(global-set-key [remap quit-window]
+		'rubicon/workspace-kill-current-buffer)
