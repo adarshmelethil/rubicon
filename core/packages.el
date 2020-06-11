@@ -437,5 +437,5 @@
 (use-package ox-pandoc)
 
 (use-package ox-hugo
-  :ensure t            ;Auto-install the package from Melpa (optional)
+  :ensure t
   :after ox)
