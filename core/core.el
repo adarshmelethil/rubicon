@@ -164,7 +164,7 @@ the only window, use evil-window-move-* (e.g. `evil-window-move-far-left')."
 
 ;; ORG mode
 (with-eval-after-load 'org
-  (set-face-attribute 'org-document-title nil :height 1.5 :foreground "#c23838")
+  (set-face-attribute 'org-document-title nil :height 1.5 :foreground "#693c3c")
   (set-face-attribute 'org-level-1 nil
 		      :height 1.26
 		      :weight 'ultra-light
