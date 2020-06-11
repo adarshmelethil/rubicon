@@ -178,8 +178,8 @@ the only window, use evil-window-move-* (e.g. `evil-window-move-far-left')."
       '((sequence
 	 "TODO(t)"  ; A task that needs doing & is ready to do
 	 "PROJ(p)"  ; A project, which usually contains other tasks
-	 "STRT(s)"  ; A task that is in progress
-	 "WAIT(w)"  ; Something external is holding up this task
+	 "ON-GOING(s)"  ; A task that is in progress
+	 "BLOCKED(w)"  ; Something external is holding up this task
 	 "HOLD(h)"  ; This task is paused/on hold because of me
 	 "|"
 	 "DONE(d)"  ; Task successfully completed
