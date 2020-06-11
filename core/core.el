@@ -12,6 +12,11 @@
 ;;(desktop-save-mode 1)
 
 (setq
+ org-src-preserve-indentation t
+ org-src-tab-acts-natively t
+ org-confirm-babel-evaluate nil
+ org-link-elisp-confirm-function nil
+ 
  inhibit-startup-screen t
  org-hide-leading-stars t
  org-adapt-indentation t
@@ -339,7 +344,8 @@ If on a:
 			     (ruby . t)
 			     (sqlite . t)
 			     (sql . t)
-			     (C . t)))
+			     (C . t)
+			     (restclient . t)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
