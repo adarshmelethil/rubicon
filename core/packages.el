@@ -432,10 +432,13 @@
 
 (use-package ob-async)
 
+(use-package restclient)
 (use-package ob-restclient)
+(use-package company-restclient)
 
 (use-package ox-pandoc)
 
 (use-package ox-hugo
   :ensure t
   :after ox)
+
