@@ -323,7 +323,7 @@
 (use-package haskell-mode)
 
 (rubicon/github-package highlight-thing "fgeller/highlight-thing.el")
-(setq highlight-thing-delay-seconds 0.2)
+(setq highlight-thing-delay-seconds 0.6)
 (global-highlight-thing-mode)
 
 (rubicon/github-package goto-line-preview "jcs-elpa/goto-line-preview")
