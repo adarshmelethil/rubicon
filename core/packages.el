@@ -329,7 +329,7 @@
    :host github
    :repo "fgeller/highlight-thing.el")
   :config
-  (setq highlight-thing-delay-seconds 0.9))
+  (setq highlight-thing-delay-seconds 0.5))
 
 
 
