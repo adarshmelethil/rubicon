@@ -188,7 +188,6 @@
 (create-folder-nmap "<f15> P" ~/projects/        )
 (create-folder-nmap "<f15> S" ~/scrap/           )
 (create-folder-nmap "<f15> R" ~/repos/           )
-(create-folder-nmap "<f15> S" ~/repos/scrap/     )
 (create-folder-nmap "<f15> E" ~/.emacs.d         )
 (create-folder-nmap "<f15> D" ~/.doom.d          )
 (create-folder-nmap "<f15> O" ~/org              )

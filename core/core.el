@@ -12,6 +12,12 @@
 ;;(desktop-save-mode 1)
 
 (setq
+ evil-snipe-smart-case t
+ evil-snipe-scope 'line
+ evil-snipe-repeat-scope 'visible
+ evil-snipe-char-fold t
+ 
+ evil-snipe-spillover-scope t
  org-indent-indentation-per-level 1
  org-src-preserve-indentation t
  org-src-tab-acts-natively t
@@ -163,9 +169,6 @@ the only window, use evil-window-move-* (e.g. `evil-window-move-far-left')."
       dired-recursive-deletes 'top)
 
 ;; ORG mode
-
-
-
 (set-face-attribute 'highlight-thing nil :background "#FFF" :foreground "#000")
 
 (with-eval-after-load 'org
@@ -354,8 +357,7 @@ If on a:
 			     (ruby . t)
 			     (sqlite . t)
 			     (sql . t)
-			     (C . t)
-			     (restclient . t)))
+			     (C . t)))
 
 (add-hook 'org-mode-hook 'org-overview)
 

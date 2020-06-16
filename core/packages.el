@@ -121,9 +121,9 @@
 
 (use-package undo-tree)
 
-(use-package smartparens
-  :config
-  (smartparens-global-mode))
+;; (use-package smartparens
+;;   :config
+;;   (smartparens-global-mode))
 
 (use-package restart-emacs)
 
@@ -161,24 +161,23 @@
 
 (use-package all-the-icons)
 
-(use-package evil-lion
-  :ensure t
-  :bind (:map evil-normal-state-map
-	      ("g l " . evil-lion-left)
-	      ("g L " . evil-lion-right)
-	      :map evil-visual-state-map
-	      ("g l " . evil-lion-left)
-	      ("g L " . evil-lion-right)))
+;; (use-package evil-lion
+;;   :ensure t
+;;   :bind (:map evil-normal-state-map
+;; 	      ("g l " . evil-lion-left)
+;; 	      ("g L " . evil-lion-right)
+;; 	      :map evil-visual-state-map
+;; 	      ("g l " . evil-lion-left)
+;; 	      ("g L " . evil-lion-right)))
 
-(use-package eyebrowse
-  :config
-  (eyebrowse-mode))
+;; (use-package eyebrowse
+;;   :config
+;;   (eyebrowse-mode))
 
 (use-package doom-modeline
   :ensure t
   :init (doom-modeline-mode 1)
-  :config
-  )
+  :config)
 
 (use-package  evil-indent-plus
   :config
@@ -235,27 +234,27 @@
   (global-undo-fu-session-mode))
 
 
-(use-package lsp-mode
-  :config
-  (lsp-mode)
-  )
+;; (use-package lsp-mode
+;;   :config
+;;   (lsp-mode)
+;;   )
 
 
-(use-package lsp-ui
-  :config
-  (setq lsp-ui-doc-max-height 8
-	lsp-ui-doc-max-width 35
-	lsp-ui-sideline-ignore-duplicate t
-	;; lsp-ui-doc is redundant with and more invasive than
-	;; `+lookup/documentation'
-	lsp-ui-doc-enable nil
-	;; Don't show symbol definitions in the sideline. They are pretty noisy,
-	;; and there is a bug preventing Flycheck errors from being shown (the
-	;; errors flash briefly and then disappear).
-	lsp-ui-sideline-show-hover nil))
+;; (use-package lsp-ui
+;;   :config
+;;   (setq lsp-ui-doc-max-height 8
+;; 	lsp-ui-doc-max-width 35
+;; 	lsp-ui-sideline-ignore-duplicate t
+;; 	;; lsp-ui-doc is redundant with and more invasive than
+;; 	;; `+lookup/documentation'
+;; 	lsp-ui-doc-enable nil
+;; 	;; Don't show symbol definitions in the sideline. They are pretty noisy,
+;; 	;; and there is a bug preventing Flycheck errors from being shown (the
+;; 	;; errors flash briefly and then disappear).
+;; 	lsp-ui-sideline-show-hover nil))
 
-(use-package lsp-ivy
-  :after lsp-mode)
+;; (use-package lsp-ivy
+;;   :after lsp-mode)
 
 (use-package go-mode)
 (use-package yaml-mode)
@@ -263,10 +262,8 @@
 (use-package vterm
   :ensure t)
 
-(use-package all-the-icons-ivy
-  :init (add-hook 'after-init-hook 'all-the-icons-ivy-setup))
-
-
+;; (use-package all-the-icons-ivy
+;;   :init (add-hook 'after-init-hook 'all-the-icons-ivy-setup))
 
 (use-package git-gutter
   :config
@@ -287,9 +284,9 @@
   ;; use margin instead of fringe
   (diff-hl-margin-mode))
 
-(use-package all-the-icons-dired
-  :config
-  (defvar +wdired-icons-enabled -1))
+;; (use-package all-the-icons-dired
+;;   :config
+;;   (defvar +wdired-icons-enabled -1))
 
 ;; (use-package dired-x
 ;;   :hook (dired-mode . dired-omit-mode)
@@ -303,45 +300,55 @@
   :init
   (global-set-key [remap find-dired] #'fd-dired))
 
-(use-package multiple-cursors)
+;; (use-package multiple-cursors)
 
-(rubicon/github-package doom-snippets "hlissner/doom-snippets")
+;; (rubicon/github-package doom-snippets "hlissner/doom-snippets")
 
-(use-package flycheck
-  :config
-  (flycheck-mode)
-  (setq flycheck-emacs-lisp-load-path 'inherit)
-  (setq flycheck-check-syntax-automatically '(save mode-enabled idle-buffer-switch))
-  (setq flycheck-buffer-switch-check-intermediate-buffers t)
-  (setq flycheck-display-errors-delay 0.25))
+;; (use-package flycheck
+;;   :config
+;;   (flycheck-mode)
+;;   (setq flycheck-emacs-lisp-load-path 'inherit)
+;;   (setq flycheck-check-syntax-automatically '(save mode-enabled idle-buffer-switch))
+;;   (setq flycheck-buffer-switch-check-intermediate-buffers t)
+;;   (setq flycheck-display-errors-delay 0.25))
 
-(use-package lsp-java
-  :config
-  (setq lsp-jt-root (concat lsp-java-server-install-dir "java-test/server/")
-          dap-java-test-runner (concat lsp-java-server-install-dir "test-runner/junit-platform-console-standalone.jar")))
+;; (use-package lsp-java
+;;   :config
+;;   (setq lsp-jt-root (concat lsp-java-server-install-dir "java-test/server/")
+;;           dap-java-test-runner (concat lsp-java-server-install-dir "test-runner/junit-platform-console-standalone.jar")))
 
 (use-package haskell-mode)
 
 (rubicon/github-package highlight-thing "fgeller/highlight-thing.el")
-(setq highlight-thing-delay-seconds 0.6)
-(global-highlight-thing-mode)
 
-(rubicon/github-package goto-line-preview "jcs-elpa/goto-line-preview")
+(use-package  highlight-thing
+  :hook (prog-mode . highlight-thing-mode)
+  :straight
+  (highlight-thing
+   :type git
+   :host github
+   :repo "fgeller/highlight-thing.el")
+  :config
+  (setq highlight-thing-delay-seconds 0.9))
+
+
+
+
+;; (rubicon/github-package goto-line-preview "jcs-elpa/goto-line-preview")
 
 (use-package company
   :config
   (add-hook 'after-init-hook 'global-company-mode))
 
-(use-package toc-org
-  :config
-  (add-hook 'org-mode-hook 'toc-org-mode)
-  (add-hook 'markdown-mode-hook 'toc-org-mode))
+;; (use-package toc-org
+;;   :config
+;;   (add-hook 'org-mode-hook 'toc-org-mode)
+;;   (add-hook 'markdown-mode-hook 'toc-org-mode))
 
 (use-package git-timemachine)
 
 (use-package highlight-parentheses
-  :config
-  (global-highlight-parentheses-mode))
+  :hook (prog-mode . highlight-parentheses-mode))
 
 (use-package forge
   :after magit)
@@ -350,9 +357,9 @@
   :config
   (exec-path-from-shell-initialize))
 
-(use-package rainbow-mode
-  :ensure t
-  :init (rainbow-mode 1))
+;; (use-package rainbow-mode
+;;   :ensure t
+;;   :init (rainbow-mode 1))
 
 (use-package perspective
   :after ivy
@@ -364,9 +371,8 @@
   :config
   (ns-auto-titlebar-mode))
 
-
-(use-package docker
-  :ensure t)
+;; (use-package docker
+;;   :ensure t)
 
 
 (use-package treemacs
@@ -390,13 +396,10 @@
   :after treemacs magit
   :ensure t)
 
-
-(use-package dired-rainbow)
-
-(use-package dired-subtree)
-(use-package dired-ranger)
-
-(use-package dired-collapse)
+;; (use-package dired-rainbow)
+;; (use-package dired-subtree)
+;; (use-package dired-ranger)
+;; (use-package dired-collapse)
 
 (use-package evil-goggles
   :ensure t
@@ -413,7 +416,6 @@
   (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
 
 (use-package evil-org
-
   :straight
   (evil-org
    :type git
@@ -425,20 +427,9 @@
   :config
   (add-hook 'org-mode-hook 'evil-org-mode)
   (add-hook 'evil-org-mode-hook
-            (lambda ()
-              (evil-org-set-key-theme)))
+	    (lambda ()
+	      (evil-org-set-key-theme)))
   (require 'evil-org-agenda)
   (evil-org-agenda-set-keys))
 
 (use-package ob-async)
-
-(use-package restclient)
-(use-package ob-restclient)
-(use-package company-restclient)
-
-(use-package ox-pandoc)
-
-(use-package ox-hugo
-  :ensure t
-  :after ox)
-
