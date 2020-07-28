@@ -42,9 +42,9 @@
 (display-time-mode t)
 
 (with-eval-after-load 'hl-line
-  (set-face-attribute 'hl-line nil :background "#404038"))
+  (set-face-attribute 'hl-line nil :background "#1a4735"))
 
-(set-face-attribute 'show-paren-match nil :background "#FFFF00")
+;; (set-face-attribute 'show-paren-match nil :background "#FFFF00")
 
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 (add-hook 'conf-mode-hook #'display-line-numbers-mode)
@@ -588,3 +588,8 @@ If on a:
   (let ((path-to-file (or (buffer-file-name) default-directory)))
     (message path-to-file)
     (kill-new path-to-file)))
+
+;; TODO
+(defun rebuicon/workspace-delete-all ()
+  (interactive)
+  (rubicon/kill-selected-buffers (buffer-list)))

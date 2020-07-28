@@ -56,14 +56,12 @@
 
 (use-package doom-themes
   :config
-  (load-theme 'doom-tomorrow-night))
+  (load-theme 'doom-dark+))
 
 (use-package general
   :config
   ;;(require 'general)
   (general-evil-setup))
-
-;; (use-package vterm)
 
 (use-package evil-collection
   :after evil
@@ -121,9 +119,9 @@
 
 (use-package undo-tree)
 
-;; (use-package smartparens
-;;   :config
-;;   (smartparens-global-mode))
+(use-package smartparens
+  :config
+  (smartparens-global-mode))
 
 (use-package restart-emacs)
 
@@ -329,21 +327,13 @@
    :host github
    :repo "fgeller/highlight-thing.el")
   :config
-  (setq highlight-thing-delay-seconds 0.5))
-
-
-
+  (setq highlight-thing-delay-seconds 0.9))
 
 ;; (rubicon/github-package goto-line-preview "jcs-elpa/goto-line-preview")
 
 (use-package company
   :config
   (add-hook 'after-init-hook 'global-company-mode))
-
-;; (use-package toc-org
-;;   :config
-;;   (add-hook 'org-mode-hook 'toc-org-mode)
-;;   (add-hook 'markdown-mode-hook 'toc-org-mode))
 
 (use-package git-timemachine)
 
@@ -367,13 +357,8 @@
   (setq persp-initial-frame-name "1")
   (persp-mode))
 
-(use-package ns-auto-titlebar
-  :config
-  (ns-auto-titlebar-mode))
-
-;; (use-package docker
-;;   :ensure t)
-
+(use-package docker
+  :ensure t)
 
 (use-package treemacs
   :config
@@ -395,11 +380,6 @@
 (use-package treemacs-magit
   :after treemacs magit
   :ensure t)
-
-;; (use-package dired-rainbow)
-;; (use-package dired-subtree)
-;; (use-package dired-ranger)
-;; (use-package dired-collapse)
 
 (use-package evil-goggles
   :ensure t
