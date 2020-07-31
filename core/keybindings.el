@@ -62,6 +62,10 @@
  "<right>" 'evil-window-right )
 
 (rubicon/leader-SPC
+
+  "n" 'replel-start-repl
+  "N" 'replel-overview
+  
   "y" 'rubicon/copy-path-to-buffer-file
 
   "0" (ilm (rubicon/workspace-switch "0"))
@@ -297,3 +301,6 @@
 		'rubicon/workspace-kill-current-buffer)
 (global-set-key [remap quit-window]
 		'rubicon/workspace-quit-window)
+(general-define-key
+ :keymaps 'replel-mode-map
+ "g r" 'replel-repls-run)

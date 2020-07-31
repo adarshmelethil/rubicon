@@ -413,3 +413,12 @@
   (evil-org-agenda-set-keys))
 
 (use-package ob-async)
+
+(use-package dockerfile-mode)
+
+(use-package  replel
+  :straight
+  (replel
+   :type git
+   :host github
+   :repo "abdulbahajaj/repl.el"))

@@ -44,7 +44,8 @@
 (with-eval-after-load 'hl-line
   (set-face-attribute 'hl-line nil :background "#1a4735"))
 
-;; (set-face-attribute 'show-paren-match nil :background "#FFFF00")
+(set-face-attribute 'show-paren-match nil :background "#FFFF00")
+(set-face-attribute 'evil-ex-lazy-highlight nil :background "#11888c")
 
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 (add-hook 'conf-mode-hook #'display-line-numbers-mode)
