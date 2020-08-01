@@ -106,7 +106,7 @@
   "o" 'rubicon/workspace-kill-invisible-buffers
   "O" 'rubicon/workspace-kill-other-buffers
 
-  "s" 'eshell
+  "s" 'rubicon/eshell-here
   "t" 'vterm
   "r" 'counsel-recentf
   "R" 'ielm

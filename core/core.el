@@ -161,6 +161,13 @@ the only window, use evil-window-move-* (e.g. `evil-window-move-far-left')."
       eshell-glob-case-insensitive t
       eshell-error-if-no-glob t)
 
+
+(defun rubicon/eshell-here ()
+  (interactive)
+  (let ((new-buffer (generate-new-buffer "*eshell*")))
+    (switch-to-buffer new-buffer)
+    (eshell-mode)))
+
 ;; Dired
 (setq dired-auto-revert-buffer t  ; don't prompt to revert; just do it
       dired-dwim-target t  ; suggest a target for moving/copying intelligently
