@@ -422,3 +422,12 @@
    :type git
    :host github
    :repo "abdulbahajaj/repl.el"))
+
+
+(use-package eshell-z)
+(use-package eshell-prompt-extras)
+(use-package esh-help)
+(use-package eshell-git-prompt
+  :config
+  (eshell-git-prompt-use-theme 'powerline))
+
