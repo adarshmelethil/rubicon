@@ -159,19 +159,6 @@
 
 (use-package all-the-icons)
 
-;; (use-package evil-lion
-;;   :ensure t
-;;   :bind (:map evil-normal-state-map
-;; 	      ("g l " . evil-lion-left)
-;; 	      ("g L " . evil-lion-right)
-;; 	      :map evil-visual-state-map
-;; 	      ("g l " . evil-lion-left)
-;; 	      ("g L " . evil-lion-right)))
-
-;; (use-package eyebrowse
-;;   :config
-;;   (eyebrowse-mode))
-
 (use-package doom-modeline
   :ensure t
   :init (doom-modeline-mode 1)
@@ -185,9 +172,6 @@
    :type git
    :host github
    :repo "TheBB/evil-indent-plus"))
-
-
-
 
 (use-package hl-todo
   :hook (prog-mode . hl-todo-mode)
@@ -231,37 +215,11 @@
   :config
   (global-undo-fu-session-mode))
 
-
-;; (use-package lsp-mode
-;;   :config
-;;   (lsp-mode)
-;;   )
-
-
-;; (use-package lsp-ui
-;;   :config
-;;   (setq lsp-ui-doc-max-height 8
-;; 	lsp-ui-doc-max-width 35
-;; 	lsp-ui-sideline-ignore-duplicate t
-;; 	;; lsp-ui-doc is redundant with and more invasive than
-;; 	;; `+lookup/documentation'
-;; 	lsp-ui-doc-enable nil
-;; 	;; Don't show symbol definitions in the sideline. They are pretty noisy,
-;; 	;; and there is a bug preventing Flycheck errors from being shown (the
-;; 	;; errors flash briefly and then disappear).
-;; 	lsp-ui-sideline-show-hover nil))
-
-;; (use-package lsp-ivy
-;;   :after lsp-mode)
-
 (use-package go-mode)
 (use-package yaml-mode)
 
 (use-package vterm
   :ensure t)
-
-;; (use-package all-the-icons-ivy
-;;   :init (add-hook 'after-init-hook 'all-the-icons-ivy-setup))
 
 (use-package git-gutter
   :config
@@ -279,41 +237,12 @@
   :hook (dired-mode . diff-hl-dired-mode-unless-remote)
   :hook (magit-post-refresh . diff-hl-magit-post-refresh)
   :config
-  ;; use margin instead of fringe
   (diff-hl-margin-mode))
-
-;; (use-package all-the-icons-dired
-;;   :config
-;;   (defvar +wdired-icons-enabled -1))
-
-;; (use-package dired-x
-;;   :hook (dired-mode . dired-omit-mode)
-;;   :config
-;;     (setq dired-omit-verbose nil
-;; 	  dired-clean-confirm-killing-deleted-buffers nil))
-
 
 (use-package fd-dired
   :defer t
   :init
   (global-set-key [remap find-dired] #'fd-dired))
-
-;; (use-package multiple-cursors)
-
-;; (rubicon/github-package doom-snippets "hlissner/doom-snippets")
-
-;; (use-package flycheck
-;;   :config
-;;   (flycheck-mode)
-;;   (setq flycheck-emacs-lisp-load-path 'inherit)
-;;   (setq flycheck-check-syntax-automatically '(save mode-enabled idle-buffer-switch))
-;;   (setq flycheck-buffer-switch-check-intermediate-buffers t)
-;;   (setq flycheck-display-errors-delay 0.25))
-
-;; (use-package lsp-java
-;;   :config
-;;   (setq lsp-jt-root (concat lsp-java-server-install-dir "java-test/server/")
-;;           dap-java-test-runner (concat lsp-java-server-install-dir "test-runner/junit-platform-console-standalone.jar")))
 
 (use-package haskell-mode)
 
@@ -328,8 +257,6 @@
    :repo "fgeller/highlight-thing.el")
   :config
   (setq highlight-thing-delay-seconds 0.9))
-
-;; (rubicon/github-package goto-line-preview "jcs-elpa/goto-line-preview")
 
 (use-package company
   :config
@@ -346,10 +273,6 @@
 (use-package exec-path-from-shell
   :config
   (exec-path-from-shell-initialize))
-
-;; (use-package rainbow-mode
-;;   :ensure t
-;;   :init (rainbow-mode 1))
 
 (use-package perspective
   :after ivy
@@ -417,7 +340,6 @@
   (evil-org-agenda-set-keys))
 
 (use-package ob-async)
-
 (use-package dockerfile-mode)
 
 (use-package  replel
