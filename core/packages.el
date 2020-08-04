@@ -377,6 +377,10 @@
   :ensure t
   :config (treemacs-icons-dired-mode))
 
+(use-package esh-autosuggest
+  :config
+  (add-hook 'eshell-mode-hook 'esh-autosuggest-mode))
+
 (use-package treemacs-magit
   :after treemacs magit
   :ensure t)
@@ -423,7 +427,6 @@
    :host github
    :repo "abdulbahajaj/repl.el"))
 
-
 (use-package eshell-z)
 (use-package eshell-prompt-extras)
 (use-package esh-help)
@@ -431,3 +434,39 @@
   :config
   (eshell-git-prompt-use-theme 'powerline))
 
+(use-package eshell-fringe-status
+  :config
+  (add-hook 'eshell-mode-hook 'eshell-fringe-status-mode))
+
+(use-package kubernetes
+  :ensure t
+  :commands (kubernetes-overview))
+
+;; If you want to pull in the Evil compatibility package.
+(use-package kubernetes-evil
+  :ensure t
+  :after kubernetes)
+
+(setq lsp-keymap-prefix "s-l")
+(use-package lsp-mode
+    :hook ((python-mode . lsp)
+            (java-mode . lsp)
+            (c-mode . lsp)
+            (c++-mode . lsp)
+            (css-mode . lsp)
+            (html-mode . lsp)
+            (sh-mode . lsp)
+            (json-mode . lsp)
+            (lsp-mode . lsp-enable-which-key-integration))
+    :commands lsp)
+
+(use-package company-lsp
+  :config
+  (setq company-lsp-enable-snippet t
+	company-lsp-cache-candidates t)
+  (push 'company-lsp company-backends))
+
+(use-package lsp-ui :commands lsp-ui-mode)
+(use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+(use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+(use-package dap-mode)
