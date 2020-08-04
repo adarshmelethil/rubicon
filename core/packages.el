@@ -146,7 +146,6 @@
 (use-package hl-todo
   :hook (prog-mode . hl-todo-mode)
   :config
-  (global-hl-todo-mode)
   (setq hl-todo-highlight-punctuation ":"
 	hl-todo-keyword-faces
 	`(;; For things that need to be done, just not today.
