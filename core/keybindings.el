@@ -302,5 +302,6 @@
 (global-set-key [remap quit-window]
 		'rubicon/workspace-quit-window)
 (general-define-key
+ ;; :states 'normal
  :keymaps 'replel-mode-map
- "g r" 'replel-repls-run)
+ "<f1>" 'replel-run)

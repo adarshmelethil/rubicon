@@ -1,4 +1,5 @@
 (require 'org-tempo)
+(require 'replel)
 (global-hl-line-mode)
 (dirtrack-mode)
 (tool-bar-mode -1)
