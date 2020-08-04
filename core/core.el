@@ -12,6 +12,10 @@
 ;;(hs-minor-mode)
 ;;(desktop-save-mode 1)
 
+(with-eval-after-load 
+  'highlight-thing
+  (set-face-attribute 'highlight-thing nil :background "#FFF" :foreground "#000"))
+
 (setq
  evil-snipe-smart-case t
  evil-snipe-scope 'line
@@ -178,7 +182,6 @@ the only window, use evil-window-move-* (e.g. `evil-window-move-far-left')."
       dired-recursive-deletes 'top)
 
 ;; ORG mode
-(set-face-attribute 'highlight-thing nil :background "#FFF" :foreground "#000")
 
 (with-eval-after-load 'org
   (set-face-attribute 'org-document-title nil :height 1.5 :foreground "#693c3c")

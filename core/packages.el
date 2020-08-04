@@ -74,48 +74,23 @@
   :config
   (evilnc-default-hotkeys nil t))
 
-;; '(el-patch :type git :host github :repo "your-name/el-patch"))
-
 (use-package evil-embrace
   :config
-  (evil-embrace-enable-evil-surround-integration)
-  :straight
-  (evil-embrace
-   :type git
-   :host github
-   :repo "cute-jumper/evil-embrace.el"))
+  (evil-embrace-enable-evil-surround-integration))
 
 (use-package magit)
-
-(use-package evil-magit
-  :config
-  ;;(require 'evil-magit)
-  :straight
-  (evil-magit
-   :type git
-   :host github
-   :repo "emacs-evil/evil-magit"))
+(use-package evil-magit)
 
 
 (use-package evil-vimish-fold
+  :hook ((prog-mode . evil-vimish-fold-mode))
   :config
-  (setq evil-vimish-fold-target-modes '(prog-mode conf-mode text-mode))
-  (global-evil-vimish-fold-mode 1)
-  :straight
-  (evil-vimish-fold
-   :type git
-   :host github
-   :repo "alexmurray/evil-vimish-fold"))
+  (setq evil-vimish-fold-target-modes '(prog-mode conf-mode text-mode)))
 
 (use-package evil-snipe
   :config
   (evil-snipe-mode +1)
-  (evil-snipe-override-mode 1)
-  :straight
-  (evil-snipe
-   :type git
-   :host github
-   :repo "hlissner/evil-snipe"))
+  (evil-snipe-override-mode 1))
 
 (use-package undo-tree)
 
@@ -164,37 +139,32 @@
   :init (doom-modeline-mode 1)
   :config)
 
-(use-package  evil-indent-plus
+(use-package evil-indent-plus
   :config
-  (evil-indent-plus-default-bindings)
-  :straight
-  (evil-indent-plus
-   :type git
-   :host github
-   :repo "TheBB/evil-indent-plus"))
+  (evil-indent-plus-default-bindings))
 
 (use-package hl-todo
   :hook (prog-mode . hl-todo-mode)
   :config
   (global-hl-todo-mode)
   (setq hl-todo-highlight-punctuation ":"
-        hl-todo-keyword-faces
-        `(;; For things that need to be done, just not today.
-          ("TODO" warning bold)
-          ;; For problems that will become bigger problems later if not
-          ;; fixed ASAP.
-          ("FIXME" error bold)
-          ;; For tidbits that are unconventional and not intended uses of the
-          ;; constituent parts, and may break in a future update.
-          ("HACK" font-lock-constant-face bold)
-          ;; For things that were done hastily and/or hasn't been thoroughly
-          ;; tested. It may not even be necessary!
-          ("REVIEW" font-lock-keyword-face bold)
-          ;; For especially important gotchas with a given implementation,
-          ;; directed at another user other than the author.
-          ("NOTE" success bold)
-          ;; For things that just gotta go and will soon be gone.
-          ("DEPRECATED" font-lock-doc-face bold))))
+	hl-todo-keyword-faces
+	`(;; For things that need to be done, just not today.
+	  ("TODO" warning bold)
+	  ;; For problems that will become bigger problems later if not
+	  ;; fixed ASAP.
+	  ("FIXME" error bold)
+	  ;; For tidbits that are unconventional and not intended uses of the
+	  ;; constituent parts, and may break in a future update.
+	  ("HACK" font-lock-constant-face bold)
+	  ;; For things that were done hastily and/or hasn't been thoroughly
+	  ;; tested. It may not even be necessary!
+	  ("REVIEW" font-lock-keyword-face bold)
+	  ;; For especially important gotchas with a given implementation,
+	  ;; directed at another user other than the author.
+	  ("NOTE" success bold)
+	  ;; For things that just gotta go and will soon be gone.
+	  ("DEPRECATED" font-lock-doc-face bold))))
 
 (use-package highlight-indent-guides
   :hook ((prog-mode text-mode conf-mode) . highlight-indent-guides-mode)
@@ -222,8 +192,7 @@
   :ensure t)
 
 (use-package git-gutter
-  :config
-  (global-git-gutter-mode +1))
+  :hook ((prog-mode . git-gutter-mode)))
 
 (use-package dired-rsync
   :hook (dired-mode . diredfl-mode)
@@ -234,8 +203,8 @@
   :hook (dired-mode . diredfl-mode))
 
 (use-package diff-hl
-  :hook (dired-mode . diff-hl-dired-mode-unless-remote)
-  :hook (magit-post-refresh . diff-hl-magit-post-refresh)
+  :hook ((dired-mode . diff-hl-dired-mode-unless-remote)
+	 (magit-post-refresh . diff-hl-magit-post-refresh))
   :config
   (diff-hl-margin-mode))
 
@@ -246,15 +215,8 @@
 
 (use-package haskell-mode)
 
-(rubicon/github-package highlight-thing "fgeller/highlight-thing.el")
-
 (use-package  highlight-thing
   :hook (prog-mode . highlight-thing-mode)
-  :straight
-  (highlight-thing
-   :type git
-   :host github
-   :repo "fgeller/highlight-thing.el")
   :config
   (setq highlight-thing-delay-seconds 0.9))
 
@@ -301,8 +263,7 @@
   :config (treemacs-icons-dired-mode))
 
 (use-package esh-autosuggest
-  :config
-  (add-hook 'eshell-mode-hook 'esh-autosuggest-mode))
+  :hook ((eshell-mode . esh-autosuggest-mode)))
 
 (use-package treemacs-magit
   :after treemacs magit
@@ -319,29 +280,20 @@
 (use-package sass-mode)
 
 (use-package org-superstar
-  :config
-  (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
+  :hook ((org-mode . (lambda () (org-superstar-mode 1)))))
 
 (use-package evil-org
-  :straight
-  (evil-org
-   :type git
-   :host github
-   :repo "hlissner/evil-org-mode")
-
   :ensure t
   :after org
+  :hook ((org-mode . evil-org-mode)
+	 ('evil-org-mode . (lambda ()
+			     (evil-org-set-key-theme))))
   :config
-  (add-hook 'org-mode-hook 'evil-org-mode)
-  (add-hook 'evil-org-mode-hook
-	    (lambda ()
-	      (evil-org-set-key-theme)))
   (require 'evil-org-agenda)
   (evil-org-agenda-set-keys))
 
 (use-package ob-async)
 (use-package dockerfile-mode)
-
 (use-package  replel
   :straight
   (replel
@@ -357,30 +309,28 @@
   (eshell-git-prompt-use-theme 'powerline))
 
 (use-package eshell-fringe-status
-  :config
-  (add-hook 'eshell-mode-hook 'eshell-fringe-status-mode))
+  :hook ((eshell-mode . eshell-fringe-status-mode)))
 
 (use-package kubernetes
   :ensure t
   :commands (kubernetes-overview))
 
-;; If you want to pull in the Evil compatibility package.
 (use-package kubernetes-evil
   :ensure t
   :after kubernetes)
 
 (setq lsp-keymap-prefix "s-l")
 (use-package lsp-mode
-    :hook ((python-mode . lsp)
-            (java-mode . lsp)
-            (c-mode . lsp)
-            (c++-mode . lsp)
-            (css-mode . lsp)
-            (html-mode . lsp)
-            (sh-mode . lsp)
-            (json-mode . lsp)
-            (lsp-mode . lsp-enable-which-key-integration))
-    :commands lsp)
+  :hook ((python-mode . lsp)
+	 (java-mode . lsp)
+	 (c-mode . lsp)
+	 (c++-mode . lsp)
+	 (css-mode . lsp)
+	 (html-mode . lsp)
+	 (sh-mode . lsp)
+	 (json-mode . lsp)
+	 (lsp-mode . lsp-enable-which-key-integration))
+  :commands lsp)
 
 (use-package company-lsp
   :config
