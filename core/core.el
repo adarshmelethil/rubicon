@@ -18,6 +18,8 @@
   'highlight-thing
   (set-face-attribute 'highlight-thing nil :background "#FFF" :foreground "#000"))
 
+(set-face-attribute 'eshell-git-prompt-powerline-dir-face nil :foreground "#000")
+
 (setq
  evil-snipe-smart-case t
  evil-snipe-scope 'line
