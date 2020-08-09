@@ -5,6 +5,7 @@
 (add-hook 'org-mode-hook 'hl-line-mode)
 (dirtrack-mode)
 (tool-bar-mode -1)
+(scroll-bar-mode -1)
 (show-paren-mode)
 (blink-cursor-mode 0)
 
@@ -606,3 +607,26 @@ If on a:
 (defun rebuicon/workspace-delete-all ()
   (interactive)
   (rubicon/kill-selected-buffers (buffer-list)))
+
+(defun me/bash-history ()
+  (interactive)
+  (let ((command
+	 (with-temp-buffer
+	   (insert-file-contents-literally "~/.zsh_history")
+	   (let ((history-list (split-string (buffer-string) "\n" t)))
+	     (completing-read "Command: " history-list )))))
+    (when command
+      (insert command))))
+
+
+
+(defun rubicon/get-zsh-history ()
+  (with-temp-buffer
+    (insert-file-contents-literally "~/.zsh_history")
+    (reverse (split-string (s-replace-regexp ": .*:0;" "" (buffer-string)) "\n" t) )))
+
+(defun rubicon/zsh-history ()
+  (interactive)
+  (insert
+   (completing-read
+    "Command: " (rubicon/get-zsh-history))))
