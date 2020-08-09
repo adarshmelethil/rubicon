@@ -341,3 +341,9 @@
 (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 (use-package dap-mode)
+
+(use-package nyan-mode
+  :config
+  (setq nyan-animate-nyancat t)
+  (setq nyan-wavy-trail t)
+  (nyan-mode))
