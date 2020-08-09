@@ -11,6 +11,7 @@
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 (defalias 'e 'evil-edit)
+(fringe-mode -1)
 
 (with-eval-after-load 
   'highlight-thing
