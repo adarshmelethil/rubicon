@@ -7,9 +7,9 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (blink-cursor-mode 0)
-(show-paren-mode 1)
-(set-face-attribute 'show-paren-match nil :background "#FFFF00")
-(set-face-attribute 'show-paren-match nil :weight 'extra-bold)
+;; (show-paren-mode 1)
+;; (set-face-attribute 'show-paren-match nil :background "#FFFF00")
+;; (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 (defalias 'e 'evil-edit)
