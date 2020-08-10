@@ -263,6 +263,8 @@
 (use-package esh-autosuggest
   :hook ((eshell-mode . esh-autosuggest-mode)))
 
+(use-package eshell-up)
+
 (use-package treemacs-magit
   :after treemacs magit
   :ensure t)
