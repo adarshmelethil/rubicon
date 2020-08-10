@@ -95,8 +95,7 @@
 (use-package undo-tree)
 
 (use-package smartparens
-  :config
-  (smartparens-global-mode))
+  :hook ((prog-mode . smartparens-mode)))
 
 (use-package restart-emacs)
 
