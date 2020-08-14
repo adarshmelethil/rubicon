@@ -11,6 +11,9 @@
 ;; (set-face-attribute 'show-paren-match nil :background "#FFFF00")
 ;; (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
 
+(when (executable-find "fish")
+  (setq-default explicit-shell-file-name "/usr/local/bin/fish"))
+
 (defalias 'yes-or-no-p 'y-or-n-p)
 (defalias 'e 'evil-edit)
 (fringe-mode -1)

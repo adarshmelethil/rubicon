@@ -347,3 +347,7 @@
   (setq nyan-animate-nyancat t)
   (setq nyan-wavy-trail t)
   (nyan-mode))
+
+(use-package fish-completion
+  :config
+  (when (executable-find "fish") (global-fish-completion-mode)))
