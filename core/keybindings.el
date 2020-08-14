@@ -176,15 +176,15 @@
 
 (defmacro create-folder-nmap (shortcut file-name)
   `(progn
-     (defalias (intern (concat "cd-to-" (symbol-name (quote ,file-name))))
+     (defalias (intern (concat "open-" (symbol-name (quote ,file-name))))
        (lambda ()
 	 (interactive)
-	 (cd
+	 (e
 	  (symbol-name
 	   (quote ,file-name)))))
      (general-nmap ,shortcut
        (intern
-	(concat "cd-to-"
+	(concat "open-"
 		(symbol-name (quote ,file-name)))))))
 
 

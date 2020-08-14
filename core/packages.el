@@ -112,8 +112,6 @@
   :config
   (ivy-prescient-mode))
 
-(use-package org-superstar)
-
 (use-package ob-async)
 
 (use-package ivy-rich
@@ -223,6 +221,7 @@
   (add-hook 'after-init-hook 'global-company-mode))
 
 (use-package git-timemachine)
+
 
 (use-package highlight-parentheses
   :hook (prog-mode . highlight-parentheses-mode))
