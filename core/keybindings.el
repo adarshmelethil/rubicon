@@ -62,7 +62,7 @@
  "<right>" 'evil-window-right )
 
 (rubicon/leader-SPC
-
+ "<ESC>" 'delete-window
   "n" 'replel-start-repl
   "N" 'replel-overview
   

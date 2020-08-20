@@ -351,3 +351,6 @@
 (use-package fish-completion
   :config
   (when (executable-find "fish") (global-fish-completion-mode)))
+
+
+(use-package forge)
