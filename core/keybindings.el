@@ -202,6 +202,8 @@
   "e p" (ilm (e "~/.emacs.d/core/packages.el"))
   "e i" (ilm (e "~/.emacs.d/init.el"))
 
+  "u" (ilm (e "~/org/schedule.org"))
+  "d" (ilm (e "~/org/day.org"))
   "l" (ilm (e "~/org/timeline.org"))
   "i" (ilm (e "~/org/triage.org"))
   "t" (ilm (e "~/org/todo.org"))
@@ -209,7 +211,7 @@
   "n" (ilm (e "~/org/notes.org"))
   "s" (ilm (e "~/org/scrap.org"))
   "r" (ilm (e "~/.zshrc"))
-  "p" (ilm (e "~/org/projects.org"))
+  "p" (ilm (e "~/org/production.org"))
   "a" (ilm (e "~/org/agenda.org"))
   "b" (ilm (e "~/org/notebooks.org"))
   "C" (ilm (e "~/.emacs.d/core"))

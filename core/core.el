@@ -10,6 +10,7 @@
 ;; (show-paren-mode 1)
 ;; (set-face-attribute 'show-paren-match nil :background "#FFFF00")
 ;; (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
+(add-hook 'org-mode-hook 'visual-line-mode)
 
 (when (executable-find "fish")
   (setq-default explicit-shell-file-name "/usr/local/bin/fish"))
@@ -24,12 +25,19 @@
 
 (set-face-attribute 'eshell-git-prompt-powerline-dir-face nil :foreground "#000")
 
+
+(setq-default display-line-numbers-width 3)
+
 (setq
  evil-snipe-smart-case t
  evil-snipe-scope 'line
  evil-snipe-repeat-scope 'visible
+ frame-resize-pixelwise t
+ ns-use-native-fullscreen t
+ ns-auto-hide-menu-bar t
+
  evil-snipe-char-fold t
- 
+ company-show-numbers t
  evil-snipe-spillover-scope t
  org-indent-indentation-per-level 1
  org-src-preserve-indentation t
