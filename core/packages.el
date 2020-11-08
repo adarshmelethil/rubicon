@@ -56,7 +56,7 @@
 
 (use-package doom-themes
   :config
-  (load-theme 'doom-dark+))
+  (load-theme 'doom-acario-dark))
 
 (use-package general
   :config
