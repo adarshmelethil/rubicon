@@ -354,3 +354,5 @@
 
 
 (use-package forge)
+(use-package ns-auto-titlebar
+  :config (ns-auto-titlebar-mode))
