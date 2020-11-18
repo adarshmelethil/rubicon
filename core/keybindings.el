@@ -65,6 +65,8 @@
  "<ESC>" 'delete-window
   "n" 'replel-start-repl
   "N" 'replel-overview
+
+  "d" 'docker
   
   "y" 'rubicon/copy-path-to-buffer-file
 
@@ -133,6 +135,10 @@
   "h s" 'describe-symbol
   "h b" 'describe-binding
   "h F" 'describe-fontset
+
+  ;; Roam
+  "a t" 'org-roam-dailies-today
+  "a d" 'org-roam-dailies-date
 
   "." 'counsel-find-file
   
