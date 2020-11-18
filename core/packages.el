@@ -353,7 +353,6 @@
   (when (executable-find "fish") (global-fish-completion-mode)))
 
 
-(use-package forge)
 
 (setq slack-token "")
 
