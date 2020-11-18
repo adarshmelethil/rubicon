@@ -1,3 +1,4 @@
+(load-theme 'wombat)
 (require 'org-tempo)
 (require 'replel)
 (add-hook 'prog-mode-hook 'hl-line-mode)

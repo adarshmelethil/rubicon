@@ -54,9 +54,7 @@
   (setf (alist-get 't ivy-format-functions-alist)
 	#'ivy-format-function-line))
 
-(use-package doom-themes
-  :config
-  (load-theme 'wombat))
+
 
 (use-package general
   :config
