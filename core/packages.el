@@ -419,3 +419,8 @@
   :commands (alert)
   :init
   (setq alert-default-style 'notifier))
+
+
+(use-package org-jira
+  :config
+  (setq jiralib-url ""))
