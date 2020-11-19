@@ -642,3 +642,13 @@ If on a:
   (insert
    (completing-read
     "Command: " (rubicon/get-zsh-history))))
+
+
+(defun rubicon/gen-random-str ()
+ (--reduce (format "%s%d" acc (random 10000)) (number-sequence 0 8)))
+
+(defun rubicon/create-disposable-dir ()
+  (interactive)
+  (let ((path (format "~/scrap/%s" (rubicon/gen-random-str))))
+    (dired-create-directory path)
+    (e path)))

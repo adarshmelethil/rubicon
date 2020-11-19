@@ -66,7 +66,8 @@
   "n" 'replel-start-repl
   "N" 'replel-overview
 
-  "d" 'docker
+  "D" 'docker
+  "d" 'rubicon/create-disposable-dir
   
   "y" 'rubicon/copy-path-to-buffer-file
 
