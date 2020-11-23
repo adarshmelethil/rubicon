@@ -118,7 +118,7 @@
   "'" 'ivy-resume
 
   
-  "SPC" 'counsel-projectile-find-file-dwim
+  "SPC" 'counsel-projectile-find-file
 
   ;; Find functions, variables, etc
   "h w" 'what-cursor-position
