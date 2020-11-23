@@ -351,9 +351,6 @@
   (when (executable-find "fish") (global-fish-completion-mode)))
 
 
-
-(setq slack-token "")
-
 (use-package org-roam
       :ensure t
       :hook
@@ -371,54 +368,29 @@
 (use-package ns-auto-titlebar
   :config (ns-auto-titlebar-mode))
 
-(use-package slack
-  :commands (slack-start)
-  :init
-  (setq slack-buffer-emojify t) ;; if you want to enable emoji, default nil
-  (setq slack-prefer-current-team t)
+(use-package orgit)
+(use-package org-tree-slide)
+(use-package org-noter)
+(use-package org-cliplink)
+
+(use-package yasnippet
   :config
-  (slack-register-team
-   :name "emacs-slack"
-   :default t
-   :token slack-token
-   :subscribed-channels '(test-rename rrrrr)
-   :full-and-display-names t)
+  (yas-global-mode 1))
 
-  (slack-register-team
-   :name "test"
-   :token slack-token
-   :subscribed-channels '(hoge fuga))
+(use-package doom-snippets
+  :straight
+  (doom-snippets
+   :type git
+   :host github
+   :repo "hlissner/doom-snippets")
+  :after yasnippet)
 
-  (evil-define-key 'normal slack-info-mode-map
-    ",u" 'slack-room-update-messages)
-  (evil-define-key 'normal slack-mode-map
-    ",c" 'slack-buffer-kill
-    ",ra" 'slack-message-add-reaction
-    ",rr" 'slack-message-remove-reaction
-    ",rs" 'slack-message-show-reaction-users
-    ",pl" 'slack-room-pins-list
-    ",pa" 'slack-message-pins-add
-    ",pr" 'slack-message-pins-remove
-    ",mm" 'slack-message-write-another-buffer
-    ",me" 'slack-message-edit
-    ",md" 'slack-message-delete
-    ",u" 'slack-room-update-messages
-    ",2" 'slack-message-embed-mention
-    ",3" 'slack-message-embed-channel
-    "\C-n" 'slack-buffer-goto-next-message
-    "\C-p" 'slack-buffer-goto-prev-message)
-   (evil-define-key 'normal slack-edit-message-mode-map
-    ",k" 'slack-message-cancel-edit
-    ",s" 'slack-message-send-from-buffer
-    ",2" 'slack-message-embed-mention
-    ",3" 'slack-message-embed-channel))
+(use-package magit-popup
+  :after magit)
 
-(use-package alert
-  :commands (alert)
-  :init
-  (setq alert-default-style 'notifier))
+(use-package magit-todos
+  :after magit)
 
+(use-package better-jumper)
 
-(use-package org-jira
-  :config
-  (setq jiralib-url ""))
+(use-package magit-gitflow)
