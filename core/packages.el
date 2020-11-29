@@ -389,8 +389,59 @@
   :after magit)
 
 (use-package magit-todos
-  :after magit)
+  :after magit
+  :config
+  (add-hook 'magit-mode-hook 'magit-todos-mode))
 
 (use-package better-jumper)
 
 (use-package magit-gitflow)
+
+
+(use-package dired-collapse
+  :hook ((dired-mode . dired-collapse-mode)))
+
+(use-package rainbow-identifiers)
+(use-package rainbow-mode
+  :hook ((prog-mode . rainbow-mode)))
+
+(use-package bufler
+  :straight
+  (bufler :fetcher github :repo "alphapapa/bufler.el"
+                  :files (:defaults (:exclude "helm-bufler.el"))))
+
+(use-package helm-org-ql
+  :straight
+  (helm-org-ql
+   :host github
+   :repo "alphapapa/org-ql"
+   :files ("helm-org-ql.el")))
+(use-package calfw
+  :config
+  ;; (require 'calfw-org)
+  :straight (calfw
+	     :host github
+	     :repo "kiwanami/emacs-calfw"))
+
+(use-package helm-org-rifle)
+
+(use-package org-sticky-header
+  :config
+  (setq org-sticky-header-full-path 'full
+	org-sticky-header-heading-star ">>>>"
+	org-sticky-header-outline-path-separator "/")
+
+  (add-hook 'org-mode-hook 'org-sticky-header-mode))
+
+(use-package org-timeline
+  :config
+  (require 'org-timeline)
+  (add-hook 'org-agenda-finalize-hook 'org-timeline-insert-timeline :append))
+
+(use-package iedit)
+
+(use-package dired-git-info
+  ;; :hook ((dired-after-readin . dired-git-info-auto-enable))
+  :config
+  (setq dgi-auto-hide-details-p nil)
+  (define-key dired-mode-map [backtab] 'dired-git-info-mode))

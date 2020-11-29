@@ -1,9 +1,14 @@
 (load-theme 'wombat)
 (require 'org-tempo)
 (require 'replel)
+(add-hook 'shell-mode-hook 'compilation-shell-minor-mode)
 (add-hook 'prog-mode-hook 'hl-line-mode)
 (add-hook 'dired-mode-hook 'hl-line-mode)
 (add-hook 'org-mode-hook 'hl-line-mode)
+(add-hook 'dired-load-hook
+          (lambda ()
+            (load "dired-x")))
+
 (dirtrack-mode)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
@@ -30,18 +35,23 @@
 (setq-default display-line-numbers-width 3)
 
 (setq
+ dired-use-ls-dired nil
+ dired-listing-switches "-alh"
+ enable-recursive-minibuffers t
  evil-snipe-smart-case t
  evil-snipe-scope 'line
  evil-snipe-repeat-scope 'visible
  frame-resize-pixelwise t
  ns-use-native-fullscreen t
  ns-auto-hide-menu-bar t
+ org-agenda-files '("~/org/")
 
  evil-snipe-char-fold t
  company-show-numbers t
  evil-snipe-spillover-scope t
  org-indent-indentation-per-level 1
  org-src-preserve-indentation t
+ org-agenda-include-deadlines t
  org-src-tab-acts-natively t
  org-confirm-babel-evaluate nil
  org-link-elisp-confirm-function nil
@@ -57,6 +67,7 @@
  display-line-numbers-type 'relative
  +ivy-buffer-preview t
  org-use-property-inheritance t
+ wdired-allow-to-change-permissions t
  show-paren-style 'parenthesis)
 
 (customize-set-variable 'horizontal-scroll-bar-mode nil)
@@ -635,7 +646,7 @@ If on a:
 (defun rubicon/get-zsh-history ()
   (with-temp-buffer
     (insert-file-contents-literally "~/.zsh_history")
-    (reverse (split-string (s-replace-regexp ": .*:0;" "" (buffer-string)) "\n" t) )))
+    (reverse (split-string (s-replace-regexp ": .*:0;" "" (buffer-string)) "\n" t))))
 
 (defun rubicon/zsh-history ()
   (interactive)
@@ -652,3 +663,10 @@ If on a:
   (let ((path (format "~/scrap/%s" (rubicon/gen-random-str))))
     (dired-create-directory path)
     (e path)))
+
+(defun rubicon/run-repl ()
+  (interactive)
+  (comint-run
+   (completing-read
+   "Select REPL"
+   '("python" "node" "clj" "bash"))))
