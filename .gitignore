@@ -2,3 +2,4 @@ var/
 etc/
 straight/*
 !straight/versions/*
+/.DS_Store

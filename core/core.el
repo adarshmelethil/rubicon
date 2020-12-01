@@ -184,12 +184,14 @@ the only window, use evil-window-move-* (e.g. `evil-window-move-far-left')."
 
 
 ;; Eshell
-(setq eshell-scroll-to-bottom-on-input 'all
-      eshell-scroll-to-bottom-on-output 'all
-      eshell-kill-processes-on-exit t
-      eshell-hist-ignoredups t
-      eshell-glob-case-insensitive t
-      eshell-error-if-no-glob t)
+(require 'eshell)
+(require 'em-smart)
+(setq eshell-where-to-jump 'begin
+      eshell-review-quick-commands nil
+      eshell-smart-space-goes-to-end t)
+
+(add-hook 'eshell-mode-hook 'eshell-smart-initialize)
+
 
 
 (defun rubicon/eshell-here ()

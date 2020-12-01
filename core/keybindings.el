@@ -45,7 +45,7 @@
 
  "/" 'swiper
  "?" 'swiper-all
- "e" 'evil-embrace-evil-surround-region
+ "*" 'evil-embrace-evil-surround-region
  "z g" 'evil-scroll-line-to-bottom
  "<DEL>" 'counsel-M-x
  [backspace] 'counsel-M-x
