@@ -13,9 +13,6 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (blink-cursor-mode 0)
-;; (show-paren-mode 1)
-;; (set-face-attribute 'show-paren-match nil :background "#FFFF00")
-;; (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
 (add-hook 'org-mode-hook 'visual-line-mode)
 
 (when (executable-find "fish")
