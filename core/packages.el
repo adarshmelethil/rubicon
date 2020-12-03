@@ -29,6 +29,12 @@
 
 (use-package dash)
 
+(use-package solaire-mode
+  :config
+  (solaire-global-mode +1))
+
+
+
 (use-package doom-themes
   :config
   ;; Global settings (defaults)
@@ -47,6 +53,10 @@
   
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
+
+(use-package evil-mc
+  :config
+  (global-evil-mc-mode 1))
 
 (use-package evil
   :init
