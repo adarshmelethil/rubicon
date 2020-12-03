@@ -666,3 +666,27 @@ If on a:
    (completing-read
    "Select REPL"
    '("python" "node" "clj" "bash"))))
+
+(defun +ivy/projectile-find-file ()
+  "A more sensible `counsel-projectile-find-file', which will revert to
+`counsel-find-file' if invoked from $HOME or /, `counsel-file-jump' if invoked
+from a non-project, `projectile-find-file' if in a big project (more than
+`ivy-sort-max-size' files), or `counsel-projectile-find-file' otherwise.
+
+The point of this is to avoid Emacs locking up indexing massive file trees."
+  (interactive)
+  ;; Spoof the command so that ivy/counsel will display the (well fleshed-out)
+  ;; actions list for `counsel-find-file' on C-o. The actions list for the other
+  ;; commands aren't as well configured or are empty.
+  (let ((this-command 'counsel-find-file))
+    (call-interactively
+     (cond ((or (file-equal-p default-directory "~")
+                (file-equal-p default-directory "/"))
+            #'counsel-find-file)
+
+           ((projectile-project-p default-directory)
+            (let ((files (projectile-current-project-files)))
+              (if (<= (length files) ivy-sort-max-size)
+                  #'counsel-projectile-find-file
+                #'projectile-find-file)))
+           (#'counsel-file-jump)))))

@@ -54,9 +54,8 @@
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
 
-(use-package evil-mc
-  :config
-  (global-evil-mc-mode 1))
+
+
 
 (use-package evil
   :init
@@ -65,7 +64,9 @@
   :config 
   (evil-mode 1)
   (evil-select-search-module 'evil-search-module 'evil-search))
-
+(use-package evil-mc
+  :config
+  (global-evil-mc-mode 1))
 (use-package counsel
   :config
   (ivy-mode 1)
