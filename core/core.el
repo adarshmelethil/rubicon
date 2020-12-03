@@ -1,6 +1,6 @@
 (require 'org-tempo)
 (require 'replel)
-(set-face-attribute 'default nil :height 135)
+(set-face-attribute 'default nil :height 130)
 (add-hook 'shell-mode-hook 'compilation-shell-minor-mode)
 (add-hook 'prog-mode-hook 'hl-line-mode)
 (add-hook 'dired-mode-hook 'hl-line-mode)
@@ -211,6 +211,8 @@ the only window, use evil-window-move-* (e.g. `evil-window-move-far-left')."
       dired-recursive-deletes 'top)
 
 ;; ORG mode
+
+(add-hook 'org-mode-hook (ilm (text-scale-adjust 1)))
 
 (with-no-warnings
     (custom-declare-face '+org-todo-active  '((t (:inherit (bold font-lock-constant-face org-todo)))) "")
