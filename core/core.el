@@ -30,10 +30,15 @@
   (set-face-attribute 'highlight-thing nil :background "#FFF" :foreground "#000"))
 
 (set-face-attribute 'eshell-git-prompt-powerline-dir-face nil :foreground "#000")
-
+(setq-default fringes-outside-margins t)
 
 (setq-default display-line-numbers-width 3)
-
+(define-fringe-bitmap 'git-gutter-fr:added [224]
+      nil nil '(center repeated))
+(define-fringe-bitmap 'git-gutter-fr:added [224]
+      nil nil '(center repeated))
+(define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240]
+      nil nil 'bottom)
 (setq
  dired-use-ls-dired nil
  dired-listing-switches "-alh"

@@ -185,8 +185,9 @@
 (use-package vterm
   :ensure t)
 
-(use-package git-gutter
-  :hook ((prog-mode . git-gutter-mode)))
+(use-package git-gutter-fringe
+  :config
+  :hook ((find-file . (lambda () (git-gutter-mode +1)))))
 
 (use-package dired-rsync
   :hook (dired-mode . diredfl-mode)
@@ -445,3 +446,17 @@
   :config
   (setq dgi-auto-hide-details-p nil)
   (define-key dired-mode-map [backtab] 'dired-git-info-mode))
+
+(use-package deft
+  :bind ("<f8>" . deft)
+  :commands (deft)
+  :config (setq deft-directory "~/org"
+		deft-extensions '("org" "md" "txt")
+		deft-default-extension "org"
+		deft-recursive t
+		deft-use-filename-as-title nil
+		deft-use-filter-string-for-filename t
+		deft-file-naming-rules '((nospace . "-"))
+		deft-extensions '("md" "org")))
+
+
