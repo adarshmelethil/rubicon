@@ -1,4 +1,3 @@
-(load-theme 'wombat)
 (require 'org-tempo)
 (require 'replel)
 (add-hook 'shell-mode-hook 'compilation-shell-minor-mode)
@@ -214,16 +213,6 @@ the only window, use evil-window-move-* (e.g. `evil-window-move-far-left')."
       dired-recursive-deletes 'top)
 
 ;; ORG mode
-
-(with-eval-after-load 'org
-  (set-face-attribute 'org-document-title nil :height 1.5)
-  (set-face-attribute 'org-level-1 nil
-		      :height 1.26
-		      :weight 'ultra-light
-		      :foreground "#34ace0")
-  (set-face-attribute 'org-level-2 nil :weight 'ultra-light  :height 1.21 :foreground "#ebe8e8")
-  (set-face-attribute 'org-level-3 nil :weight 'ultra-light :height 1.125 :foreground "#71a676"))
-
 
 (with-no-warnings
     (custom-declare-face '+org-todo-active  '((t (:inherit (bold font-lock-constant-face org-todo)))) "")
