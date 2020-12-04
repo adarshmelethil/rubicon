@@ -20,7 +20,8 @@
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 (defalias 'e 'evil-edit)
-(fringe-mode -1)
+(fringe-mode '(4 . 0))
+
 
 (with-eval-after-load 
   'highlight-thing
