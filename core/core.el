@@ -220,7 +220,8 @@ the only window, use evil-window-move-* (e.g. `evil-window-move-far-left')."
     (custom-declare-face '+org-todo-project '((t (:inherit (bold font-lock-doc-face org-todo)))) "")
     (custom-declare-face '+org-todo-onhold  '((t (:inherit (bold warning org-todo)))) ""))
 
-(setq org-todo-keywords
+(setq org-superstar-headline-bullets-list '("#")
+      org-todo-keywords
       '((sequence
 	 "TODO(t)"  ; A task that needs doing & is ready to do
 	 "PROJ(p)"  ; A project, which usually contains other tasks
