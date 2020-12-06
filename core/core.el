@@ -38,6 +38,18 @@
 (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240]
       nil nil 'bottom)
 
+
+(let ((background-color  "#21242b"))
+  (dolist (defined-modeline-face (list 'mode-line
+				       'solaire-mode-line-face
+				       'mode-line-inactive
+				       'solaire-mode-line-inactive-face))
+    (set-face-attribute defined-modeline-face nil
+			:height 144
+			:background background-color
+			:weight 'ultra-bold
+			:box (list :line-width 5 :color background-color))))
+
 (setq-default mode-line-format
 	      (list ""
 		    'default-directory
