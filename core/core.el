@@ -37,7 +37,29 @@
       nil nil '(center repeated))
 (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240]
       nil nil 'bottom)
+
+(setq-default mode-line-format
+	      (list ""
+		    'default-directory
+		    "%b | %p |"
+		    'vc-mode
+		    " | "
+		    'mode-name
+		    " | "
+		    'display-time-string
+		    " | "
+		    'battery-mode-line-string
+		    " | "
+		    '(:eval
+		      (persp-mode-line))
+		    'persp-mode-line
+   		    " |"
+		    'minor-mode-alist))
+
 (setq
+ display-time-24hr-format t
+ display-battery-mode t
+ display-time-mode t
  dired-use-ls-dired nil
  dired-listing-switches "-alh"
  enable-recursive-minibuffers t
