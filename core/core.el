@@ -41,10 +41,11 @@
 (setq-default mode-line-format
 	      (list ""
 		    'default-directory
-		    "%b | %p |"
-		    'vc-mode
+		    "%b @ %p"
 		    " | "
 		    'mode-name
+		    " | "
+		    'vc-mode
 		    " | "
 		    'display-time-string
 		    " | "
