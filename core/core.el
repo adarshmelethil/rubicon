@@ -44,7 +44,7 @@
 		    "%b @ %p"
 		    " | "
 		    'mode-name
-		    " | "
+		    " |"
 		    'vc-mode
 		    " | "
 		    'display-time-string
