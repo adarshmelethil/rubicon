@@ -42,9 +42,6 @@
   (load-theme 'doom-one t)
   (doom-themes-org-config))
 
-
-
-
 (use-package evil
   :init
   (setq evil-want-integration t)
@@ -52,6 +49,7 @@
   :config 
   (evil-mode 1)
   (evil-select-search-module 'evil-search-module 'evil-search))
+
 (use-package evil-mc
   :config
   (global-evil-mc-mode 1))
@@ -147,10 +145,11 @@
 
 (use-package all-the-icons)
 
-(use-package doom-modeline
-  :ensure t
-  :init (doom-modeline-mode 1)
-  :config)
+;; (use-package doom-modeline
+;;   :ensure t
+;;   :init (doom-modeline-mode 1)
+;;   :config
+;;   (setq doom-modeline-enable-word-count t))
 
 (use-package evil-indent-plus
   :config
@@ -359,12 +358,6 @@
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 (use-package dap-mode)
 
-(use-package nyan-mode
-  :config
-  (setq nyan-animate-nyancat t)
-  (setq nyan-wavy-trail t)
-  (nyan-mode))
-
 (use-package fish-completion
   :config
   (when (executable-find "fish") (global-fish-completion-mode)))
@@ -478,3 +471,7 @@
 		deft-extensions '("md" "org")))
 
 
+
+(use-package vi-tilde-fringe
+  :config
+  (global-vi-tilde-fringe-mode))
