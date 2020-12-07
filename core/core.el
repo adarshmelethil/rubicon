@@ -50,9 +50,17 @@
 			:weight 'ultra-bold
 			:box (list :line-width 5 :color background-color))))
 
+(setq rubicon-home-path (expand-file-name "~"))
+(setq rubicon--home-path-rg-starts-with (concat "^" rubicon-home-path))
+
+(defun rubicon/relative-default-dir ()
+  (s-replace-regexp  rubicon--home-path-rg-starts-with
+		     "~"
+		     default-directory))
+
 (setq-default mode-line-format
 	      (list ""
-		    'default-directory
+		    '(:eval (rubicon/relative-default-dir))
 		    "%b @ %p"
 		    " | "
 		    'mode-name
