@@ -39,7 +39,7 @@
       nil nil 'bottom)
 
 
-(let ((background-color  "#21242b"))
+(let ((background-color "#21242b"))
   (dolist (defined-modeline-face (list 'mode-line
 				       'solaire-mode-line-face
 				       'mode-line-inactive
@@ -61,13 +61,8 @@
 		    " | "
 		    'display-time-string
 		    " | "
-		    'battery-mode-line-string
-		    " | "
-		    '(:eval
-		      (persp-mode-line))
-		    'persp-mode-line
-   		    " |"
-		    'minor-mode-alist))
+		    'battery-mode-line-string))
+
 
 (setq
  display-time-24hr-format t
