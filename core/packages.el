@@ -201,7 +201,7 @@
 
 (use-package git-gutter-fringe
   :config
-  :hook ((find-file . (lambda () (git-gutter-mode +1)))))
+  (global-git-gutter-mode))
 
 (use-package dired-rsync
   :hook (dired-mode . diredfl-mode)

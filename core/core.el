@@ -252,7 +252,7 @@ the only window, use evil-window-move-* (e.g. `evil-window-move-far-left')."
 
 ;; ORG mode
 
-(add-hook 'org-mode-hook (ilm (text-scale-adjust 1)))
+(add-hook 'org-mode-hook (lambda () (text-scale-adjust 1)))
 
 (with-no-warnings
     (custom-declare-face '+org-todo-active  '((t (:inherit (bold font-lock-constant-face org-todo)))) "")
