@@ -22,7 +22,6 @@
   :config
   (require 'no-littering))
 
-
 (defmacro rubicon/github-package (package-name repo)
   `(use-package  ,package-name
      :straight (,package-name :type git :host github :repo ,repo)))
@@ -69,8 +68,6 @@
 	ivy-count-format "%d/%d")
   (setf (alist-get 't ivy-format-functions-alist)
 	#'ivy-format-function-line))
-
-
 
 (use-package general
   :config
@@ -442,7 +439,6 @@
   (setq org-sticky-header-full-path 'full
 	org-sticky-header-heading-star ">>>>"
 	org-sticky-header-outline-path-separator "/")
-
   (add-hook 'org-mode-hook 'org-sticky-header-mode))
 
 (use-package org-timeline
@@ -469,8 +465,6 @@
 		deft-use-filter-string-for-filename t
 		deft-file-naming-rules '((nospace . "-"))
 		deft-extensions '("md" "org")))
-
-
 
 (use-package vi-tilde-fringe
   :config

@@ -63,6 +63,15 @@
 		    " | "
 		    'battery-mode-line-string))
 
+(defun rubicon/disable-modeline ()
+  (setq mode-line-format nil))
+
+(dolist (no-modeline-mode-hook (list 'vterm-mode-hook
+				     'dired-mode-hook
+				     'eshell-mode-hook
+				     'shell-mode-hook
+				     'magit-mode-hook))
+  (add-hook no-modeline-mode-hook 'rubicon/disable-modeline))
 
 (setq
  display-time-24hr-format t
@@ -681,7 +690,6 @@ If on a:
   (insert
    (completing-read
     "Command: " (rubicon/get-zsh-history))))
-
 
 (defun rubicon/gen-random-str ()
  (--reduce (format "%s%d" acc (random 10000)) (number-sequence 0 8)))
