@@ -32,8 +32,6 @@
   :config
   (solaire-global-mode +1))
 
-
-
 (use-package doom-themes
   :config
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
@@ -52,6 +50,7 @@
 (use-package evil-mc
   :config
   (global-evil-mc-mode 1))
+
 (use-package counsel
   :config
   (ivy-mode 1)
@@ -71,7 +70,6 @@
 
 (use-package general
   :config
-  ;;(require 'general)
   (general-evil-setup))
 
 (use-package evil-collection
@@ -141,12 +139,6 @@
 (use-package avy)
 
 (use-package all-the-icons)
-
-;; (use-package doom-modeline
-;;   :ensure t
-;;   :init (doom-modeline-mode 1)
-;;   :config
-;;   (setq doom-modeline-enable-word-count t))
 
 (use-package evil-indent-plus
   :config
