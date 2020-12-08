@@ -41,7 +41,7 @@
       nil nil 'bottom)
 
 
-(let ((background-color "#21242b"))
+(let ((background-color "#1d2026"))
   (dolist (defined-modeline-face (list 'mode-line
 				       'solaire-mode-line-face
 				       'mode-line-inactive
@@ -50,7 +50,8 @@
 			:height 144
 			:background background-color
 			:weight 'ultra-bold
-			:box (list :line-width 5 :color background-color))))
+			:box (list :line-width 5
+				   :color background-color))))
 
 (setq rubicon-home-path (expand-file-name "~"))
 (setq rubicon--home-path-rg-starts-with (concat "^" rubicon-home-path))
