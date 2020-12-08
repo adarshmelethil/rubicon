@@ -60,28 +60,30 @@
 		     "~"
 		     default-directory))
 
-(setq-default mode-line-format
-	      (list ""
-		    '(:eval (rubicon/relative-default-dir))
-		    "%b @ %p"
-		    " | "
-		    'mode-name
-		    " |"
-		    'vc-mode
-		    " | "
-		    'display-time-string
-		    " | "
-		    'battery-mode-line-string))
+(setq-default mode-line-format nil)
+
+(setq rubicon--modeline-format
+      (list ""
+	    '(:eval
+	      (rubicon/relative-default-dir))
+	    "%b @ %p"
+	    " | "
+	    'mode-name
+	    " |"
+	    'vc-mode
+	    " | "
+	    'display-time-string
+	    " | "
+	    'battery-mode-line-string))
+(defun rubicon/enable-modeline ()
+  (setq mode-line-format rubicon--modeline-format))
 
 (defun rubicon/disable-modeline ()
   (setq mode-line-format nil))
 
-(dolist (no-modeline-mode-hook (list 'vterm-mode-hook
-				     'dired-mode-hook
-				     'eshell-mode-hook
-				     'shell-mode-hook
-				     'magit-mode-hook))
-  (add-hook no-modeline-mode-hook 'rubicon/disable-modeline))
+(dolist (enable-modeline-mode-hook (list 'prog-mode-hook
+					 'org-mode-hook))
+  (add-hook enable-modeline-mode-hook 'rubicon/enable-modeline))
 
 (setq
  display-time-24hr-format t
