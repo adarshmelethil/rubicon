@@ -14,6 +14,8 @@
 (scroll-bar-mode -1)
 (blink-cursor-mode 0)
 (add-hook 'org-mode-hook 'visual-line-mode)
+(add-hook 'org-mode-hook 'flyspell-mode)
+(add-hook 'markdown-mode-hook 'flyspell-mode)
 
 (when (executable-find "fish")
   (setq-default explicit-shell-file-name "/usr/local/bin/fish"))
@@ -95,7 +97,6 @@
  ns-use-native-fullscreen t
  ns-auto-hide-menu-bar t
  org-agenda-files '("~/org/")
-
  evil-snipe-char-fold t
  company-show-numbers t
  evil-snipe-spillover-scope t
@@ -105,7 +106,6 @@
  org-src-tab-acts-natively t
  org-confirm-babel-evaluate nil
  org-link-elisp-confirm-function nil
- 
  inhibit-startup-screen t
  org-hide-leading-stars t
  org-adapt-indentation t
