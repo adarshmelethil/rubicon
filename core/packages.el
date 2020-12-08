@@ -169,7 +169,8 @@
 (use-package highlight-indent-guides
   :hook ((prog-mode text-mode conf-mode) . highlight-indent-guides-mode)
   :init
-  (setq highlight-indent-guides-method 'fill))
+  (setq highlight-indent-guides-method 'character 
+	highlight-indent-guides-responsive t))
 
 (use-package which-key
   :config
