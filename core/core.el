@@ -9,13 +9,13 @@
           (lambda ()
             (load "dired-x")))
 
+(add-hook 'text-mode-hook 'flyspell-mode)
+
 (dirtrack-mode)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (blink-cursor-mode 0)
 (add-hook 'org-mode-hook 'visual-line-mode)
-(add-hook 'org-mode-hook 'flyspell-mode)
-(add-hook 'markdown-mode-hook 'flyspell-mode)
 
 (when (executable-find "fish")
   (setq-default explicit-shell-file-name "/usr/local/bin/fish"))
