@@ -106,6 +106,7 @@
   "M" 'avy-move-region
 
   "L" 'goto-line-preview
+
   "o" 'rubicon/workspace-kill-invisible-buffers
   "O" 'rubicon/workspace-kill-other-buffers
 
@@ -148,7 +149,8 @@
   "," 'persp-counsel-switch-buffer
   
   "g" 'magit-status
-  "b" 'ibuffer
+  "b" 'magit-blame-addition
+  "l" 'magit-log-current
 
   "z"  (ilm (evil-edit "."))
   "<right>" (ilm (rubicon/split-window "right"))
