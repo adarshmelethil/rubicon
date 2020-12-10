@@ -1,5 +1,6 @@
 (require 'org-tempo)
 (require 'replel)
+
 (set-face-attribute 'default nil :height 130)
 (add-hook 'shell-mode-hook 'compilation-shell-minor-mode)
 (add-hook 'prog-mode-hook 'hl-line-mode)
@@ -10,7 +11,6 @@
             (load "dired-x")))
 
 (add-hook 'text-mode-hook 'flyspell-mode)
-
 (dirtrack-mode)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
@@ -33,6 +33,7 @@
 (setq-default fringes-outside-margins t)
 
 (setq-default display-line-numbers-width 3)
+
 (define-fringe-bitmap 'git-gutter-fr:added [224]
       nil nil '(center repeated))
 (define-fringe-bitmap 'git-gutter-fr:added [224]
@@ -40,28 +41,7 @@
 (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240]
       nil nil 'bottom)
 
-
-(let ((background-color "#1d2026"))
-  (dolist (defined-modeline-face (list 'mode-line
-				       'solaire-mode-line-face
-				       'mode-line-inactive
-				       'solaire-mode-line-inactive-face))
-    (set-face-attribute defined-modeline-face nil
-			:height 144
-			:background background-color
-			:weight 'ultra-bold
-			:box (list :line-width 5
-				   :color background-color))))
-
-(setq rubicon-home-path (expand-file-name "~"))
-(setq rubicon--home-path-rg-starts-with (concat "^" rubicon-home-path))
-
-(defun rubicon/relative-default-dir ()
-  (s-replace-regexp  rubicon--home-path-rg-starts-with
-		     "~"
-		     default-directory))
-
-(setq-default mode-line-format nil)
+(defgroup rubicon-faces nil "Faces for my config" :group 'faces)
 
 (setq rubicon--modeline-format
       (list ""
@@ -76,6 +56,29 @@
 	    'display-time-string
 	    " | "
 	    'battery-mode-line-string))
+
+(setq-default mode-line-format nil)
+
+(defun rubicon--modeline-face (inherits background-color)
+  `((t :inherit ,inherits
+       :background ,background-color
+       :box (:line-width 5 :color ,background-color)
+       :height 144)))
+
+(let ((background-color "#191b20"))
+  (defface rubicon-modeline-active
+    (rubicon--modeline-face 'mode-line background-color)
+    "Face used when modeline is enabled and active"
+    :group 'rubicon-faces)
+  (defface rubicon-modeline-inactive
+    (rubicon--modeline-face 'mode-line-inactive background-color)
+    "Face used when modeline is enabled and inactive"
+    :group 'rubicon-faces))
+
+(dolist (remapping '((mode-line-inactive . rubicon-modeline-inactive)
+		     (mode-line . rubicon-modeline-active)))
+  (add-to-list 'face-remapping-alist remapping t))
+
 (defun rubicon/enable-modeline ()
   (setq mode-line-format rubicon--modeline-format))
 
@@ -86,7 +89,19 @@
 					 'org-mode-hook))
   (add-hook enable-modeline-mode-hook 'rubicon/enable-modeline))
 
+(setq rubicon-home-path (expand-file-name "~"))
+(setq rubicon--home-path-rg-starts-with (concat "^" rubicon-home-path))
+
+(defun rubicon/relative-default-dir ()
+  (s-replace-regexp  rubicon--home-path-rg-starts-with
+		     "~"
+		     default-directory))
+
+
+
 (setq
+ window-divider-default-bottom-width 1
+ window-divider-default-right-width 1
  display-time-24hr-format t
  display-battery-mode t
  display-time-mode t
@@ -126,7 +141,7 @@
 (customize-set-variable 'horizontal-scroll-bar-mode nil)
 (display-battery-mode t)
 (display-time-mode t)
-
+(menu-bar-bottom-and-right-window-divider)
 (set-face-attribute 'show-paren-match nil :background "#FFFF00")
 (set-face-attribute 'evil-ex-lazy-highlight nil :background "#11888c")
 

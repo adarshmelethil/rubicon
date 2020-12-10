@@ -30,6 +30,7 @@
 
 (use-package solaire-mode
   :config
+  (setq solaire-mode-remap-modeline nil)
   (solaire-global-mode +1))
 
 (use-package doom-themes
@@ -41,8 +42,8 @@
 
 (use-package evil
   :init
-  (setq evil-want-integration t)
-  (setq evil-want-keybinding nil)
+  (setq evil-want-integration t
+	evil-want-keybinding nil)
   :config 
   (evil-mode 1)
   (evil-select-search-module 'evil-search-module 'evil-search))
