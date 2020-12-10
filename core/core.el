@@ -33,6 +33,7 @@
 (setq-default fringes-outside-margins t)
 
 (setq-default display-line-numbers-width 3)
+(setq-default org-agenda-span 'month)
 
 (define-fringe-bitmap 'git-gutter-fr:added [224]
       nil nil '(center repeated))
@@ -100,6 +101,8 @@
 
 
 (setq
+ org-default-notes-file  "~/org/notes.org"
+
  window-divider-default-bottom-width 1
  window-divider-default-right-width 1
  display-time-24hr-format t

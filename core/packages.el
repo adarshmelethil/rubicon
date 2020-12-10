@@ -435,11 +435,6 @@
 	org-sticky-header-outline-path-separator "/")
   (add-hook 'org-mode-hook 'org-sticky-header-mode))
 
-(use-package org-timeline
-  :config
-  (require 'org-timeline)
-  (add-hook 'org-agenda-finalize-hook 'org-timeline-insert-timeline :append))
-
 (use-package iedit)
 
 (use-package dired-git-info

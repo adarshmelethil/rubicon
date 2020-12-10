@@ -138,8 +138,10 @@
   "h F" 'describe-fontset
 
   ;; Roam
-  "a t" 'org-roam-dailies-today
-  "a d" 'org-roam-dailies-date
+  "a r" 'org-roam-dailies-today
+  "a a" 'org-agenda-list
+  "a t" 'org-todo-list
+  "c" 'org-capture
 
   "." 'counsel-find-file
   
