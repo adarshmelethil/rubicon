@@ -100,12 +100,9 @@
   
   ;; Navigation
   "f" 'avy-goto-char-2
-  "l" 'avy-goto-line
   "\"" 'avy-resume
   "m" 'avy-move-line
   "M" 'avy-move-region
-
-  "L" 'goto-line-preview
 
   "o" 'rubicon/workspace-kill-invisible-buffers
   "O" 'rubicon/workspace-kill-other-buffers
@@ -150,7 +147,15 @@
   
   "g" 'magit-status
   "b" 'magit-blame-addition
-  "l" 'magit-log-current
+  "l" 'magit-log-buffer-file
+  "L" 'magit-log-current
+
+  "k u" 'smerge-keep-upper
+  "k l" 'smerge-keep-lower
+  "k a" 'smerge-keep-all
+  "k n" 'smerge-next
+  "k p" 'smerge-prev
+  "k m" 'smerge-keep-mine
 
   "z"  (ilm (evil-edit "."))
   "<right>" (ilm (rubicon/split-window "right"))
