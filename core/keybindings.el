@@ -37,9 +37,6 @@
  "M-=" 'evil-window-increase-height
  "M--" 'evil-window-decrease-height
 
-
- "J"  (ilm (evil-next-line 10))
- "K"  (ilm (evil-previous-line 10))
  "L"  (ilm (right-char 10))
  "H"  (ilm (left-char 10))
 
@@ -50,16 +47,18 @@
  "<DEL>" 'counsel-M-x
  [backspace] 'counsel-M-x
 
- "S-<SPC>" 'counsel-locate
+ "S-<SPC>"    'counsel-rg
+ "s-<SPC>"    'counsel-locate
 
- ;; split navigation
- "(" 'evil-scroll-down
- ")" 'evil-scroll-up
- 
- "<down>" 'evil-window-down
- "<left>" 'evil-window-left
- "<up>" 'evil-window-up
- "<right>" 'evil-window-right )
+ ;; navigation
+ "("          'evil-scroll-down
+ ")"          'evil-scroll-up
+
+ ;; split
+ "<down>"     'evil-window-down
+ "<left>"     'evil-window-left
+ "<up>"       'evil-window-up
+ "<right>"    'evil-window-right)
 
 (rubicon/leader-SPC
  "<ESC>" 'delete-window
@@ -92,17 +91,13 @@
   "TAB 7" (ilm (rubicon/workspace-switch "17"))
   "TAB 8" (ilm (rubicon/workspace-switch "18"))
   "TAB 9" (ilm (rubicon/workspace-switch "19"))
+  "TAB r" 'rename-buffer
 
   ;; Workspaces
   "TAB d" 'rubicon/workspace-delete
   "TAB TAB" 'rubicon/workspace-show-all
   "TAB s" 'persp-switch 
   
-  ;; Navigation
-  "f" 'avy-goto-char-2
-  "\"" 'avy-resume
-  "m" 'avy-move-line
-  "M" 'avy-move-region
 
   "o" 'rubicon/workspace-kill-invisible-buffers
   "O" 'rubicon/workspace-kill-other-buffers
@@ -140,15 +135,16 @@
   "a a" 'org-agenda-list
   "a t" 'org-todo-list
   "c" 'org-capture
+  "C" 'org-goto-calendar
 
   "." 'counsel-find-file
   
   "," 'persp-counsel-switch-buffer
   
-  "g" 'magit-status
-  "b" 'magit-blame-addition
-  "l" 'magit-log-buffer-file
-  "L" 'magit-log-current
+  "g" 'magit-file-dispatch
+  "G" 'magit-dispatch
+
+  "l" 'magit-log-current
 
   "k u" 'smerge-keep-upper
   "k l" 'smerge-keep-lower
@@ -157,26 +153,24 @@
   "k p" 'smerge-prev
   "k m" 'smerge-keep-mine
 
+  ;; avy
+  "f" 'avy-goto-char-2
+  "F" 'avy-goto-char
+  "q r" 'avy-resume
+  "m" 'avy-move-line
+  "M" 'avy-move-region
+
+  "p" 'proced
+
   "z"  (ilm (evil-edit "."))
+  "Z" 'treemacs-select-window
   "<right>" (ilm (rubicon/split-window "right"))
   "<up>" (ilm (rubicon/split-window "up"))
   "<left>" (ilm (rubicon/split-window "left"))
   "<down>" (ilm (rubicon/split-window "down")))
 
 (rubicon/leader-<f14>
-  "z" 'treemacs-select-window
-;;  "Z" 'treemacs
-  "<f14>" 'counsel-rg
-  "h" 'hs-hide-level
-  "p" 'proced
-  "3" 'swiper-isearch-thing-at-point
-  "c" 'org-goto-calendar
-  "l" 'magit-log-all
-  ;; "<f14> b" 'ibuffer
-  "r" 'rename-buffer
-;;  "<f1> c" 'org-schedule
-
-  "<f1>" 'org-agenda)
+  )
 
 (rubicon/leader-<f13>
   "<right>" #'+evil/window-move-right
@@ -326,6 +320,8 @@
 (global-set-key [remap goto-line] 'goto-line-preview)
 
 
+(global-set-key [remap execute-extended-command]
+		'counsel-M-x)
 (global-set-key [remap kill-current-buffer]
 		'rubicon/workspace-kill-current-buffer)
 (global-set-key [remap quit-window]

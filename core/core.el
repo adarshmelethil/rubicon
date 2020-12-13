@@ -1,6 +1,7 @@
 (require 'org-tempo)
 (require 'replel)
 
+(show-paren-mode)
 (set-face-attribute 'default nil :height 130)
 (add-hook 'shell-mode-hook 'compilation-shell-minor-mode)
 (add-hook 'prog-mode-hook 'hl-line-mode)
@@ -15,6 +16,7 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (blink-cursor-mode 0)
+(add-hook 'prog-mode-hook 'hs-minor-mode)
 (add-hook 'org-mode-hook 'visual-line-mode)
 
 (when (executable-find "fish")
@@ -66,7 +68,7 @@
        :box (:line-width 5 :color ,background-color)
        :height 144)))
 
-(let ((background-color "#191b20"))
+(let ((background-color "#1d2026"))
   (defface rubicon-modeline-active
     (rubicon--modeline-face 'mode-line background-color)
     "Face used when modeline is enabled and active"

@@ -66,6 +66,14 @@
 	ivy-on-del-error-function #'ignore
 	ivy-use-selectable-prompt t
 	ivy-count-format "%d/%d")
+
+  (defun rubicon--ivy-open-dir (x)
+    (interactive)
+    (dired (or (file-name-directory x)
+	       default-directory)))
+  (dolist (fn '(counsel-file-jump counsel-projectile-find-file))
+    (ivy-add-actions fn '(("a" rubicon--ivy-open-dir "open dir"))))
+
   (setf (alist-get 't ivy-format-functions-alist)
 	#'ivy-format-function-line))
 
@@ -92,10 +100,10 @@
 (use-package evil-magit)
 
 
-(use-package evil-vimish-fold
-  :hook ((prog-mode . evil-vimish-fold-mode))
-  :config
-  (setq evil-vimish-fold-target-modes '(prog-mode conf-mode text-mode)))
+;; (use-package evil-vimish-fold
+;;   :hook ((prog-mode . evil-vimish-fold-mode))
+;;   :config
+;;   (setq evil-vimish-fold-target-modes '(prog-mode conf-mode text-mode)))
 
 (use-package evil-snipe
   :config
@@ -224,8 +232,7 @@
   (setq highlight-thing-delay-seconds 0.9))
 
 (use-package company
-  :config
-  (add-hook 'after-init-hook 'global-company-mode))
+  :hook ((text-mode prog-mode) . company-mode))
 
 (use-package git-timemachine)
 
@@ -391,10 +398,10 @@
 (use-package magit-popup
   :after magit)
 
-(use-package magit-todos
+(use-package
+  magit-todos
   :after magit
-  :config
-  (add-hook 'magit-mode-hook 'magit-todos-mode))
+  :config (magit-todos-mode))
 
 (use-package better-jumper)
 
@@ -405,6 +412,7 @@
   :hook ((dired-mode . dired-collapse-mode)))
 
 (use-package rainbow-identifiers)
+
 (use-package rainbow-mode
   :hook ((prog-mode . rainbow-mode)))
 
@@ -419,21 +427,23 @@
    :host github
    :repo "alphapapa/org-ql"
    :files ("helm-org-ql.el")))
+
 (use-package calfw
   :config
   ;; (require 'calfw-org)
-  :straight (calfw
-	     :host github
-	     :repo "kiwanami/emacs-calfw"))
+  :straight
+  (calfw
+   :host github
+   :repo "kiwanami/emacs-calfw"))
 
 (use-package helm-org-rifle)
 
-(use-package org-sticky-header
-  :config
-  (setq org-sticky-header-full-path 'full
-	org-sticky-header-heading-star ">>>>"
-	org-sticky-header-outline-path-separator "/")
-  (add-hook 'org-mode-hook 'org-sticky-header-mode))
+;; (use-package org-sticky-header
+;;   :config
+;;   (setq org-sticky-header-full-path 'full
+;; 	org-sticky-header-heading-star ">>>>"
+;; 	org-sticky-header-outline-path-separator "/")
+;;   (add-hook 'org-mode-hook 'org-sticky-header-mode))
 
 (use-package iedit)
 
@@ -458,3 +468,44 @@
 (use-package vi-tilde-fringe
   :config
   (global-vi-tilde-fringe-mode))
+(use-package aggressive-indent
+  :hook (prog-mode . aggressive-indent-mode)
+  :config
+  (dolist (fn '(undo-fu-only-redo undo-fu-only-undo))
+    (add-to-list 'aggressive-indent-protected-commands fn)))
+
+(use-package flycheck
+  :hook (emacs-lisp-mode . flycheck-mode))
+
+(use-package pkg-info)
+(use-package macrostep)
+(use-package volatile-highlights
+  :config
+  (vhl/define-extension 'evil 'evil-paste-after 'evil-paste-before
+			'evil-paste-pop 'evil-move)
+  (vhl/install-extension 'evil))
+
+(use-package move-text
+  :bind (("M-j" . move-text-down)
+	 ("M-k" . move-text-up)))
+
+(use-package evil-numbers
+  :bind (("C-c +" . evil-numbers/inc-at-pt)
+	 ("C-c -" . evil-numbers/dec-at-pt)))
+
+(use-package ws-butler
+  :hook (prog-mode . ws-butler-mode))
+
+
+(use-package evil-lion
+  :ensure t
+  :config
+  (evil-lion-mode))
+
+(use-package lispy
+  :hook ((clojure-mode emacs-lisp-mode) . lispy-mode))
+
+(use-package highlight-quoted
+  :hook ((clojure-mode emacs-lisp-mode) . highlight-quoted-mode))
+
+(provide 'packages)
