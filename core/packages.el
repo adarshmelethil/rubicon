@@ -96,7 +96,10 @@
   :config
   (evil-embrace-enable-evil-surround-integration))
 
-(use-package magit)
+(use-package magit
+  :config
+  (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1))
+
 (use-package evil-magit)
 
 
