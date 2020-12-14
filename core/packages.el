@@ -317,9 +317,6 @@
 (use-package eshell-z)
 (use-package eshell-prompt-extras)
 (use-package esh-help)
-(use-package eshell-git-prompt
-  :config
-  (eshell-git-prompt-use-theme 'powerline))
 
 (use-package eshell-fringe-status
   :hook ((eshell-mode . eshell-fringe-status-mode)))

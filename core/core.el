@@ -28,10 +28,9 @@
 
 
 (with-eval-after-load 
-  'highlight-thing
+    'highlight-thing
   (set-face-attribute 'highlight-thing nil :background "#FFF" :foreground "#000"))
 
-(set-face-attribute 'eshell-git-prompt-powerline-dir-face nil :foreground "#000")
 (setq-default fringes-outside-margins t)
 
 (setq-default display-line-numbers-width 3)
