@@ -61,7 +61,7 @@
  "<right>"    'evil-window-right)
 
 (rubicon/leader-SPC
- "<ESC>" 'delete-window
+  "<ESC>" 'delete-window
   "n" 'replel-start-repl
   "N" 'replel-overview
 
@@ -154,7 +154,7 @@
   "k m" 'smerge-keep-mine
 
   ;; avy
-  "f" 'avy-goto-char-2
+  "f" 'avy-goto-char-timer
   "F" 'avy-goto-char
   "q r" 'avy-resume
   "m" 'avy-move-line
