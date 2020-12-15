@@ -14,11 +14,8 @@
        :states rubicon/nvm-states)))
 
 (rubicon/define-leader "SPC")
-(rubicon/define-leader "g")
-(rubicon/define-leader "<f14>")
 (rubicon/define-leader "<f13>")
 (rubicon/define-leader "<f15>")
-(rubicon/define-leader "M")
 
 (general-nmap
  "TAB" 'evil-jump-item
@@ -169,9 +166,6 @@
   "<left>" (ilm (rubicon/split-window "left"))
   "<down>" (ilm (rubicon/split-window "down")))
 
-(rubicon/leader-<f14>
-  )
-
 (rubicon/leader-<f13>
   "<right>" #'+evil/window-move-right
   "<up>" #'+evil/window-move-up
@@ -316,6 +310,14 @@
  :keymaps 'dired-mode-map
  "[" 'dired-create-directory)
 
+(general-define-key
+ :states rubicon/nvm-states
+ :keymaps 'org-mode-map
+ :prefix "<f14>"
+ "a" #'org-archive-subtree-default
+ "t" #'counsel-org-tag
+ "r" #'org-refile
+ "i" #'org-date-from-calendar)
 
 (global-set-key [remap goto-line] 'goto-line-preview)
 
