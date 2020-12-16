@@ -132,7 +132,6 @@
   "a a" 'org-agenda-list
   "a t" 'org-todo-list
   "c" 'org-capture
-  "C" 'org-goto-calendar
 
   "." 'counsel-find-file
   
@@ -311,13 +310,18 @@
  "[" 'dired-create-directory)
 
 (general-define-key
- :states rubicon/nvm-states
  :keymaps 'org-mode-map
  :prefix "<f14>"
  "a" #'org-archive-subtree-default
  "t" #'counsel-org-tag
  "r" #'org-refile
- "i" #'org-date-from-calendar)
+ "i" #'org-date-from-calendar
+ "l" #'org-cliplink
+ "L" #'org-toggle-link-display
+ "d" #'org-deadline
+ "s" #'org-schedule
+ "c" #'org-goto-calendar
+ "h" #'org-insert-heading-respect-content)
 
 (global-set-key [remap goto-line] 'goto-line-preview)
 
