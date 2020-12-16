@@ -469,8 +469,12 @@
   :config
   (global-vi-tilde-fringe-mode))
 (use-package aggressive-indent
-  :hook (prog-mode . aggressive-indent-mode)
+  ;; :hook (prog-mode . aggressive-indent-mode)
   :config
+  (global-aggressive-indent-mode)
+  (add-to-list 'aggressive-indent-excluded-modes 'dockerfile-mode)
+  (add-to-list 'aggressive-indent-excluded-modes 'makefile-mode)
+  (add-to-list 'aggressive-indent-excluded-modes 'makefile-bsdmake-mode)
   (dolist (fn '(undo-fu-only-redo undo-fu-only-undo))
     (add-to-list 'aggressive-indent-protected-commands fn)))
 
