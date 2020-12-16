@@ -87,6 +87,7 @@
   (setq mode-line-format nil))
 
 (dolist (enable-modeline-mode-hook (list 'prog-mode-hook
+					 'yaml-mode-hook
 					 'org-mode-hook))
   (add-hook enable-modeline-mode-hook 'rubicon/enable-modeline))
 
