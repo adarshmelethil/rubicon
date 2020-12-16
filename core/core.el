@@ -103,7 +103,7 @@
 
 (setq
  org-default-notes-file  "~/org/notes.org"
-
+ org-habit-show-habits-only-for-today nil
  window-divider-default-bottom-width 1
  window-divider-default-right-width 1
  display-time-24hr-format t
