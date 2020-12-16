@@ -1,7 +1,6 @@
 (require 'org-tempo)
 (require 'replel)
 
-(show-paren-mode)
 (set-face-attribute 'default nil :height 130)
 (add-hook 'shell-mode-hook 'compilation-shell-minor-mode)
 (add-hook 'prog-mode-hook 'hl-line-mode)
