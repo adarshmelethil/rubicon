@@ -25,6 +25,13 @@
 (defalias 'e 'evil-edit)
 (fringe-mode '(nil . 0))
 
+(show-paren-mode 1)
+
+(defun rubicon--disable-paren ()
+  (setq-local show-paren-mode nil))
+
+(add-hook 'org-mode-hook
+	  #'rubicon--disable-paren)
 
 (with-eval-after-load 
     'highlight-thing
