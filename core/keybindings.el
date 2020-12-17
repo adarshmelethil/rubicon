@@ -107,7 +107,8 @@
   "E" 'eval-buffer
   "'" 'ivy-resume
 
-  
+  "b" #'evil-buffer-new
+
   "SPC" '+ivy/projectile-find-file
 
   ;; Find functions, variables, etc
