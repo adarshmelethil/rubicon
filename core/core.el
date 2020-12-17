@@ -95,6 +95,7 @@
 
 (dolist (enable-modeline-mode-hook (list 'prog-mode-hook
 					 'yaml-mode-hook
+					 'eshell-mode-hook
 					 'org-mode-hook))
   (add-hook enable-modeline-mode-hook 'rubicon/enable-modeline))
 
@@ -264,14 +265,15 @@ the only window, use evil-window-move-* (e.g. `evil-window-move-far-left')."
 
 ;; Eshell
 (require 'eshell)
+
+(setq eshell-prompt-function (lambda () " # "))
+
 (require 'em-smart)
 (setq eshell-where-to-jump 'begin
       eshell-review-quick-commands nil
       eshell-smart-space-goes-to-end t)
 
 (add-hook 'eshell-mode-hook 'eshell-smart-initialize)
-
-
 
 (defun rubicon/eshell-here ()
   (interactive)

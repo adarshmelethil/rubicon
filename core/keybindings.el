@@ -232,8 +232,9 @@
 (general-define-key
  :keymaps 'eshell-mode-map
  :states 'insert
- "<f1>" (ilm (eshell/clear))
- "<f13>" (ilm (evil-collection-eshell-interrupt-process)))
+ "<f1>" (ilm (eshell/clear-scrollback)
+	     (eshell-send-input))
+ "<f13>" #'evil-collection-eshell-interrupt-process)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

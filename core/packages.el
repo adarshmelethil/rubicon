@@ -279,8 +279,6 @@
 (use-package esh-autosuggest
   :hook ((eshell-mode . esh-autosuggest-mode)))
 
-(use-package eshell-up)
-
 (use-package treemacs-magit
   :after treemacs magit
   :ensure t)
@@ -316,10 +314,6 @@
    :type git
    :host github
    :repo "abdulbahajaj/repl.el"))
-
-(use-package eshell-z)
-(use-package eshell-prompt-extras)
-(use-package esh-help)
 
 (use-package eshell-fringe-status
   :hook ((eshell-mode . eshell-fringe-status-mode)))
