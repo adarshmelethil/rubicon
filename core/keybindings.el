@@ -206,6 +206,7 @@
   "e p" (ilm (e "~/.emacs.d/core/packages.el"))
   "e i" (ilm (e "~/.emacs.d/init.el"))
 
+  "o" (ilm (e "~/org/org.org"))
   "u" (ilm (e "~/org/schedule.org"))
   "d" (ilm (e "~/org/day.org"))
   "l" (ilm (e "~/org/timeline.org"))
