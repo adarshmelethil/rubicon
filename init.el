@@ -20,5 +20,5 @@
 (load (concat user-emacs-directory "core/core"))
 (load (concat user-emacs-directory "core/keybindings"))
 (load (concat user-emacs-directory "local"))
-(e "~/org/timeline.org")
+(e "~/org/org.org")
 (setq gc-cons-threshold 16777216)
