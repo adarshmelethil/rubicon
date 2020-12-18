@@ -314,6 +314,7 @@
 (general-define-key
  :keymaps 'org-mode-map
  :prefix "<f14>"
+ "f" #'org-roam-insert
  "a" #'org-archive-subtree-default
  "t" #'counsel-org-tag
  "r" #'org-refile
@@ -323,6 +324,7 @@
  "d" #'org-deadline
  "s" #'org-schedule
  "c" #'org-goto-calendar
+ "C" #'count-words
  "h" #'org-insert-heading-respect-content)
 
 (global-set-key [remap goto-line] 'goto-line-preview)
