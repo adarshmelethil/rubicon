@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (setq mac-command-modifier 'super
       mac-option-modifier  'meta)
 

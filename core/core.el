@@ -1,11 +1,13 @@
+;; -*- lexical-binding: t; -*-
 (require 'org-tempo)
 (require 'replel)
 
+
 (set-face-attribute 'default nil :height 130)
+(set-face-attribute 'fringe nil
+		    :background "#2d3743")
 (add-hook 'shell-mode-hook 'compilation-shell-minor-mode)
-(add-hook 'prog-mode-hook 'hl-line-mode)
-(add-hook 'dired-mode-hook 'hl-line-mode)
-(add-hook 'org-mode-hook 'hl-line-mode)
+
 (add-hook 'dired-load-hook
           (lambda ()
             (load "dired-x")))
@@ -17,7 +19,9 @@
 (blink-cursor-mode 0)
 (add-hook 'prog-mode-hook 'hs-minor-mode)
 (add-hook 'org-mode-hook 'visual-line-mode)
-
+(add-hook 'org-mode-hook
+	  (lambda () (setq-local left-fringe-width 0
+				 right-fringe-width 0)))
 (when (executable-find "fish")
   (setq-default explicit-shell-file-name "/usr/local/bin/fish"))
 
@@ -26,6 +30,7 @@
 (fringe-mode '(nil . 0))
 
 (show-paren-mode 1)
+(setq show-paren-style 'parenthesis)
 
 (defun rubicon--disable-paren ()
   (setq-local show-paren-mode nil))
@@ -65,15 +70,16 @@
 	    " | "
 	    'battery-mode-line-string))
 
-(setq-default mode-line-format nil)
-
 (defun rubicon--modeline-face (inherits background-color)
   `((t :inherit ,inherits
        :background ,background-color
        :box (:line-width 5 :color ,background-color)
        :height 144)))
 
-(let ((background-color "#1d2026"))
+(set-face-attribute 'cursor nil :background "#000")
+(set-face-attribute 'window-divider nil :foreground "#222933")
+
+(let ((background-color "#242c36"))
   (defface rubicon-modeline-active
     (rubicon--modeline-face 'mode-line background-color)
     "Face used when modeline is enabled and active"
@@ -95,6 +101,7 @@
 
 (dolist (enable-modeline-mode-hook (list 'prog-mode-hook
 					 'yaml-mode-hook
+					 'markdown-mode-hook
 					 'eshell-mode-hook
 					 'org-mode-hook))
   (add-hook enable-modeline-mode-hook 'rubicon/enable-modeline))
@@ -107,9 +114,20 @@
 		     "~"
 		     default-directory))
 
+(font-lock-add-keywords
+ 'org-mode
+ `(("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)" 1 'org-headline-done prepend))
+ 'append)
 
-
+;; (font-lock-add-keywords 'org-mode
+;;                         '(("^ +\\([-*]\\) "
+;;                            (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
 (setq
+ org-fontify-whole-heading-line t
+ org-fontify-quote-and-verse-blocks t
+ org-fontify-done-headline t
+ org-hide-emphasis-markers t
+ org-enforce-todo-dependencies t
  org-default-notes-file  "~/org/org.org"
  org-habit-show-habits-only-for-today nil
  window-divider-default-bottom-width 1
@@ -159,26 +177,21 @@
 
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 (add-hook 'conf-mode-hook #'display-line-numbers-mode)
-(add-hook 'text-mode-hook #'display-line-numbers-mode)
+;;(add-hook 'text-mode-hook #'display-line-numbers-mode)
+
 
 ;; split creation and navigation
 (defun rubicon/split-window (pos)
-  (cond
-   ((string= pos "right")
-    (progn
-      (split-window-horizontally)
-      (evil-window-right 1)))
-   ((string= pos "left")
-    (split-window-horizontally))
-   ((string= pos "up")
-    (split-window-vertically))
-   ((string= pos "down")
-    (progn
-      (split-window-vertically)
-      (evil-window-down 1)))))
-
-
-
+  (cond ((string= pos "right")
+	 (split-window-horizontally)
+	 (evil-window-right 1))
+	((string= pos "left")
+	 (split-window-horizontally))
+	((string= pos "down")
+	 (split-window-vertically)
+	 (evil-window-down 1))
+	((string= pos "up")
+	 (split-window-vertically))))
 
 (defun rubicon/escape ()
   (interactive)
@@ -294,35 +307,52 @@ the only window, use evil-window-move-* (e.g. `evil-window-move-far-left')."
 (add-hook 'org-mode-hook (lambda () (text-scale-adjust 1)))
 
 (with-no-warnings
-    (custom-declare-face '+org-todo-active  '((t (:inherit (bold font-lock-constant-face org-todo)))) "")
-    (custom-declare-face '+org-todo-project '((t (:inherit (bold font-lock-doc-face org-todo)))) "")
-    (custom-declare-face '+org-todo-onhold  '((t (:inherit (bold warning org-todo)))) ""))
+  (custom-declare-face '+org-todo-active  '((t (:inherit (bold font-lock-constant-face org-todo)))) "")
+  (custom-declare-face '+org-todo-project '((t (:inherit (bold font-lock-doc-face org-todo)))) "")
+  (custom-declare-face '+org-todo-onhold  '((t (:inherit (bold warning org-todo)))) ""))
 
-(setq org-superstar-headline-bullets-list '("#")
-      org-todo-keywords
-      '((sequence
-	 "TODO(t)"  ; A task that needs doing & is ready to do
-	 "PROJ(p)"  ; A project, which usually contains other tasks
-	 "ON-GOING(s)"  ; A task that is in progress
-	 "BLOCKED(w)"  ; Something external is holding up this task
-	 "HOLD(h)"  ; This task is paused/on hold because of me
-	 "|"
-	 "DONE(d)"  ; Task successfully completed
-	 "KILL(k)") ; Task was cancelled, aborted or is no longer applicable
-	(sequence
-	 "[ ](T)"   ; A task that needs doing
-	 "[-](S)"   ; Task is in progress
-	 "[?](W)"   ; Task is being held up or paused
-	 "|"
-	 "[X](D)")) ; Task was completed
-      org-todo-keyword-faces
-      '(
-	("STRT" . +org-todo-active)
-	("[?]"  . +org-todo-onhold)
-	("WAIT" . +org-todo-onhold)
-	("HOLD" . +org-todo-onhold)
-	("PROJ" . +org-todo-project)))
+(let* ((done-color "#545454" )
+       (todo '(:foreground "#ffad37" :weight ultra-bold))
+       (done `(:foreground ,done-color :weight ultra-bold :strike-through t))
+       (blocked `(:foreground "#e6712e" :weight ultra-bold :underline t)))
+  (set-face-attribute 'org-tag nil :foreground done-color)
+  (setq org-superstar-headline-bullets-list '("#" "○" "+" "~" "-")
+	org-todo-keywords
+	'((list "TODO(t)" "PROJ(p)" "ON-GOING(s)" "BLOCKED(w)" "HOLD(h)" "|" "DONE(d)" "KILL(k)"))
+	org-todo-keyword-faces
+	`(("TODO" ,@todo)
+	  ("PROJ" ,@todo)
+	  ("ON-GOING" ,@todo)
+	  ("HOLD" ,@blocked)
+	  ("BLOCKED" ,@blocked)
+	  ("DONE" ,@done)
+	  ("KILL" ,@done))))
 
+(let ((color (face-foreground 'default nil 'default)))
+  (dolist (face '(org-level-1
+		  org-level-2
+		  org-level-3
+		  org-level-4
+		  org-level-5
+		  org-level-6))
+    (set-face-attribute face nil :foreground color :weight 'ultra-bold :family "Serif Sans Serif")))
+
+(dolist (face '(org-block-begin-line
+		org-block-end-line
+		org-level-1
+		org-code
+		org-block))
+  (set-face-attribute face nil :background "#242c36" :extend t))
+
+(dolist (face '(org-block-begin-line
+		org-block-end-line
+		org-level-1))
+  (set-face-attribute face nil :box '(:line-width 1 :color "#222933")))
+
+
+(set-face-attribute 'org-level-1 nil :height 1.3 )
+;;(set-face-attribute 'org-headline-todo nil :foreground "#fff")
+(set-face-attribute 'org-headline-done nil :foreground "#545454" :strike-through t)
 
 (setq org-log-done 'time)
 
@@ -562,11 +592,11 @@ If on a:
    (format "popd")))
 
 (defun vt-insert-command (cmd)
-    (vterm-send-string cmd)
-    (evil-insert 1))
+  (vterm-send-string cmd)
+  (evil-insert 1))
 
 (defun vt-ls ()
-    (vt-exec "ls -la"))
+  (vt-exec "ls -la"))
 
 (defun vt-clear-current-command ()
   (vterm-send-escape)
@@ -594,8 +624,8 @@ If on a:
   (vterm-send-string cmd))
 
 (defun vt-add-sudo ()
-    (interactive)
-    (vt-insert-at-start "sudo "))
+  (interactive)
+  (vt-insert-at-start "sudo "))
 
 (defun vt-add-chmod ()
   (interactive)
@@ -731,7 +761,7 @@ If on a:
     "Command: " (rubicon/get-zsh-history))))
 
 (defun rubicon/gen-random-str ()
- (--reduce (format "%s%d" acc (random 10000)) (number-sequence 0 8)))
+  (--reduce (format "%s%d" acc (random 10000)) (number-sequence 0 8)))
 
 (defun rubicon/create-disposable-dir ()
   (interactive)
@@ -743,8 +773,8 @@ If on a:
   (interactive)
   (comint-run
    (completing-read
-   "Select REPL"
-   '("python" "node" "clj" "bash"))))
+    "Select REPL"
+    '("python" "node" "clj" "bash"))))
 
 (defun +ivy/projectile-find-file ()
   "A more sensible `counsel-projectile-find-file', which will revert to

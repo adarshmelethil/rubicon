@@ -17,7 +17,11 @@
 
 (straight-use-package 'use-package)
 
-;; Installing and configuring packages 
+(use-package ns-auto-titlebar
+  :config
+  (ns-auto-titlebar-mode))
+
+;; Installing and configuring packages
 (use-package no-littering
   :config
   (require 'no-littering))
@@ -25,20 +29,6 @@
 (defmacro rubicon/github-package (package-name repo)
   `(use-package  ,package-name
      :straight (,package-name :type git :host github :repo ,repo)))
-
-(use-package dash)
-
-(use-package solaire-mode
-  :config
-  (setq solaire-mode-remap-modeline nil)
-  (solaire-global-mode +1))
-
-(use-package doom-themes
-  :config
-  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-        doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  (load-theme 'doom-one t)
-  (doom-themes-org-config))
 
 (use-package evil
   :init
@@ -100,8 +90,22 @@
   :config
   (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1))
 
-(use-package evil-magit)
 
+;; (use-package libgit)
+
+(use-package tuareg)
+
+(use-package all-the-icons)
+
+(use-package all-the-icons-dired
+  :hook (dired-mode . all-the-icons-dired-mode))
+
+(use-package all-the-icons-ibuffer
+  :hook (ibuffer-mode . all-the-icons-ibuffer-mode))
+
+(use-package all-the-icons-ivy-rich)
+
+(use-package evil-magit)
 
 ;; (use-package evil-vimish-fold
 ;;   :hook ((prog-mode . evil-vimish-fold-mode))
@@ -135,22 +139,11 @@
 
 (use-package ob-async)
 
-(use-package ivy-rich
-  :after ivy
-  :config
-  (setq ivy-rich-parse-remote-buffer nil)
-  (ivy-rich-mode 1)
-  (setcdr
-   (assq t ivy-format-functions-alist)
-   #'ivy-format-function-line))
-
 (use-package wgrep)
 
 (use-package counsel-projectile)
 
 (use-package avy)
-
-(use-package all-the-icons)
 
 (use-package evil-indent-plus
   :config
@@ -241,6 +234,8 @@
 
 
 (use-package highlight-parentheses
+  :config
+  (setq hl-paren-colors (cons "#FFFF00" hl-paren-colors))
   :hook (prog-mode . highlight-parentheses-mode))
 
 (use-package forge
@@ -270,11 +265,6 @@
 (use-package treemacs-projectile
   :after treemacs projectile
   :ensure t)
-
-(use-package treemacs-icons-dired
-  :after treemacs dired
-  :ensure t
-  :config (treemacs-icons-dired-mode))
 
 (use-package esh-autosuggest
   :hook ((eshell-mode . esh-autosuggest-mode)))
@@ -369,8 +359,6 @@
               (("C-c n i" . org-roam-insert))
               (("C-c n I" . org-roam-insert-immediate))))
 
-(use-package ns-auto-titlebar
-  :config (ns-auto-titlebar-mode))
 
 (use-package orgit)
 (use-package org-tree-slide)
@@ -506,4 +494,16 @@
 (use-package highlight-quoted
   :hook ((clojure-mode emacs-lisp-mode) . highlight-quoted-mode))
 
+(use-package ivy-rich
+  :after ivy
+  :config
+  (setq ivy-rich-parse-remote-buffer nil)
+  (ivy-rich-mode 1)
+  (all-the-icons-ivy-rich-mode)
+  (setcdr
+   (assq t ivy-format-functions-alist)
+   #'ivy-format-function-line))
+
+(use-package org-bullets
+  :hook ((org-mode . org-bullets-mode)))
 (provide 'packages)
