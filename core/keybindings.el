@@ -96,12 +96,12 @@
   "TAB d" 'rubicon/workspace-delete
   "TAB TAB" 'rubicon/workspace-show-all
   "TAB s" 'persp-switch 
-  
 
   "o" 'rubicon/workspace-kill-invisible-buffers
   "O" 'rubicon/workspace-kill-other-buffers
 
-  "s" 'rubicon/eshell-here
+  "s" 'save-buffer
+  "S" 'rubicon/eshell-here
   "t" 'vterm
   "r" 'counsel-recentf
   "R" 'ielm
@@ -134,6 +134,8 @@
   "a r" 'org-roam-dailies-today
   "a a" 'org-agenda-list
   "a t" 'org-todo-list
+  "a c" 'cfw:open-org-calendar
+
   "c" 'org-capture
 
   "." 'counsel-find-file
@@ -145,6 +147,7 @@
 
   "l" 'magit-log-current
 
+  "k k" #'rubicon/workspace-kill-current-buffer
   "k u" 'smerge-keep-upper
   "k l" 'smerge-keep-lower
   "k a" 'smerge-keep-all
