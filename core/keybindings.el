@@ -159,7 +159,13 @@
   "m" 'avy-move-line
   "M" 'avy-move-region
 
-  "p" 'proced
+  "P" 'proced
+
+  ;; project
+  "p s" #'counsel-projectile-switch-project
+  "p d" #'projectile-add-known-project
+  "p t" #'treemacs-add-project-to-workspace
+
 
   "z"  (ilm (evil-edit "."))
   "Z" 'treemacs-select-window
