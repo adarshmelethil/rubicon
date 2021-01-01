@@ -504,4 +504,9 @@
 
 (use-package org-bullets
   :hook ((org-mode . org-bullets-mode)))
+
+(use-package ctrlf
+  :config
+  (ctrlf-mode 1))
+
 (provide 'packages)
