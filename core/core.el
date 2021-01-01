@@ -74,8 +74,8 @@
 (defun rubicon--modeline-face (inherits background-color)
   `((t :inherit ,inherits
        :background ,background-color
-       :box (:line-width 5 :color ,background-color)
-       :height 144)))
+       :box (:line-width 1 :color ,background-color)
+       :height 145)))
 
 (set-face-attribute 'cursor nil :background "#000")
 (set-face-attribute 'window-divider nil :foreground "#222933")
