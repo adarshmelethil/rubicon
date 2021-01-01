@@ -56,14 +56,12 @@
 	ivy-on-del-error-function #'ignore
 	ivy-use-selectable-prompt t
 	ivy-count-format "%d/%d")
-
   (defun rubicon--ivy-open-dir (x)
     (interactive)
     (dired (or (file-name-directory x)
 	       default-directory)))
   (dolist (fn '(counsel-file-jump counsel-projectile-find-file))
     (ivy-add-actions fn '(("a" rubicon--ivy-open-dir "open dir"))))
-
   (setf (alist-get 't ivy-format-functions-alist)
 	#'ivy-format-function-line))
 

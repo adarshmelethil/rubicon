@@ -1,4 +1,5 @@
 ;; -*- lexical-binding: t; -*-
+
 (require 'org-tempo)
 (require 'replel)
 
@@ -122,51 +123,50 @@
 ;; (font-lock-add-keywords 'org-mode
 ;;                         '(("^ +\\([-*]\\) "
 ;;                            (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
-(setq
- org-fontify-whole-heading-line t
- org-fontify-quote-and-verse-blocks t
- org-fontify-done-headline t
- org-hide-emphasis-markers t
- org-enforce-todo-dependencies t
- org-default-notes-file  "~/org/org.org"
- org-habit-show-habits-only-for-today nil
- window-divider-default-bottom-width 1
- window-divider-default-right-width 1
- display-time-24hr-format t
- display-battery-mode t
- display-time-mode t
- dired-use-ls-dired nil
- dired-listing-switches "-alh"
- enable-recursive-minibuffers t
- evil-snipe-smart-case t
- evil-snipe-scope 'line
- evil-snipe-repeat-scope 'visible
- frame-resize-pixelwise t
- ns-use-native-fullscreen t
- ns-auto-hide-menu-bar t
- org-agenda-files '("~/org/")
- evil-snipe-char-fold t
- company-show-numbers t
- evil-snipe-spillover-scope t
- org-indent-indentation-per-level 1
- org-src-preserve-indentation t
- org-agenda-include-deadlines t
- org-src-tab-acts-natively t
- org-confirm-babel-evaluate nil
- org-link-elisp-confirm-function nil
- inhibit-startup-screen t
- org-hide-leading-stars t
- org-adapt-indentation t
- ns-use-native-fullscreen nil
- org-odd-levels-only t     
- backup-inhibited t
- visible-bell -1
- ring-bell-function 'ignore
- display-line-numbers-type 'relative
- +ivy-buffer-preview t
- org-use-property-inheritance t
- wdired-allow-to-change-permissions t
- show-paren-style 'parenthesis)
+(setq org-fontify-whole-heading-line t
+      org-fontify-quote-and-verse-blocks t
+      org-fontify-done-headline t
+      org-hide-emphasis-markers t
+      org-enforce-todo-dependencies t
+      org-default-notes-file  "~/org/org.org"
+      org-habit-show-habits-only-for-today nil
+      window-divider-default-bottom-width 1
+      window-divider-default-right-width 1
+      display-time-24hr-format t
+      display-battery-mode t
+      display-time-mode t
+      dired-use-ls-dired nil
+      dired-listing-switches "-alh"
+      enable-recursive-minibuffers t
+      evil-snipe-smart-case t
+      evil-snipe-scope 'line
+      evil-snipe-repeat-scope 'visible
+      frame-resize-pixelwise t
+      ns-use-native-fullscreen t
+      ns-auto-hide-menu-bar t
+      org-agenda-files '("~/org/")
+      evil-snipe-char-fold t
+      company-show-numbers t
+      evil-snipe-spillover-scope t
+      org-indent-indentation-per-level 1
+      org-src-preserve-indentation t
+      org-agenda-include-deadlines t
+      org-src-tab-acts-natively t
+      org-confirm-babel-evaluate nil
+      org-link-elisp-confirm-function nil
+      inhibit-startup-screen t
+      org-hide-leading-stars t
+      org-adapt-indentation t
+      ns-use-native-fullscreen nil
+      org-odd-levels-only t
+      backup-inhibited t
+      visible-bell -1
+      ring-bell-function 'ignore
+      display-line-numbers-type 'relative
+      +ivy-buffer-preview t
+      org-use-property-inheritance t
+      wdired-allow-to-change-permissions t
+      show-paren-style 'parenthesis)
 
 (customize-set-variable 'horizontal-scroll-bar-mode nil)
 (display-battery-mode t)
