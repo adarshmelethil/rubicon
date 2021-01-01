@@ -101,8 +101,8 @@
   "O" 'rubicon/workspace-kill-other-buffers
 
   "s" 'save-buffer
-  "S" 'rubicon/eshell-here
-  "t" 'vterm
+  "t" 'rubicon/eshell-here
+  "T" 'vterm
   "r" 'counsel-recentf
   "R" 'ielm
   "e" 'eval-last-sexp
