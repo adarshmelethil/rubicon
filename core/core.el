@@ -334,7 +334,9 @@ the only window, use evil-window-move-* (e.g. `evil-window-move-far-left')."
 		  org-level-3
 		  org-level-4
 		  org-level-5
-		  org-level-6))
+		  org-level-6
+		  org-level-7
+		  org-level-8))
     (set-face-attribute face nil :foreground color :weight 'ultra-bold :family "Serif Sans Serif")))
 
 (dolist (face '(org-block-begin-line
