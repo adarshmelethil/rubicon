@@ -311,7 +311,7 @@ the only window, use evil-window-move-* (e.g. `evil-window-move-far-left')."
   (custom-declare-face '+org-todo-project '((t (:inherit (bold font-lock-doc-face org-todo)))) "")
   (custom-declare-face '+org-todo-onhold  '((t (:inherit (bold warning org-todo)))) ""))
 
-(let* ((done-color "#545454" )
+(let* ((done-color "#48514f")
        (todo '(:foreground "#ffad37" :weight ultra-bold))
        (done `(:foreground ,done-color :weight ultra-bold :strike-through t))
        (blocked `(:foreground "#e6712e" :weight ultra-bold :underline t)))
