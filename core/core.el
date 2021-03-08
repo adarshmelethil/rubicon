@@ -46,6 +46,12 @@
 (setq-default display-line-numbers-width 3)
 (setq-default org-agenda-span 'month)
 
+(define-fringe-bitmap 'git-gutter-fr:added [224]
+      nil nil '(center repeated))
+(define-fringe-bitmap 'git-gutter-fr:modified [224]
+      nil nil '(center repeated))
+(define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240]
+      nil nil 'bottom)
 
 (set-face-attribute 'cursor nil :background "#fff")
 (set-face-attribute 'window-divider nil :foreground "#222933")
