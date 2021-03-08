@@ -59,14 +59,6 @@
 		     "~"
 		     default-directory))
 
-(font-lock-add-keywords
- 'org-mode
- `(("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)" 1 'org-headline-done prepend))
- 'append)
-
-;; (font-lock-add-keywords 'org-mode
-;;                         '(("^ +\\([-*]\\) "
-;;                            (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
 (setq org-fontify-whole-heading-line t
       org-fontify-quote-and-verse-blocks t
       org-fontify-done-headline t
