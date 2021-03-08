@@ -509,4 +509,7 @@
   :config
   (ctrlf-mode 1))
 
+(use-package magit-delta
+  :hook ((magit-mode . magit-delta-mode)))
+
 (provide 'packages)
