@@ -103,8 +103,6 @@
 
 (use-package all-the-icons-ivy-rich)
 
-(use-package evil-magit)
-
 ;; (use-package evil-vimish-fold
 ;;   :hook ((prog-mode . evil-vimish-fold-mode))
 ;;   :config
