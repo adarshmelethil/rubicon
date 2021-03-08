@@ -236,9 +236,6 @@
   (setq hl-paren-colors (cons "#FFFF00" hl-paren-colors))
   :hook (prog-mode . highlight-parentheses-mode))
 
-(use-package forge
-  :after magit)
-
 (use-package exec-path-from-shell
   :config
   (exec-path-from-shell-initialize))
