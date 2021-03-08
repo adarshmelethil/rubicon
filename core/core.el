@@ -223,7 +223,7 @@ the only window, use evil-window-move-* (e.g. `evil-window-move-far-left')."
 ;; Eshell
 (require 'eshell)
 
-(setq eshell-prompt-function (lambda () " # "))
+(setq eshell-prompt-function (lambda () (concat default-directory" # ")))
 
 (require 'em-smart)
 (setq eshell-where-to-jump 'begin
