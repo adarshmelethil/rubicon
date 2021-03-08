@@ -68,6 +68,7 @@
   "d" 'rubicon/create-disposable-dir
   
   "y" 'rubicon/copy-path-to-buffer-file
+  "p" 'helm-show-kill-ring
 
   "0" (ilm (rubicon/workspace-switch "0"))
   "1" (ilm (rubicon/workspace-switch "1"))
@@ -165,9 +166,9 @@
   "P" 'proced
 
   ;; project
-  "p s" #'counsel-projectile-switch-project
-  "p d" #'projectile-add-known-project
-  "p t" #'treemacs-add-project-to-workspace
+  ;; "p s" #'counsel-projectile-switch-project
+  ;; "p d" #'projectile-add-known-project
+  ;; "p t" #'treemacs-add-project-to-workspace
 
 
   "z"  (ilm (evil-edit "."))
