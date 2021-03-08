@@ -5,8 +5,6 @@
 
 
 (set-face-attribute 'default nil :height 130)
-(set-face-attribute 'fringe nil
-		    :background "#2d3743")
 (add-hook 'shell-mode-hook 'compilation-shell-minor-mode)
 
 (add-hook 'dired-load-hook
@@ -48,64 +46,10 @@
 (setq-default display-line-numbers-width 3)
 (setq-default org-agenda-span 'month)
 
-(define-fringe-bitmap 'git-gutter-fr:added [224]
-      nil nil '(center repeated))
-(define-fringe-bitmap 'git-gutter-fr:modified [224]
-      nil nil '(center repeated))
-(define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240]
-      nil nil 'bottom)
 
-(defgroup rubicon-faces nil "Faces for my config" :group 'faces)
-
-(setq rubicon--modeline-format
-      (list ""
-	    '(:eval
-	      (rubicon/relative-default-dir))
-	    "%b @ %p"
-	    " | "
-	    'mode-name
-	    " |"
-	    'vc-mode
-	    " | "
-	    'display-time-string
-	    " | "
-	    'battery-mode-line-string))
-
-(defun rubicon--modeline-face (inherits background-color)
-  `((t :inherit ,inherits
-       :background ,background-color
-       :box (:line-width 1 :color ,background-color)
-       :height 145)))
-
-(set-face-attribute 'cursor nil :background "#000")
+(set-face-attribute 'cursor nil :background "#fff")
 (set-face-attribute 'window-divider nil :foreground "#222933")
 
-(let ((background-color "#242c36"))
-  (defface rubicon-modeline-active
-    (rubicon--modeline-face 'mode-line background-color)
-    "Face used when modeline is enabled and active"
-    :group 'rubicon-faces)
-  (defface rubicon-modeline-inactive
-    (rubicon--modeline-face 'mode-line-inactive background-color)
-    "Face used when modeline is enabled and inactive"
-    :group 'rubicon-faces))
-
-(dolist (remapping '((mode-line-inactive . rubicon-modeline-inactive)
-		     (mode-line . rubicon-modeline-active)))
-  (add-to-list 'face-remapping-alist remapping t))
-
-(defun rubicon/enable-modeline ()
-  (setq mode-line-format rubicon--modeline-format))
-
-(defun rubicon/disable-modeline ()
-  (setq mode-line-format nil))
-
-(dolist (enable-modeline-mode-hook (list 'prog-mode-hook
-					 'yaml-mode-hook
-					 'markdown-mode-hook
-					 'eshell-mode-hook
-					 'org-mode-hook))
-  (add-hook enable-modeline-mode-hook 'rubicon/enable-modeline))
 
 (setq rubicon-home-path (expand-file-name "~"))
 (setq rubicon--home-path-rg-starts-with (concat "^" rubicon-home-path))

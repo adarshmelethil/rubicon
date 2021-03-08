@@ -303,7 +303,6 @@
  :states 'insert
  :keymaps 'vterm-mode-map
 
- "`" (ilm (vt-exec "fzf-history-widget"))
  "TAB" 'vterm-send-tab
  "S-<return>" 'vterm-run-and-go-up
  "M-<f13>" 'vt-rc
