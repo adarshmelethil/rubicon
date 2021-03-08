@@ -316,8 +316,7 @@
 
 (setq lsp-keymap-prefix "s-l")
 (use-package lsp-mode
-  :hook ((python-mode . lsp)
-	 (java-mode . lsp)
+  :hook ((java-mode . lsp)
 	 (c-mode . lsp)
 	 (c++-mode . lsp)
 	 (css-mode . lsp)
