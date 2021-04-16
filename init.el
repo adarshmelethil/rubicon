@@ -16,7 +16,7 @@
 (load (concat user-emacs-directory "core/packages"))
 
 (load (concat user-emacs-directory "core/core"))
+(load (concat user-emacs-directory "core/config"))
 (load (concat user-emacs-directory "core/keybindings"))
 (load (concat user-emacs-directory "local"))
-(e org-default-notes-file)
 (setq gc-cons-threshold 16777216)

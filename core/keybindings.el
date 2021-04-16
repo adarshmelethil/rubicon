@@ -1,23 +1,40 @@
-;; -*- lexical-binding: t; -*-
+;;; -*- lexical-binding: t; -*-
 
-(setq mac-command-modifier 'super
-      mac-option-modifier  'meta)
+(general-nmap
+  "TAB" 'evil-jump-item
+  "u" 'undo-fu-only-undo
+  "r" 'undo-fu-only-redo
+  "g c" 'evilnc-comment-operator)
 
-(defconst rubicon/nvm-states
-  '(normal visual motion))
+(general-define-key
+ :states rubicon/nvm-states
+ :keymaps 'override
 
-(defmacro rubicon/define-leader (prefix)
-  (let ((rb-definer-name (intern
-			  (concat "rubicon/leader-" prefix))))
-    `(general-create-definer
-       ,rb-definer-name
-       :prefix ,prefix
-       :keymaps 'override
-       :states rubicon/nvm-states)))
+ "+" 'evil-window-increase-width
+ "_" 'evil-window-decrease-width
+ "M-=" 'evil-window-increase-height
+ "M--" 'evil-window-decrease-height
 
-(rubicon/define-leader "SPC")
-(rubicon/define-leader "<f13>")
-(rubicon/define-leader "<f15>")
+ "L"  (ilm (right-char 10))
+ "H"  (ilm (left-char 10))
+
+ "*" 'evil-embrace-evil-surround-region
+ "z g" 'evil-scroll-line-to-bottom
+ ;; "<DEL>" 'counsel-M-x
+ ;; [backspace] 'counsel-M-x
+
+ "S-<SPC>"    'counsel-rg
+ "s-<SPC>"    'counsel-locate
+
+ ;; navigation
+ "("          'evil-scroll-down
+ ")"          'evil-scroll-up
+
+ ;; split
+ "<down>"     'evil-window-down
+ "<left>"     'evil-window-left
+ "<up>"       'evil-window-up
+ "<right>"    'evil-window-right)
 
 (general-nmap
  "TAB" 'evil-jump-item
@@ -59,124 +76,82 @@
  "<up>"       'evil-window-up
  "<right>"    'evil-window-right)
 
-(rubicon/leader-SPC
-  "<ESC>" 'delete-window
-  "n" 'replel-start-repl
-  "N" 'replel-overview
+(eval
+ `(rubicon/leader-SPC
+    "<ESC>" #'delete-window
 
-  "D" 'docker
-  "d" 'rubicon/create-disposable-dir
-  
-  "y" 'rubicon/copy-path-to-buffer-file
-  "p" 'helm-show-kill-ring
+    ;; Workspaces
+    "TAB d" 'rubicon/workspace-delete
+    "TAB TAB" 'rubicon/workspace-show-all
+    "TAB s" 'persp-switch 
+    "o" 'rubicon/workspace-kill-invisible-buffers
+    "O" 'rubicon/workspace-kill-other-buffers
 
-  "0" (ilm (rubicon/workspace-switch "0"))
-  "1" (ilm (rubicon/workspace-switch "1"))
-  "2" (ilm (rubicon/workspace-switch "2"))
-  "3" (ilm (rubicon/workspace-switch "3"))
-  "4" (ilm (rubicon/workspace-switch "4"))
-  "5" (ilm (rubicon/workspace-switch "5"))
-  "6" (ilm (rubicon/workspace-switch "6"))
-  "7" (ilm (rubicon/workspace-switch "7"))
-  "8" (ilm (rubicon/workspace-switch "8"))
-  "9" (ilm (rubicon/workspace-switch "9"))
+    ,@(-flatten-n 1 (--map (let ((str-num (number-to-string it)))
+			     (list str-num `(ilm (rubicon/workspace-switch ,str-num))))
+			   (number-sequence 1 9)))
+    
+    "n" #'replel-start-repl
+    "N" #'replel-overview
+    "D" #'docker
+    "s" #'save-buffer
+    "t" 'rubicon/eshell-here
 
-  "TAB 0" (ilm (rubicon/workspace-switch "10"))
-  "TAB 1" (ilm (rubicon/workspace-switch "11"))
-  "TAB 2" (ilm (rubicon/workspace-switch "12"))
-  "TAB 3" (ilm (rubicon/workspace-switch "13"))
-  "TAB 4" (ilm (rubicon/workspace-switch "14"))
-  "TAB 5" (ilm (rubicon/workspace-switch "15"))
-  "TAB 6" (ilm (rubicon/workspace-switch "16"))
-  "TAB 7" (ilm (rubicon/workspace-switch "17"))
-  "TAB 8" (ilm (rubicon/workspace-switch "18"))
-  "TAB 9" (ilm (rubicon/workspace-switch "19"))
-  "TAB r" 'rename-buffer
+    "T" #'vterm
+    "R" #'ielm
+    "e" #'eval-last-sexp
+    "E" #'eval-buffer
+    "b" #'evil-buffer-new
+    "y" 'rubicon/copy-path-to-buffer-file
+    
+    "." 'counsel-find-file
+    "," 'persp-counsel-switch-buffer
 
-  ;; Workspaces
-  "TAB d" 'rubicon/workspace-delete
-  "TAB TAB" 'rubicon/workspace-show-all
-  "TAB s" 'persp-switch 
+    "h w" #'what-cursor-position
+    "h o" #'find-function-on-key
+    "h f" #'find-function
+    "h v" #'find-variable
+    "h r" #'describe-variable
+    "h k" #'describe-key
+    "h m" #'describe-mode
+    "h e" #'describe-face
+    "h n" #'describe-font
+    "h c" #'describe-char
+    "h t" #'describe-theme
+    "h a" #'describe-keymap
+    "h s" #'describe-symbol
+    "h b" #'describe-binding
+    "h F" #'describe-fontset
+    "a a" #'org-agenda-list
+    "a t" #'org-todo-list
+    "c" #'org-capture
+    
+    "g" #'magit-file-dispatch
+    "G" #'magit-dispatch
+    "l" #'magit-log-current
+    
+    ;; SMERGE
+    "k u" #'smerge-keep-upper
+    "k l" #'smerge-keep-lower
+    "k a" #'smerge-keep-all
+    "k n" #'smerge-next
+    "k p" #'smerge-prev
+    "k m" #'smerge-keep-mine
 
-  "o" 'rubicon/workspace-kill-invisible-buffers
-  "O" 'rubicon/workspace-kill-other-buffers
+    "P" #'proced
 
-  "s" 'save-buffer
-  "t" 'rubicon/eshell-here
-  "T" 'vterm
-  "r" 'counsel-recentf
-  "R" 'ielm
-  "e" 'eval-last-sexp
-  "E" 'eval-buffer
-  "'" 'ivy-resume
+    "SPC" '+ivy/projectile-find-file
+    "'" 'ivy-resume
 
-  "b" #'evil-buffer-new
+    "d" 'rubicon/create-disposable-dir
 
-  "SPC" '+ivy/projectile-find-file
+    "z"  (ilm (evil-edit "."))
+    "Z" 'treemacs-select-window
+    "<right>" (ilm (rubicon/split-window "right"))
+    "<up>" (ilm (rubicon/split-window "up"))
+    "<left>" (ilm (rubicon/split-window "left"))
+    "<down>" (ilm (rubicon/split-window "down"))))
 
-  ;; Find functions, variables, etc
-  "h w" 'what-cursor-position
-  "h o" 'find-function-on-key
-  "h f" 'find-function
-  "h v" 'find-variable
-  "h r" 'describe-variable
-  "h k" 'describe-key
-  "h m" 'describe-mode
-  "h e" 'describe-face
-  "h n" 'describe-font
-  "h c" 'describe-char
-  "h t" 'describe-theme
-  "h a" 'describe-keymap
-  "h s" 'describe-symbol
-  "h b" 'describe-binding
-  "h F" 'describe-fontset
-
-  ;; Roam
-  "a r" 'org-roam-dailies-today
-  "a a" 'org-agenda-list
-  "a t" 'org-todo-list
-  "a c" 'cfw:open-org-calendar
-
-  "c" 'org-capture
-
-  "." 'counsel-find-file
-  
-  "," 'persp-counsel-switch-buffer
-  
-  "g" 'magit-file-dispatch
-  "G" 'magit-dispatch
-
-  "l" 'magit-log-current
-
-  "k k" #'rubicon/workspace-kill-current-buffer
-  "k u" 'smerge-keep-upper
-  "k l" 'smerge-keep-lower
-  "k a" 'smerge-keep-all
-  "k n" 'smerge-next
-  "k p" 'smerge-prev
-  "k m" 'smerge-keep-mine
-
-  ;; avy
-  "f" 'avy-goto-char-timer
-  "F" 'avy-goto-char
-  "q r" 'avy-resume
-  "m" 'avy-move-line
-  "M" 'avy-move-region
-
-  "P" 'proced
-
-  ;; project
-  ;; "p s" #'counsel-projectile-switch-project
-  ;; "p d" #'projectile-add-known-project
-  ;; "p t" #'treemacs-add-project-to-workspace
-
-
-  "z"  (ilm (evil-edit "."))
-  "Z" 'treemacs-select-window
-  "<right>" (ilm (rubicon/split-window "right"))
-  "<up>" (ilm (rubicon/split-window "up"))
-  "<left>" (ilm (rubicon/split-window "left"))
-  "<down>" (ilm (rubicon/split-window "down")))
 
 (rubicon/leader-<f13>
   "<right>" #'+evil/window-move-right
@@ -184,62 +159,25 @@
   "<left>" #'+evil/window-move-left
   "<down>" #'+evil/window-move-down)
 
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;; dirs/files navigation
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(defmacro create-folder-nmap (shortcut file-name)
-  `(progn
-     (defalias (intern (concat "open-" (symbol-name (quote ,file-name))))
-       (lambda ()
-	 (interactive)
-	 (e
-	  (symbol-name
-	   (quote ,file-name)))))
-     (general-nmap ,shortcut
-       (intern
-	(concat "open-"
-		(symbol-name (quote ,file-name)))))))
-
-
-(create-folder-nmap "<f15> H" ~/                 )
-(create-folder-nmap "<f15> P" ~/projects/        )
-(create-folder-nmap "<f15> S" ~/scrap/           )
-(create-folder-nmap "<f15> R" ~/repos/           )
-(create-folder-nmap "<f15> E" ~/.emacs.d         )
-(create-folder-nmap "<f15> D" ~/.doom.d          )
-(create-folder-nmap "<f15> O" ~/org              )
-
-(rubicon/leader-<f15>
-  "e k" (ilm (e "~/.emacs.d/core/keybindings.el"))
-  "e c" (ilm (e "~/.emacs.d/core/core.el"))
-  "e p" (ilm (e "~/.emacs.d/core/packages.el"))
-  "e i" (ilm (e "~/.emacs.d/init.el"))
-  "o" (ilm (e "~/org/org.org"))
-  "g" (ilm (e "~/org/gist.org"))
-  "n" (ilm (e "~/org/notes.org"))
-  "s" (ilm (e "~/org/scrap.org"))
-  "r" (ilm (e "~/.config/fish/config.fish"))
-  "b" (ilm (e "~/org/notebooks.org"))
-  "C" (ilm (e "~/.emacs.d/core")))
-
-(global-set-key [remap keyboard-quit] #'rubicon/escape)
-(global-set-key [remap evil-force-normal-state] #'rubicon/escape)
-(global-set-key [escape] #'rubicon/escape)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Eshell 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(general-define-key
+ :keymaps 'org-mode-map
+ :prefix "<f14>"
+ "a" #'org-archive-subtree-default
+ "t" #'counsel-org-tag
+ "r" #'org-refile
+ "i" #'org-date-from-calendar
+ "l" #'org-cliplink
+ "L" #'org-toggle-link-display
+ "d" #'org-deadline
+ "s" #'org-schedule
+ "c" #'org-goto-calendar
+ "C" #'count-words
+ "h" #'org-insert-heading-respect-content)
 
 (general-define-key
- :keymaps 'eshell-mode-map
- :states 'insert
- "<f1>" (ilm (eshell/clear-scrollback)
-	     (eshell-send-input))
- "<f13>" #'evil-collection-eshell-interrupt-process)
+ :states 'normal
+ :keymaps 'org-mode-map
+ "<return>" '+org/dwim-at-point)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -289,15 +227,7 @@
 
  "<f13> <f13>" 'vterm-send-C-c
 
- ;; "r" (ilm)
  "R" 'vt-source-zshrc)
-
-
-(general-define-key
- :states 'normal
- :keymaps 'org-mode-map
- "<return>" '+org/dwim-at-point)
-
 
 
 (general-define-key
@@ -310,9 +240,73 @@
  "<f13>" 'vterm-send-C-c
  "<f14>" 'vterm-send-escape)
 
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Eshell 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(general-define-key
+ :keymaps 'eshell-mode-map
+ :states 'insert
+ "<f1>" (ilm (eshell/clear-scrollback)
+	     (eshell-send-input))
+ "<f13>" #'evil-collection-eshell-interrupt-process)
+
+
+
+(global-set-key [remap keyboard-quit] #'rubicon/escape)
+(global-set-key [remap evil-force-normal-state] #'rubicon/escape)
+(global-set-key [escape] #'rubicon/escape)
+
+(general-define-key
+ ;; :states 'normal
+ :keymaps 'replel-mode-map
+ "<f1>" 'replel-run)
+
+(global-set-key [remap kill-current-buffer]
+		'rubicon/workspace-kill-current-buffer)
+(global-set-key [remap quit-window]
+		'rubicon/workspace-quit-window)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; dirs/files navigation
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(rubicon/create-fs-map "Q" "~/repos")
+(rubicon/create-fs-map "H" "~/" )
+(rubicon/create-fs-map "P" "~/projects/" )
+(rubicon/create-fs-map "S" "~/scrap/" )
+(rubicon/create-fs-map "R" "~/repos/" )
+(rubicon/create-fs-map "E" "~/.emacs.d" )
+(rubicon/create-fs-map "D" "~/.doom.d" )
+(rubicon/create-fs-map "O" "~/org" )
+(rubicon/create-fs-map "e k" "~/.emacs.d/core/keybindings.el")
+(rubicon/create-fs-map "e c" "~/.emacs.d/core/core.el")
+(rubicon/create-fs-map "e C" "~/.emacs.d/core/config.el")
+(rubicon/create-fs-map "e p" "~/.emacs.d/core/packages.el")
+(rubicon/create-fs-map "e i" "~/.emacs.d/init.el")
+(rubicon/create-fs-map "o" "~/org/org.org")
+(rubicon/create-fs-map "g" "~/org/gist.org")
+(rubicon/create-fs-map "n" "~/org/notes.org")
+(rubicon/create-fs-map "s" "~/org/scrap.org")
+(rubicon/create-fs-map "r" "~/.config/fish/config.fish")
+(rubicon/create-fs-map "b" "~/org/notebooks.org")
+(rubicon/create-fs-map "C" "~/.emacs.d/core")
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; Dired
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (general-define-key
  :keymaps 'dired-mode-map
  "[" 'dired-create-directory)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; Org mode
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (general-define-key
  :keymaps 'org-mode-map
@@ -330,16 +324,7 @@
  "C" #'count-words
  "h" #'org-insert-heading-respect-content)
 
-(global-set-key [remap goto-line] 'goto-line-preview)
-
-
-(global-set-key [remap execute-extended-command]
-		'counsel-M-x)
-(global-set-key [remap kill-current-buffer]
-		'rubicon/workspace-kill-current-buffer)
-(global-set-key [remap quit-window]
-		'rubicon/workspace-quit-window)
 (general-define-key
- ;; :states 'normal
- :keymaps 'replel-mode-map
- "<f1>" 'replel-run)
+ :states 'normal
+ :keymaps 'org-mode-map
+ "<return>" '+org/dwim-at-point)
