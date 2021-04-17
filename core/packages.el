@@ -330,3 +330,4 @@ to `magit-dispatch'."
 			  (require 'dap-python)
 			  (setq-default dap-python-executable "python3"))))
 
+(use-package pyvenv)

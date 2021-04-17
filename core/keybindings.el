@@ -155,6 +155,12 @@
     ;; Debugger 
     "q d" 'dap-debug
     "q n" 'dap-next
+    "q i" 'dap-step-in
+    "q o" 'dap-step-out
+    "q c" 'dap-continue
+    "q v" 'dap-ui-locals
+    "q r" 'dap-ui-repl
+    "q B" 'dap-ui-breakpoints-list
     "q b" 'dap-breakpoint-toggle))
 
 
