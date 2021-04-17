@@ -19,12 +19,15 @@
   ;; (print (concat "loading: " path))
   (load (concat user-emacs-directory path)))
 
-(rubicon/load  "core/packages" )
+(rubicon/load  "core/packages")
 (rubicon/load  "core/core")
 (rubicon/load  "core/config")
 (rubicon/load  "core/keybindings")
-(rubicon/load  "local")
+
+(if (file-exists-p (concat user-emacs-directory "local.el"))
+    (rubicon/load  "local")
+  (print "init.el was not found"))
+
 (setq gc-cons-threshold 16777216)
 
-
-(print (concat "emacs init time is " (emacs-init-time)) )
+(print (concat "emacs init time is " (emacs-init-time)))
