@@ -168,11 +168,7 @@
 	    " | "
 	    'mode-name
 	    " |"
-	    'vc-mode
-	    " | "
-	    'display-time-string
-	    " | "
-	    'battery-mode-line-string))
+	    'vc-mode))
 
 (dolist (enable-modeline-mode-hook (list 'prog-mode-hook
 					 'yaml-mode-hook
