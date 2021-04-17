@@ -1,10 +1,12 @@
 ;; -*- lexical-binding: t; -*-
 
+;;;###autoload
 (defmacro ilm (&rest body)
   `(lambda ()
      (interactive)
      ,@body))
 
+;;;###autoload
 (defun rubicon/escape ()
   (interactive)
   (evil-ex-nohighlight)
@@ -17,6 +19,7 @@
 	((keyboard-quit))))
 
 ;; split creation and navigation
+;;;###autoload
 (defun rubicon/split-window (pos)
   (cond ((string= pos "right")
 	 (split-window-horizontally)
@@ -31,6 +34,7 @@
 
 
 ;; Doom helper functions
+;;;###autoload
 (defun +evil--window-swap (direction)
   "Move current window to the next window in DIRECTION.
 If there are no windows there and there is only one window, split in that
@@ -85,25 +89,30 @@ the only window, use evil-window-move-* (e.g. `evil-window-move-far-left')."
   "Swap windows downward."
   (interactive) (+evil--window-swap 'down))
 
+;;;###autoload
 (defun rubicon/gen-random-str ()
   (--reduce (format "%s%d" acc (random 10000)) (number-sequence 0 8)))
 
+;;;###autoload
 (defun rubicon/create-disposable-dir ()
   (interactive)
   (let ((path (format "~/scrap/%s" (rubicon/gen-random-str))))
     (dired-create-directory path)
     (e path)))
 
+;;;###autoload
 (defun rubicon/workspace-switch (name)
   (interactive)
   (persp-switch name)
   (rubicon/workspace-show-all))
 
+;;;###autoload
 (defun rubicon/workspace-delete ()
   (interactive)
   (persp-kill (persp-current-name))
   (rubicon/workspace-show-all))
 
+;;;###autoload
 (defun rubicon/workspace-get-marked-list ()
   (--map
    (if (string= (persp-current-name) it)
@@ -111,57 +120,68 @@ the only window, use evil-window-move-* (e.g. `evil-window-move-far-left')."
      (concat " " it " "))
    (persp-names)))
 
+;;;###autoload
 (defun rubicon/workspace-show-all ()
   (interactive)
   (message
    (string-join (rubicon/workspace-get-marked-list) " ")))
 
+;;;###autoload
 (defun rubicon/workspace-is-last-buffer? ()
   (interactive)
   (not (> (length (persp-current-buffer-names)) 1)))
 
+;;;###autoload
 (defun rubicon/workspace-kill-current-buffer ()
   (interactive)
   (if (not (rubicon/workspace-is-last-buffer?))
       (kill-current-buffer)
     (message "Can't delete last workspace buffer")))
 
+;;;###autoload
 (defun rubicon/workspace-quit-window ()
   (interactive)
   (if (not (rubicon/workspace-is-last-buffer?))
       (quit-window)
     (message "Can't delete last workspace buffer")))
 
+;;;###autoload
 (defun rubicon/visible-buffers ()
   "Returns a list of all currently visible buffers"
   (mapcar 'window-buffer (window-list)))
 
+;;;###autoload
 (defun rubicon/workspace-current-get-all-buffers ()
   "Returns a list of all buffers in current perspective"
   (persp-current-buffers))
 
+;;;###autoload
 (defun rubicon/workspace-current-get-invisible-buffers ()
   "returns a list of all invisible buffers in current perspective"
   (-difference (rubicon/workspace-current-get-all-buffers)
 	       (rubicon/visible-buffers)))
 
+;;;###autoload
 (defun rubicon/kill-selected-buffers (selected-buffers)
   "Kills all buffers given to it"
   (--map (kill-buffer it) selected-buffers))
 
 
+;;;###autoload
 (defun rubicon/workspace-current-get-other-buffers ()
   "Get buffers other than the current buffers in the current perspective"
   (-difference
    (rubicon/workspace-current-get-all-buffers)
    (list (current-buffer))))
 
+;;;###autoload
 (defun rubicon/workspace-kill-invisible-buffers ()
   "Kills all invisible buffers in perspective"
   (interactive)
   (rubicon/kill-selected-buffers
    (rubicon/workspace-current-get-invisible-buffers)))
 
+;;;###autoload
 (defun rubicon/workspace-kill-other-buffers ()
   "Kills all buffers other than current one in perspective"
   (interactive)
@@ -169,6 +189,7 @@ the only window, use evil-window-move-* (e.g. `evil-window-move-far-left')."
   (rubicon/kill-selected-buffers
    (rubicon/workspace-current-get-other-buffers)))
 
+;;;###autoload
 (defun rubicon/copy-path-to-buffer-file ()
   (interactive)
   (let ((path-to-file (or (buffer-file-name) default-directory)))
@@ -195,12 +216,11 @@ the only window, use evil-window-move-* (e.g. `evil-window-move-far-left')."
 (defmacro rubicon/create-fs-map (shortcut file-path)
   `(let* ((fn-name-str (concat "open-" ,file-path))
 	  (fn-name (intern fn-name-str)))
-     (print ,shortcut)
-     (print ,file-path)
      (defalias fn-name (ilm (e ,file-path)))
      (rubicon/leader-<f15> ,shortcut fn-name)))
 
 
+;;;###autoload
 (defun +ivy/projectile-find-file ()
   "A more sensible `counsel-projectile-find-file', which will revert to
 `counsel-find-file' if invoked from $HOME or /, `counsel-file-jump' if invoked
@@ -225,9 +245,11 @@ The point of this is to avoid Emacs locking up indexing massive file trees."
 	   (#'counsel-file-jump)))))
 
 
+;;;###autoload
 (defun rubicon/gen-random-str ()
   (--reduce (format "%s%d" acc (random 10000)) (number-sequence 0 8)))
 
+;;;###autoload
 (defun rubicon/create-disposable-dir ()
   (interactive)
   (let ((path (format "~/scrap/%s" (rubicon/gen-random-str))))
@@ -239,11 +261,13 @@ The point of this is to avoid Emacs locking up indexing massive file trees."
 ;;;; Vterm functions
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;;###autoload
 (defun vterm-send-escape()
   (interactive)
   (vterm-send-key "<escape>"))
 
 (with-eval-after-load 'vterm
+;;;###autoload
   (defun vterm (&optional buffer-name)
     "Create a new vterm."
     (interactive)
@@ -252,81 +276,99 @@ The point of this is to avoid Emacs locking up indexing massive file trees."
         (vterm-mode))
       (switch-to-buffer buffer))))
 
+;;;###autoload
 (defun vterm-run-and-go-up ()
   (interactive)
   (vterm-send-return)
   (vterm-send-up))
 
+;;;###autoload
 (defun my-vterm-normal-mode ()
   (interactive)
   (evil-force-normal-state)
   (vterm-copy-mode))
 
+;;;###autoload
 (defun my-vterm-insert ()
   (interactive)
   (vterm-copy-mode -1)
   (evil-insert 1))
 
+;;;###autoload
 (defun my-vterm-append ()
   (interactive)
   (vterm-copy-mode -1)
   (evil-append 1))
 
+;;;###autoload
 (defun my-vterm-clear ()
   (interactive)
   (vterm-clear-scrollback)
   (vterm-clear))
 
+;;;###autoload
 (defun vt-exec (str)
   (vterm-send-string str)
   (vterm-send-return))
 
+;;;###autoload
 (defun vt-eq (key val)
   (vt-exec
    (format "%s=\"%s\"" key val)))
 
+;;;###autoload
 (defun vt-alias (key val)
   (vt-exec
    (format "alias %s=\"%s\"" key val)))
 
+;;;###autoload
 (defun vt-export (key val)
   (vt-exec
    (format "export %s=%s" key val)))
 
+;;;###autoload
 (defun vt-append-path (path)
   (vt-export
    "PATH"
    (format "%s:$PATH" path)))
 
+;;;###autoload
 (defun vt-source-zshrc ()
   (interactive)
   (vt-exec "source ~/.zshrc"))
 
+;;;###autoload
 (defun vt-cd-to (path)
   (interactive)
   (vt-exec
    (format "cd %s" path)))
 
+;;;###autoload
 (defun vt-pusdh (path)
   (vt-exec
    (format "pushd %s" path)))
 
+;;;###autoload
 (defun vt-popd ()
   (vt-exec
    (format "popd")))
 
+;;;###autoload
 (defun vt-insert-command (cmd)
   (vterm-send-string cmd)
   (evil-insert 1))
 
+;;;###autoload
 (defun vt-ls ()
   (vt-exec "ls -la"))
 
+;;;###autoload
 (defun vt-clear-current-command ()
   (vterm-send-escape)
   (vterm-send-string "dd")
   (vterm-send-string "i"))
 
+;;;###autoload
 (defun vt-insert-at-start (cmd) ;; requires vi mode
   (vterm-send-escape)
   (vterm-send-string "m")
@@ -342,19 +384,23 @@ The point of this is to avoid Emacs locking up indexing massive file trees."
       (setq cursor (+ cursor 1))))
   (vterm-send-string "a"))
 
+;;;###autoload
 (defun vt-inset-at-point (cmd)
   (vterm-send-escape)
   (vterm-send-string "i")
   (vterm-send-string cmd))
 
+;;;###autoload
 (defun vt-add-sudo ()
   (interactive)
   (vt-insert-at-start "sudo "))
 
+;;;###autoload
 (defun vt-add-chmod ()
   (interactive)
   (vt-insert-at-start "chmod u+x "))
 
+;;;###autoload
 (defun vt-rc ()
   (interactive)
   (vt-append-path "~/bin/")
@@ -372,12 +418,14 @@ The point of this is to avoid Emacs locking up indexing massive file trees."
   (vt-alias "..." "cd ../..")
   (vt-alias ".." "cd .."))
 
+;;;###autoload
 (defun rubicon/eshell-here ()
   (interactive)
   (let ((new-buffer (generate-new-buffer "*eshell*")))
     (switch-to-buffer new-buffer)
     (eshell-mode)))
 
+;;;###autoload
 (defun +org-get-todo-keywords-for (&optional keyword)
   "Returns the list of todo keywords that KEYWORD belongs to."
   (when keyword
@@ -394,6 +442,7 @@ The point of this is to avoid Emacs locking up indexing massive file trees."
 
 
 
+;;;###autoload
 (defun +org/dwim-at-point (&optional arg)
   "Do-what-I-mean at point.
 If on a:
@@ -499,18 +548,22 @@ If on a:
 ;;;; Modeline 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;;###autoload
 (defun rubicon/enable-modeline ()
   (setq mode-line-format rubicon--modeline-format))
 
+;;;###autoload
 (defun rubicon/disable-modeline ()
   (setq mode-line-format nil))
 
+;;;###autoload
 (defun rubicon--modeline-face (inherits background-color)
   `((t :inherit ,inherits
        :background ,background-color
        :box (:line-width 1 :color ,background-color)
        :height 145)))
 
+;;;###autoload
 (defun rubicon/relative-default-dir ()
   (s-replace-regexp  rubicon--home-path-rg-starts-with
 		     "~"

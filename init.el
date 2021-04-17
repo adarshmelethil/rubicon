@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -13,11 +15,16 @@
  ;; If there is more than one, they won't work right.
  )
 
-(load (concat user-emacs-directory "core/packages"))
+(defun rubicon/load (path)
+  ;; (print (concat "loading: " path))
+  (load (concat user-emacs-directory path)))
 
-(load (concat user-emacs-directory "core/core"))
-(load (concat user-emacs-directory "core/config"))
-(load (concat user-emacs-directory "core/keybindings"))
-(load (concat user-emacs-directory "local"))
+(rubicon/load  "core/packages" )
+(rubicon/load  "core/core")
+(rubicon/load  "core/config")
+(rubicon/load  "core/keybindings")
+(rubicon/load  "local")
 (setq gc-cons-threshold 16777216)
+
+
 (print (concat "emacs init time is " (emacs-init-time)) )
