@@ -20,3 +20,4 @@
 (load (concat user-emacs-directory "core/keybindings"))
 (load (concat user-emacs-directory "local"))
 (setq gc-cons-threshold 16777216)
+(print (concat "emacs init time is " (emacs-init-time)) )

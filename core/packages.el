@@ -289,8 +289,7 @@ to `magit-dispatch'."
   :bind (("C-c +" . evil-numbers/inc-at-pt)
 	 ("C-c -" . evil-numbers/dec-at-pt)))
 
-(use-package eglot
-  :hook ((c-mode python-mode) . eglot))
+
 
 (use-package clojure-mode)
 
@@ -324,10 +323,17 @@ to `magit-dispatch'."
 
 (use-package org-cliplink)
 
+;; IDE 
+
+(use-package eglot
+  :hook ((c-mode c++-mode python-mode) . eglot-ensure)
+  :config
+  (add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd")))
 
 (use-package dap-mode
-  :hook ('python-mode . (lambda ()
-			  (require 'dap-python)
-			  (setq-default dap-python-executable "python3"))))
+  :config
+  (require 'dap-python)
+  (setq-default dap-python-executable "python3")
+  (require 'dap-lldb))
 
 (use-package pyvenv)
