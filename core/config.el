@@ -204,3 +204,5 @@
 					 'eshell-mode-hook
 					 'org-mode-hook))
   (add-hook enable-modeline-mode-hook 'rubicon/enable-modeline))
+
+(add-hook 'text-mode-hook 'flyspell-mode)
