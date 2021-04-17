@@ -1,4 +1,5 @@
 ;; Setting up Package manager
+
 (defvar bootstrap-version)
 
 (let ((bootstrap-file
@@ -310,3 +311,15 @@ to `magit-dispatch'."
   (setcdr
    (assq t ivy-format-functions-alist)
    #'ivy-format-function-line))
+
+(use-package evil-org
+  :ensure t
+  :after org
+  :hook ((org-mode . evil-org-mode)
+	 ('evil-org-mode . (lambda ()
+			     (evil-org-set-key-theme))))
+  :config
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys)) 
+
+(use-package org-cliplink)

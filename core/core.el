@@ -511,7 +511,6 @@ If on a:
        :box (:line-width 1 :color ,background-color)
        :height 145)))
 
-
 (defun rubicon/relative-default-dir ()
   (s-replace-regexp  rubicon--home-path-rg-starts-with
 		     "~"
