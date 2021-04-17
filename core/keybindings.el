@@ -292,6 +292,8 @@
 (rubicon/create-fs-map "e C" "~/.emacs.d/core/config.el")
 (rubicon/create-fs-map "e p" "~/.emacs.d/core/packages.el")
 (rubicon/create-fs-map "e i" "~/.emacs.d/init.el")
+(rubicon/create-fs-map "e e" "~/.emacs.d/early-init.el")
+(rubicon/create-fs-map "e l" "~/.emacs.d/local.el")
 (rubicon/create-fs-map "o" "~/org/org.org")
 (rubicon/create-fs-map "g" "~/org/gist.org")
 (rubicon/create-fs-map "n" "~/org/notes.org")
