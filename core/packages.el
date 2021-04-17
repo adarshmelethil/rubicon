@@ -333,6 +333,8 @@ to `magit-dispatch'."
 (use-package dap-mode
   :config
   (require 'dap-python)
+
+  (setq-default dap-python-debugger 'debugpy)
   (setq-default dap-python-executable "python3")
   (require 'dap-lldb))
 
