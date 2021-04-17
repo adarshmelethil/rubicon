@@ -323,3 +323,10 @@ to `magit-dispatch'."
   (evil-org-agenda-set-keys)) 
 
 (use-package org-cliplink)
+
+
+(use-package dap-mode
+  :hook ('python-mode . (lambda ()
+			  (require 'dap-python)
+			  (setq-default dap-python-executable "python3"))))
+

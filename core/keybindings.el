@@ -150,7 +150,12 @@
     "<right>" (ilm (rubicon/split-window "right"))
     "<up>" (ilm (rubicon/split-window "up"))
     "<left>" (ilm (rubicon/split-window "left"))
-    "<down>" (ilm (rubicon/split-window "down"))))
+    "<down>" (ilm (rubicon/split-window "down"))
+
+    ;; Debugger 
+    "q d" 'dap-debug
+    "q n" 'dap-next
+    "q b" 'dap-breakpoint-toggle))
 
 
 (rubicon/leader-<f13>
