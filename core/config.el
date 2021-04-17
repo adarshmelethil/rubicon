@@ -9,21 +9,17 @@
 			 scroll-bar-mode))
   (funcall turn-off-mode -1))
 
-(fringe-mode '(0 . 0))
+(fringe-mode '(nil . 0))
 
-(dolist (turn-off-mode '(dirtrack-mode
+(dolist (turn-on-mode '(dirtrack-mode
 			show-paren-mode))
-  (funcall turn-off-mode 1))
+  (funcall turn-on-mode 1))
 
 (setq-default fringes-outside-margins t)
 
 (setq-default display-line-numbers-width 3)
 (setq-default org-agenda-span 'month)
 (setq-default fringes-outside-margins t)
-(set-face-attribute 'cursor nil :background "#fff")
-(set-face-attribute 'window-divider nil :foreground "#222933")
-(menu-bar-bottom-and-right-window-divider)
-(customize-set-variable 'horizontal-scroll-bar-mode nil)
 
 (setq show-paren-style 'parenthesis
       window-divider-default-bottom-width 1
@@ -55,6 +51,11 @@
 
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 (add-hook 'conf-mode-hook #'display-line-numbers-mode)
+
+(set-face-attribute 'cursor nil :background "#fff")
+(set-face-attribute 'window-divider nil :foreground "#222933")
+(customize-set-variable 'horizontal-scroll-bar-mode nil)
+(menu-bar-bottom-and-right-window-divider)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Org 
