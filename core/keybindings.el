@@ -294,8 +294,8 @@
 (rubicon/create-fs-map "D" "~/.doom.d" )
 (rubicon/create-fs-map "O" "~/org" )
 (rubicon/create-fs-map "e k" "~/.emacs.d/core/keybindings.el")
-(rubicon/create-fs-map "e c" "~/.emacs.d/core/core.el")
-(rubicon/create-fs-map "e C" "~/.emacs.d/core/config.el")
+(rubicon/create-fs-map "e C" "~/.emacs.d/core/core.el")
+(rubicon/create-fs-map "e c" "~/.emacs.d/core/config.el")
 (rubicon/create-fs-map "e p" "~/.emacs.d/core/packages.el")
 (rubicon/create-fs-map "e i" "~/.emacs.d/init.el")
 (rubicon/create-fs-map "e e" "~/.emacs.d/early-init.el")
@@ -324,6 +324,7 @@
 (general-define-key
  :keymaps 'org-mode-map
  :prefix "<f14>"
+ "w" #'writeroom-mode
  "f" #'org-roam-insert
  "a" #'org-archive-subtree-default
  "t" #'counsel-org-tag
