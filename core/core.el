@@ -561,7 +561,7 @@ If on a:
   `((t :inherit ,inherits
        :background ,background-color
        :box (:line-width 1 :color ,background-color)
-       :height 145)))
+       :height 130)))
 
 ;;;###autoload
 (defun rubicon/relative-default-dir ()
