@@ -19,9 +19,7 @@
 (straight-use-package 'use-package)
 
 ;; Installing and configuring packages
-(use-package no-littering
-  :config
-  (require 'no-littering))
+(use-package no-littering)
 
 (use-package exec-path-from-shell
   :config
@@ -293,8 +291,6 @@ to `magit-dispatch'."
 
 (use-package clojure-mode)
 
-(use-package flycheck
-  :hook (emacs-lisp-mode . flycheck-mode))
 
 (use-package volatile-highlights
   :config
@@ -339,7 +335,21 @@ to `magit-dispatch'."
   (require 'dap-lldb))
 
 (use-package pyvenv)
+
 (use-package gcmh
   :hook (emacs-startup . gcmh-mode)
   :config
   (setq-default gcmh-idle-delay 3))
+
+;; langauge
+(use-package flycheck
+  :hook (text-mode . flycheck-mode))
+
+(use-package writegood-mode
+  :hook (text-mode . writegood-mode))
+
+(use-package mixed-pitch
+  :hook
+  (text-mode . mixed-pitch-mode))
+
+(use-package writeroom-mode)
