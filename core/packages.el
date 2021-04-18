@@ -339,3 +339,7 @@ to `magit-dispatch'."
   (require 'dap-lldb))
 
 (use-package pyvenv)
+(use-package gcmh
+  :hook (emacs-startup . gcmh-mode)
+  :config
+  (setq-default gcmh-idle-delay 3))
