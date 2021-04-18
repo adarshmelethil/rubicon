@@ -85,6 +85,11 @@
 (setq-default org-agenda-span 'month)
 
 (add-hook 'org-mode-hook (lambda () (text-scale-adjust 1)))
+(add-hook 'text-mode-hook 'visual-line-mode)
+(add-hook 'text-mode-hook
+	  (lambda () (setq-local left-fringe-width 0
+				 right-fringe-width 0)))
+
 
 (with-no-warnings
   (custom-declare-face '+org-todo-active  '((t (:inherit (bold font-lock-constant-face org-todo)))) "")
