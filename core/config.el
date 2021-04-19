@@ -2,6 +2,10 @@
 ;;;; Misc 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+
+(dolist (no-fringe-mode '(vterm-mode-hook
+			  text-mode-hook))
+  (add-hook no-fringe-mode #'rubicon/turn-fringes-off))
 (defalias 'yes-or-no-p 'y-or-n-p)
 (defalias 'e 'evil-edit)
 
@@ -88,10 +92,6 @@
 
 (add-hook 'org-mode-hook (lambda () (text-scale-adjust 1)))
 (add-hook 'text-mode-hook 'visual-line-mode)
-(add-hook 'text-mode-hook
-	  (lambda () (setq-local left-fringe-width 0
-				 right-fringe-width 0)))
-
 
 (with-no-warnings
   (custom-declare-face '+org-todo-active  '((t (:inherit (bold font-lock-constant-face org-todo)))) "")

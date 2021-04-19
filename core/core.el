@@ -569,3 +569,7 @@ If on a:
 		     "~"
 		     default-directory))
 
+;;;###autoload
+(defun rubicon/turn-fringes-off ()
+  (setq-local left-fringe-width 0
+	      right-fringe-width 0))
