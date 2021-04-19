@@ -6,6 +6,9 @@
 (dolist (no-fringe-mode '(vterm-mode-hook
 			  text-mode-hook))
   (add-hook no-fringe-mode #'rubicon/turn-fringes-off))
+
+(set-face-attribute 'evil-ex-lazy-highlight nil :background "#006501")
+
 (defalias 'yes-or-no-p 'y-or-n-p)
 (defalias 'e 'evil-edit)
 
@@ -18,8 +21,6 @@
 (dolist (turn-on-mode '(dirtrack-mode
 			show-paren-mode))
   (funcall turn-on-mode 1))
-
-(setq-default fringes-outside-margins t)
 
 (setq-default display-line-numbers-width 3)
 (setq-default org-agenda-span 'month)
