@@ -198,6 +198,7 @@
 (general-define-key
  :keymaps 'magit-mode-map
  :prefix "<f14>"
+ "a" #'magit-commit-amend
  "s" #'magit-stash)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
