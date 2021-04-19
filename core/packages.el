@@ -353,3 +353,6 @@ to `magit-dispatch'."
   (text-mode . mixed-pitch-mode))
 
 (use-package writeroom-mode)
+
+(use-package markdown-mode)
+
