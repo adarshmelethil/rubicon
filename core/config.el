@@ -2,10 +2,13 @@
 ;;;; Misc 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(set-face-attribute 'fringe nil :background "#000")
 
-(dolist (no-fringe-mode '(vterm-mode-hook
-			  text-mode-hook))
-  (add-hook no-fringe-mode #'rubicon/turn-fringes-off))
+(dolist (enabled-fringe-in-mode '(prog-mode-hook
+				  magit-status-mode-hook
+				  eshell-mode-hook))
+  (add-hook enabled-fringe-in-mode #'rubicon/turn-fringes-on))
+
 
 (set-face-attribute 'evil-ex-lazy-highlight nil :background "#006501")
 
@@ -16,7 +19,7 @@
 			 scroll-bar-mode))
   (funcall turn-off-mode -1))
 
-(fringe-mode '(nil . 0))
+(fringe-mode '(0 . 0))
 
 (dolist (turn-on-mode '(dirtrack-mode
 			show-paren-mode))
@@ -213,3 +216,4 @@
   (add-hook enable-modeline-mode-hook 'rubicon/enable-modeline))
 
 (add-hook 'text-mode-hook 'flyspell-mode)
+

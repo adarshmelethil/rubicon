@@ -573,3 +573,10 @@ If on a:
 (defun rubicon/turn-fringes-off ()
   (setq-local left-fringe-width 0
 	      right-fringe-width 0))
+
+;;;###autoload
+(defun rubicon/turn-fringes-on ()
+  (let ((width 8))
+    (setq-local left-fringe-width width
+		right-fringe-width 0) 
+    (set-window-fringes nil width nil)))
