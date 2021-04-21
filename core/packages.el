@@ -328,8 +328,9 @@ to `magit-dispatch'."
   (add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd")))
 
 (use-package dap-mode
-  :hook (emacs-startup . dap-ui-mode)
   :config
+  (dap-mode)
+  (dap-ui-mode)
   (require 'dap-python)
   (setq-default dap-python-debugger 'debugpy)
   (setq-default dap-python-executable "python3")

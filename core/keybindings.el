@@ -153,15 +153,15 @@
     "<down>" (ilm (rubicon/split-window "down"))
 
     ;; Debugger 
-    "q d" 'dap-debug
-    "q n" 'dap-next
-    "q i" 'dap-step-in
-    "q o" 'dap-step-out
-    "q c" 'dap-continue
-    "q v" 'dap-ui-locals
-    "q r" 'dap-ui-repl
-    "q B" 'dap-ui-breakpoints-list
-    "q b" 'dap-breakpoint-toggle))
+    "TAB r" 'dap-debug
+    "TAB n" 'dap-next
+    "TAB i" 'dap-step-in
+    "TAB o" 'dap-step-out
+    "TAB c" 'dap-continue
+    "TAB l" 'dap-ui-locals
+    "TAB R" 'dap-ui-repl
+    "TAB B" 'dap-ui-breakpoints-list
+    "TAB b" 'dap-breakpoint-toggle))
 
 
 (rubicon/leader-<f13>
