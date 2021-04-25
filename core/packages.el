@@ -32,7 +32,9 @@
 	evil-want-keybinding nil)
   :config
   (evil-mode 1)
-  (evil-select-search-module 'evil-search-module 'evil-search))
+  (evil-select-search-module 'evil-search-module 'evil-search)
+  (set-face-attribute 'evil-ex-lazy-highlight nil :background "#006501")
+  (defalias 'e 'evil-edit))
 
 (use-package evil-mc
   :config
@@ -311,12 +313,11 @@ to `magit-dispatch'."
 (use-package evil-org
   :ensure t
   :after org
-  :hook ((org-mode . evil-org-mode)
-	 ('evil-org-mode . (lambda ()
-			     (evil-org-set-key-theme))))
+  :hook (org-mode . evil-org-mode)
   :config
   (require 'evil-org-agenda)
-  (evil-org-agenda-set-keys)) 
+  (evil-org-set-key-theme)
+  (evil-org-agenda-set-keys))
 
 (use-package org-cliplink)
 
@@ -345,7 +346,8 @@ to `magit-dispatch'."
 
 ;; langauge
 (use-package flycheck
-  :hook (text-mode . flycheck-mode))
+  :config
+  (global-flycheck-mode))
 
 (use-package writegood-mode
   :hook (text-mode . writegood-mode))

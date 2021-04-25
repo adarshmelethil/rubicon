@@ -9,11 +9,7 @@
 				  eshell-mode-hook))
   (add-hook enabled-fringe-in-mode #'rubicon/turn-fringes-on))
 
-
-(set-face-attribute 'evil-ex-lazy-highlight nil :background "#006501")
-
 (defalias 'yes-or-no-p 'y-or-n-p)
-(defalias 'e 'evil-edit)
 
 (dolist (turn-off-mode '(tool-bar-mode
 			 scroll-bar-mode))
@@ -73,14 +69,15 @@
 
 (require 'org-tempo)
 
-(setq org-fontify-whole-heading-line t
+(setq rubicon/org-dir-path "~/org/"
+      org-fontify-whole-heading-line t
       org-fontify-quote-and-verse-blocks t
       org-fontify-done-headline t
       org-hide-emphasis-markers t
       org-enforce-todo-dependencies t
-      org-default-notes-file  "~/org/org.org"
+      org-default-notes-file  (format "%s/org.org" rubicon/org-dir-path)
       org-habit-show-habits-only-for-today nil
-      org-agenda-files '("~/org/")
+      org-agenda-files (list rubicon/org-dir-path)
       org-indent-indentation-per-level 1
       org-src-preserve-indentation t
       org-agenda-include-deadlines t
