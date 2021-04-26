@@ -360,3 +360,12 @@ to `magit-dispatch'."
 
 (use-package markdown-mode)
 
+(use-package highlight-indent-guides
+  :hook (org-mode . (lambda ()
+		      (highlight-indent-guides-mode)
+		      (set-face-attribute 'highlight-indent-guides-top-character-face nil :foreground "#e0e0e0")
+		      (set-face-attribute 'highlight-indent-guides-character-face nil :foreground "#707070")))
+  :init
+  (require 'highlight-indent-guides)
+  (setq highlight-indent-guides-method 'character 
+	highlight-indent-guides-responsive t))
