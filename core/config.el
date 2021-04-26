@@ -188,15 +188,14 @@
 					 'org-mode-hook))
   (add-hook enable-modeline-mode-hook 'rubicon/enable-modeline))
 
-(let ((background-color "#FFF"))
-  (defface rubicon-modeline-active
-    (rubicon--modeline-face 'mode-line background-color)
-    "Face used when modeline is enabled and active"
-    :group 'rubicon-faces)
-  (defface rubicon-modeline-inactive
-    (rubicon--modeline-face 'mode-line-inactive background-color)
-    "Face used when modeline is enabled and inactive"
-    :group 'rubicon-faces))
+(defface rubicon-modeline-active
+  (rubicon--modeline-face 'mode-line "#ebebeb")
+  "Face used when modeline is enabled and active"
+  :group 'rubicon-faces)
+(defface rubicon-modeline-inactive
+  (rubicon--modeline-face 'mode-line-inactive  "#212121")
+  "Face used when modeline is enabled and inactive"
+  :group 'rubicon-faces)
 
 (setq rubicon-home-path (expand-file-name "~"))
 (setq rubicon--home-path-rg-starts-with (concat "^" rubicon-home-path))
