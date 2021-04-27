@@ -145,23 +145,32 @@
 
     "d" 'rubicon/create-disposable-dir
 
+    ;; Narrow and widen
+    "w r" #'narrow-to-region
+    "w p" #'narrow-to-page
+    "w w" #'widen
+    "w f" #'narrow-to-defun
+    "w b" #'org-narrow-to-block
+    "w s" #'org-narrow-to-subtree
+    "w e" #'org-narrow-to-element
+
     "z"  (ilm (evil-edit "."))
-    "Z" 'treemacs-select-window
+    "Z" #'treemacs-select-window
     "<right>" (ilm (rubicon/split-window "right"))
     "<up>" (ilm (rubicon/split-window "up"))
     "<left>" (ilm (rubicon/split-window "left"))
     "<down>" (ilm (rubicon/split-window "down"))
 
     ;; Debugger 
-    "TAB r" 'dap-debug
-    "TAB n" 'dap-next
-    "TAB i" 'dap-step-in
-    "TAB o" 'dap-step-out
-    "TAB c" 'dap-continue
-    "TAB l" 'dap-ui-locals
-    "TAB R" 'dap-ui-repl
-    "TAB B" 'dap-ui-breakpoints-list
-    "TAB b" 'dap-breakpoint-toggle))
+    "TAB r" #'dap-debug
+    "TAB n" #'dap-next
+    "TAB i" #'dap-step-in
+    "TAB o" #'dap-step-out
+    "TAB c" #'dap-continue
+    "TAB l" #'dap-ui-locals
+    "TAB R" #'dap-ui-repl
+    "TAB B" #'dap-ui-breakpoints-list
+    "TAB b" #'dap-breakpoint-toggle))
 
 
 (rubicon/leader-<f13>
