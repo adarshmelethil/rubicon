@@ -310,7 +310,6 @@
 (rubicon/create-fs-map "S" "~/scrap/" )
 (rubicon/create-fs-map "R" "~/repos/" )
 (rubicon/create-fs-map "E" "~/.emacs.d" )
-(rubicon/create-fs-map "D" "~/.doom.d" )
 (rubicon/create-fs-map "e k" "~/.emacs.d/core/keybindings.el")
 (rubicon/create-fs-map "e C" "~/.emacs.d/core/core.el")
 (rubicon/create-fs-map "e c" "~/.emacs.d/core/config.el")
