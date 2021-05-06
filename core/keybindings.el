@@ -125,6 +125,7 @@
     "a a" #'org-agenda-list
     "a t" #'org-todo-list
     "c" #'org-capture
+    "C" #'comint-run
     
     "g" #'magit-file-dispatch
     "G" #'magit-dispatch
@@ -164,6 +165,7 @@
     ;; Debugger 
     "TAB r" #'dap-debug
     "TAB n" #'dap-next
+    "TAB t" #'dap-disconnect
     "TAB i" #'dap-step-in
     "TAB o" #'dap-step-out
     "TAB c" #'dap-continue
