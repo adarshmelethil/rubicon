@@ -219,22 +219,10 @@ to `magit-dispatch'."
   (setf (alist-get 't ivy-format-functions-alist)
 	#'ivy-format-function-line))
 
-(use-package ivy-rich
-  :after ivy
-  :config
-  (setq ivy-rich-parse-remote-buffer nil)
-  (ivy-rich-mode 1)
-  (setcdr
-   (assq t ivy-format-functions-alist)
-   #'ivy-format-function-line))
-
 (use-package ivy-prescient
   :after counsel
   :config
   (ivy-prescient-mode))
-
-
-
 
 (use-package ob-async)
 
@@ -301,14 +289,7 @@ to `magit-dispatch'."
 			'evil-paste-pop 'evil-move)
   (vhl/install-extension 'evil))
 
-(use-package ivy-rich
-  :after ivy
-  :config
-  (setq ivy-rich-parse-remote-buffer nil)
-  (ivy-rich-mode 1)
-  (setcdr
-   (assq t ivy-format-functions-alist)
-   #'ivy-format-function-line))
+
 
 (use-package evil-org
   :ensure t
@@ -373,6 +354,15 @@ to `magit-dispatch'."
 (use-package browse-at-remote)
 
 (use-package git-link)
+
+(use-package ivy-rich
+  :after ivy
+  :config
+  (setq ivy-rich-parse-remote-buffer nil)
+  (ivy-rich-mode 1)
+  (setcdr
+   (assq t ivy-format-functions-alist)
+   #'ivy-format-function-line))
 
 (provide 'packages)
 ;;; packages.el ends here
