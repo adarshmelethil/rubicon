@@ -364,5 +364,8 @@ to `magit-dispatch'."
    (assq t ivy-format-functions-alist)
    #'ivy-format-function-line))
 
+(use-package terraform-mode)
+
 (provide 'packages)
 ;;; packages.el ends here
+
