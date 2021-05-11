@@ -173,6 +173,9 @@
     "<f1> e" #'evil-embrace-evil-surround-change
     "<f1> d" #'evil-embrace-evil-surround-delete
     "<f1> r" #'evil-embrace-evil-surround-region
+     
+    ;; python venv 
+    "TAB v" #'pyvenv-activate
 
     ;; Debugger 
     "TAB r" #'dap-debug
