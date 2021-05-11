@@ -80,6 +80,8 @@
  `(rubicon/leader-SPC
     "<ESC>" #'delete-window
 
+    "q q" 'restart-emacs
+
     ;; Workspaces
     "TAB d" 'rubicon/workspace-delete
     "TAB TAB" 'rubicon/workspace-show-all
