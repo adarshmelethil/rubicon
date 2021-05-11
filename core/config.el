@@ -77,7 +77,13 @@
       org-fontify-done-headline t
       org-hide-emphasis-markers t
       org-enforce-todo-dependencies t
-      org-default-notes-file  (format "%s/org.org" rubicon/org-dir-path)
+      org-default-notes-file  (rubicon/get-org-path "org.org")
+      org-capture-templates `(("c" "Todo" entry (file+headline ,org-default-notes-file "Tasks")
+			       "* TODO %?\nEntered on %U\n")
+			      ("t" "Thoughts" entry (file+olp+datetree ,(rubicon/get-org-path "thoughts.org"))
+			       "* %?\nEntered on %U\n")
+			      ("j" "Journal" entry (file+olp+datetree ,(rubicon/get-org-path "journal.org"))
+			       "* %?\nEntered on %U\n"))
       org-habit-show-habits-only-for-today nil
       org-agenda-files (list rubicon/org-dir-path)
       org-indent-indentation-per-level 1

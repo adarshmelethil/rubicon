@@ -440,7 +440,8 @@ The point of this is to avoid Emacs locking up indexing massive file trees."
 	     if (member keyword keywords)
 	     return keywords)))
 
-
+(defun rubicon/get-org-path (org-file)
+  (format "%s/%s" rubicon/org-dir-path org-file))
 
 ;;;###autoload
 (defun +org/dwim-at-point (&optional arg)
