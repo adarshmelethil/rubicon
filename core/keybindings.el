@@ -169,6 +169,11 @@
     "<left>" (ilm (rubicon/split-window "left"))
     "<down>" (ilm (rubicon/split-window "down"))
 
+    ;; surround 
+    "<f1> e" #'evil-embrace-evil-surround-change
+    "<f1> d" #'evil-embrace-evil-surround-delete
+    "<f1> r" #'evil-embrace-evil-surround-region
+
     ;; Debugger 
     "TAB r" #'dap-debug
     "TAB n" #'dap-next
