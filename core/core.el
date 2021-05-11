@@ -581,3 +581,6 @@ If on a:
     (setq-local left-fringe-width width
 		right-fringe-width 0) 
     (set-window-fringes nil width nil)))
+
+(provide 'core)
+;;; core.el ends here

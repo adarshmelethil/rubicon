@@ -105,8 +105,12 @@
     
     "e" #'eval-last-sexp
     "E" #'eval-buffer
-    "b" #'evil-buffer-new
+    "B" #'evil-buffer-new
+    "b" #'browse-at-remote
     "y" 'rubicon/copy-path-to-buffer-file
+    "Y g" 'git-link-homepage
+    "Y c" 'git-link-commit
+    "Y l" 'git-link
     
     "." 'counsel-find-file
     "," 'persp-counsel-switch-buffer
@@ -367,3 +371,6 @@
  :states 'normal
  :keymaps 'org-mode-map
  "<return>" '+org/dwim-at-point)
+
+(provide 'keybindings)
+;;; keybindings.el ends here

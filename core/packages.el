@@ -369,3 +369,10 @@ to `magit-dispatch'."
   (require 'highlight-indent-guides)
   (setq highlight-indent-guides-method 'character 
 	highlight-indent-guides-responsive t))
+
+(use-package browse-at-remote)
+
+(use-package git-link)
+
+(provide 'packages)
+;;; packages.el ends here
