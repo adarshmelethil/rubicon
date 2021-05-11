@@ -109,8 +109,7 @@
     "b" #'browse-at-remote
     "y" 'rubicon/copy-path-to-buffer-file
     "Y g" 'git-link-homepage
-    "Y c" 'git-link-commit
-    "Y l" 'git-link
+    "Y y" 'rubicon/copy-git-link-at-point
     
     "." 'counsel-find-file
     "," 'persp-counsel-switch-buffer

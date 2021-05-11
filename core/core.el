@@ -190,11 +190,15 @@ the only window, use evil-window-move-* (e.g. `evil-window-move-far-left')."
    (rubicon/workspace-current-get-other-buffers)))
 
 ;;;###autoload
+(defun rubicon/print-and-copy (val)
+  (message val)
+  (kill-new val))
+
+;;;###autoload
 (defun rubicon/copy-path-to-buffer-file ()
   (interactive)
-  (let ((path-to-file (or (buffer-file-name) default-directory)))
-    (message path-to-file)
-    (kill-new path-to-file)))
+  (rubicon/print-and-copy
+   (or (buffer-file-name) default-directory)))
 
 ;; Key bindings functions
 
@@ -581,6 +585,12 @@ If on a:
     (setq-local left-fringe-width width
 		right-fringe-width 0) 
     (set-window-fringes nil width nil)))
+
+
+;;;###autoload
+(defun rubicon/copy-git-link-at-point ()
+  (interactive)
+  (rubicon/print-and-copy (browse-at-remote-get-url)))
 
 (provide 'core)
 ;;; core.el ends here
