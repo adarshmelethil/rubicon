@@ -18,6 +18,7 @@
 (fringe-mode '(0 . 0))
 
 (dolist (turn-on-mode '(dirtrack-mode
+			recentf-mode
 			show-paren-mode))
   (funcall turn-on-mode 1))
 

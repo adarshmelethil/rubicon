@@ -99,6 +99,8 @@
 
     "T" #'vterm
     "R" #'ielm
+    "r" #'counsel-recentf
+    
     "e" #'eval-last-sexp
     "E" #'eval-buffer
     "b" #'evil-buffer-new
