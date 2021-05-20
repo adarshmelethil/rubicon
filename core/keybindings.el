@@ -177,6 +177,8 @@
     ;; python venv 
     "TAB v" #'pyvenv-activate
 
+    "i" #'rubicon/edit-last-kill
+
     ;; Debugger 
     "TAB r" #'dap-debug
     "TAB n" #'dap-next

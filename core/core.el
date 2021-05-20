@@ -592,5 +592,10 @@ If on a:
   (interactive)
   (rubicon/print-and-copy (browse-at-remote-get-url)))
 
+
+(defun rubicon/edit-last-kill ()
+  (interactive)
+  (e (car kill-ring)))
+
 (provide 'core)
 ;;; core.el ends here
