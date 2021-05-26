@@ -366,6 +366,20 @@ to `magit-dispatch'."
 
 (use-package terraform-mode)
 
+(use-package git-gutter-fringe
+  :config
+
+  (define-fringe-bitmap 'git-gutter-fr:added [224]
+    nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:modified [224]
+    nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240]
+    nil nil 'bottom)
+
+  (set-face-foreground 'git-gutter-fr:modified "#3b4c7d")
+  (set-face-foreground 'git-gutter-fr:added    "#3c6e29")
+  (set-face-foreground 'git-gutter-fr:deleted  "#941938")
+  (global-git-gutter-mode))
 (provide 'packages)
 ;;; packages.el ends here
 
