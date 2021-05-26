@@ -346,6 +346,24 @@
 (rubicon/create-fs-map "r" "~/.config/fish/config.fish")
 (rubicon/create-fs-map "C" "~/.emacs.d/core")
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; Cider
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(general-define-key
+ :keymaps 'clojure-mode-map
+ :prefix "<f14>"
+ "j" 'cider-jack-in
+
+ "t" 'cider-toggle-trace-var
+ "T" 'cider-toggle-trace-ns
+
+ "e" 'cider-eval-last-sexp
+ "E" 'cider-eval-buffer
+
+ "i" 'cider-debug-defun-at-point
+
+ "h" 'cider-debug-move-here)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Dired

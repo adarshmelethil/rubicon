@@ -380,6 +380,10 @@ to `magit-dispatch'."
   (set-face-foreground 'git-gutter-fr:added    "#3c6e29")
   (set-face-foreground 'git-gutter-fr:deleted  "#941938")
   (global-git-gutter-mode))
+
+(use-package cider)
+
+
 (provide 'packages)
 ;;; packages.el ends here
 
