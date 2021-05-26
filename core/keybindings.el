@@ -103,8 +103,6 @@
     "R" #'ielm
     "r" #'counsel-recentf
     
-    "e" #'eval-last-sexp
-    "E" #'eval-buffer
     "B" #'evil-buffer-new
     "b" #'browse-at-remote
     "y" 'rubicon/copy-path-to-buffer-file
@@ -401,3 +399,14 @@
 
 (provide 'keybindings)
 ;;; keybindings.el ends here
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; Emacs lisp mode
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(general-define-key
+ :keymaps 'emacs-lisp-mode-map
+ :prefix "<f14>"
+ "e" #'eval-last-sexp
+ "E" #'eval-buffer)
+
