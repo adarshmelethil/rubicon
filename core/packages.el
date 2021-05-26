@@ -279,8 +279,13 @@ to `magit-dispatch'."
 	 ("C-c -" . evil-numbers/dec-at-pt)))
 
 
+(use-package flycheck-clj-kondo
+  :ensure t)
 
-(use-package clojure-mode)
+(use-package clojure-mode
+  :ensure t
+  :config
+  (require 'flycheck-clj-kondo))
 
 
 (use-package volatile-highlights
