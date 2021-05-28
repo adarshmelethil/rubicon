@@ -427,7 +427,9 @@ to `magit-dispatch'."
 (use-package py-isort)
 
 (use-package lsp-mode
-  :hook (python-mode . lsp))
+  :hook (python-mode . lsp)
+  :config
+  (setq-default lsp-headerline-breadcrumb-enable nil))
 
 (use-package lsp-pyright
   :config
