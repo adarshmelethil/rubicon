@@ -112,6 +112,7 @@
     "." 'counsel-find-file
     "," 'persp-counsel-switch-buffer
 
+    "h y" 'yas-describe-tables
     "h w" #'what-cursor-position
     "h o" #'find-function-on-key
     "h f" #'find-function
