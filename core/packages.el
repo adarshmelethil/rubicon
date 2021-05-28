@@ -203,7 +203,8 @@ to `magit-dispatch'."
   :after treemacs evil
   :ensure t)
 
-(use-package projectile)
+(use-package projectile
+  :hook (emacs-startup . projectile-mode))
 
 (use-package treemacs-projectile
   :after treemacs projectile
