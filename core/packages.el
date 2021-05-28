@@ -231,7 +231,7 @@ to `magit-dispatch'."
 (use-package  highlight-thing
   :hook (prog-mode . highlight-thing-mode)
   :config
-  (setq highlight-thing-delay-seconds 0.9))
+  (setq highlight-thing-delay-seconds 0.01))
 
 (use-package treemacs
   :config
