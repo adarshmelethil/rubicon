@@ -268,7 +268,6 @@ to `magit-dispatch'."
 (use-package lispy
   :hook ((clojure-mode emacs-lisp-mode) . lispy-mode))
 
-(use-package projectile)
 
 (use-package counsel-projectile)
 
@@ -412,6 +411,10 @@ to `magit-dispatch'."
   (setq doom-snippets-dir (concat (straight--repos-dir) "doom-snippets"))
   (doom-snippets-initialize))
 
+(use-package browse-kill-ring
+  :bind (:map browse-kill-ring-mode-map
+	      ("j" . browse-kill-ring-forward)
+	      ("k" . browse-kill-ring-previous)))
 
 (provide 'packages)
 ;;; packages.el ends here

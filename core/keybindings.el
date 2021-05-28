@@ -135,6 +135,11 @@
     "g" #'magit-file-dispatch
     "G" #'magit-dispatch
     "l" #'magit-log-current
+
+    ;; killing and yanking
+    "p p" 'browse-kill-ring
+    "p 1" (ilm (yank 2))
+
     ;; Projectile
     "p a" 'projectile-add-known-project
     "p s" 'projectile-switch-project
