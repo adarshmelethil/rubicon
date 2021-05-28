@@ -159,7 +159,9 @@ to `magit-dispatch'."
   :hook (dired-mode . diredfl-mode))
 
 (use-package company
-  :hook ((text-mode prog-mode) . company-mode))
+  :hook ((text-mode prog-mode) . company-mode)
+  :config
+  (setq company-idle-delay 0.2))
 
 (use-package highlight-parentheses
   :config
@@ -231,7 +233,7 @@ to `magit-dispatch'."
 (use-package  highlight-thing
   :hook (prog-mode . highlight-thing-mode)
   :config
-  (setq highlight-thing-delay-seconds 0.01))
+  (setq highlight-thing-delay-seconds 0))
 
 (use-package treemacs
   :config
@@ -319,7 +321,7 @@ to `magit-dispatch'."
 ;; IDE 
 
 (use-package eglot
-  :hook ((c-mode c++-mode python-mode) . eglot-ensure)
+  :hook ((c-mode c++-mode) . eglot-ensure)
   :config
   (add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd")))
 
@@ -415,6 +417,21 @@ to `magit-dispatch'."
   :bind (:map browse-kill-ring-mode-map
 	      ("j" . browse-kill-ring-forward)
 	      ("k" . browse-kill-ring-previous)))
+
+
+(use-package pyimport)
+(use-package python-pytest)
+(use-package pip-requirements)
+
+(use-package flycheck-pyflakes)
+(use-package py-isort)
+
+(use-package lsp-mode
+  :hook (python-mode . lsp))
+
+(use-package lsp-pyright
+  :config
+  (require 'lsp-pyright))
 
 (provide 'packages)
 ;;; packages.el ends here

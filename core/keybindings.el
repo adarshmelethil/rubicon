@@ -355,7 +355,7 @@
 (rubicon/create-fs-map "C" "~/.emacs.d/core")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;; Cider
+;;;; Clojure
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (general-define-key
@@ -379,6 +379,18 @@
  "i" 'cider-debug-defun-at-point
 
  "h" 'cider-debug-move-here)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; Python
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(general-define-key
+ :keymaps 'python-mode-map
+ :prefix "<f14>"
+ "s" 'py-isort
+ "i" 'pyimport-insert-missing
+ "r" 'pyimport-remove-unused)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Dired
@@ -414,8 +426,6 @@
  :keymaps 'org-mode-map
  "<return>" '+org/dwim-at-point)
 
-(provide 'keybindings)
-;;; keybindings.el ends here
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Emacs lisp mode
@@ -427,3 +437,5 @@
  "e" #'eval-last-sexp
  "E" #'eval-buffer)
 
+(provide 'keybindings)
+;;; keybindings.el ends here
