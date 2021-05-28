@@ -139,6 +139,9 @@ to `magit-dispatch'."
 	  ;; For things that just gotta go and will soon be gone.
 	  ("DEPRECATED" font-lock-doc-face bold))))
 
+(use-package smartparens
+  :hook (prog-mode . smartparens-mode))
+
 (use-package which-key
   :config
   (which-key-mode))

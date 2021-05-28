@@ -111,6 +111,7 @@
  ("s.el" . "43ba8b563bee3426cead0e6d4ddc09398e1a349d")
  ("sesman" . "edee869c209c016e5f0c5cbb8abb9f3ccd2d1e05")
  ("shut-up" . "ff6f06f3b080ee833a25a22da8cb5b96e911dc77")
+ ("smartparens" . "fb1ce4b4013fe6f86dde9dd5bd5d4c032ab0d45b")
  ("spinner" . "61f59fab44d22cd5add61a1baf3f0b88a5d829d7")
  ("straight.el" . "e1390a933b6f5a15079d6dec91eac97a17aad10c")
  ("swiper" . "e005666df39ca767e6d5ab71b1a55d8c08395259")
