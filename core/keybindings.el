@@ -353,6 +353,13 @@
  :prefix "<f14>"
  "j" 'cider-jack-in
 
+ "r" 'hydra-cljr-help-menu/body
+
+ "d d" 'cider-hydra-doc/body
+ "d r" 'cider-hydra-repl/body
+ "d e" 'cider-hydra-eval/body
+ "d t" 'cider-hydra-test/body
+
  "t" 'cider-toggle-trace-var
  "T" 'cider-toggle-trace-ns
 

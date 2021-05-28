@@ -288,6 +288,10 @@ to `magit-dispatch'."
   (require 'flycheck-clj-kondo))
 
 (use-package cider)
+(use-package cider-hydra
+  :hook (clojure-mode . cider-hydra-mode))
+
+
 
 (use-package clj-refactor
   :hook (clojure-mode . clj-refactor-mode))
