@@ -135,6 +135,11 @@
     "g" #'magit-file-dispatch
     "G" #'magit-dispatch
     "l" #'magit-log-current
+    ;; Projectile
+    "p a" 'projectile-add-known-project
+    "p s" 'projectile-switch-project
+    "p r" 'projectile-replace
+    "p k" 'projectile-kill-buffers
     
     ;; SMERGE
     "k u" #'smerge-keep-upper

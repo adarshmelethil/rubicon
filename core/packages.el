@@ -198,6 +198,8 @@ to `magit-dispatch'."
   :after treemacs evil
   :ensure t)
 
+(use-package projectile)
+
 (use-package treemacs-projectile
   :after treemacs projectile
   :ensure t)
