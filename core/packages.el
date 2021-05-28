@@ -67,6 +67,8 @@
   (evil-snipe-mode +1)
   (evil-snipe-override-mode 1))
 
+(use-package yasnippet)
+
 (use-package magit
   :config
   (transient-define-prefix magit-file-dispatch ()
@@ -287,6 +289,11 @@ to `magit-dispatch'."
   :config
   (require 'flycheck-clj-kondo))
 
+(use-package cider)
+
+(use-package clj-refactor
+  :hook ((clojure-mode . clj-refactor-mode)
+	 (clojure-mode . yas-minor-mode)))
 
 (use-package volatile-highlights
   :config
@@ -386,7 +393,9 @@ to `magit-dispatch'."
   (set-face-foreground 'git-gutter-fr:deleted  "#941938")
   (global-git-gutter-mode))
 
-(use-package cider)
+
+
+(use-package clojure-snippets)
 
 
 (provide 'packages)
