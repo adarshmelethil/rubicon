@@ -67,8 +67,6 @@
   (evil-snipe-mode +1)
   (evil-snipe-override-mode 1))
 
-(use-package yasnippet)
-
 (use-package magit
   :config
   (transient-define-prefix magit-file-dispatch ()
@@ -292,8 +290,7 @@ to `magit-dispatch'."
 (use-package cider)
 
 (use-package clj-refactor
-  :hook ((clojure-mode . clj-refactor-mode)
-	 (clojure-mode . yas-minor-mode)))
+  :hook (clojure-mode . clj-refactor-mode))
 
 (use-package volatile-highlights
   :config
@@ -395,9 +392,20 @@ to `magit-dispatch'."
 
 
 
+(use-package yasnippet
+  :hook (prog-mode . yas-minor-mode))
+
 (use-package clojure-snippets)
+
+(use-package doom-snippets
+  :after yasnippet
+  :straight
+  (doom-snippets
+   :type git :host github :repo "hlissner/doom-snippets")
+  :init
+  (setq doom-snippets-dir (concat (straight--repos-dir) "doom-snippets"))
+  (doom-snippets-initialize))
 
 
 (provide 'packages)
 ;;; packages.el ends here
-
