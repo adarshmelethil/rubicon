@@ -80,7 +80,7 @@
  ("lsp-mode" . "4abcf566f936f9d268aab65ee3d8ee6223545263")
  ("lsp-pyright" . "e986eeb15d1b3bf0f8c59be71684eac0d3894de5")
  ("lsp-treemacs" . "3bae4a91e05d55d5ca92da272ffcd497f370e9df")
- ("magit" . "d14c082354c796dd363550a03463e9382b7cfbf6")
+ ("magit" . "f50c3aa56704cddd46ca987722642584bc8290b0")
  ("markdown-mode" . "051734091aba17a54af96b81beebdbfc84c26459")
  ("melpa" . "c79c9c02b1898bd55f9e1147d096e9040bde9744")
  ("mixed-pitch" . "519e05f74825abf04b7d2e0e38ec040d013a125a")
