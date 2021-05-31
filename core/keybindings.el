@@ -364,7 +364,6 @@
  :prefix "<f14>"
  "j" 'cider-jack-in
 
- "r" 'hydra-cljr-help-menu/body
 
  "d d" 'cider-hydra-doc/body
  "d r" 'cider-hydra-repl/body
@@ -378,6 +377,11 @@
  "E" 'cider-eval-buffer
 
  "i" 'cider-debug-defun-at-point
+
+ "r" 'cider-test-run-test
+ 
+ "n" 'cider-ns-reload-all
+ "R" 'hydra-cljr-help-menu/body
 
  "h" 'cider-debug-move-here)
 
