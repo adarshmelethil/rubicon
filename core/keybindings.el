@@ -403,7 +403,8 @@
 
 (general-define-key
  :keymaps 'dired-mode-map
- "[" 'dired-create-directory)
+ :prefix "<f14>"
+ "c" 'dired-create-directory)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Org mode
