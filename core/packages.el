@@ -285,7 +285,6 @@ to `magit-dispatch'."
   :bind (("C-c +" . evil-numbers/inc-at-pt)
 	 ("C-c -" . evil-numbers/dec-at-pt)))
 
-
 (use-package flycheck-clj-kondo
   :ensure t)
 
@@ -293,6 +292,9 @@ to `magit-dispatch'."
   :ensure t
   :config
   (require 'flycheck-clj-kondo))
+
+(use-package aggressive-indent
+  :hook ((emacs-lisp-mode clojure-mode) . aggressive-indent-mode))
 
 (use-package cider)
 (use-package cider-hydra

@@ -1,5 +1,6 @@
 (("a.el" . "3d341eb7813ee02b00ab28e11c915295bfd4b5a7")
  ("ace-window" . "c7cb315c14e36fded5ac4096e158497ae974bec9")
+ ("aggressive-indent-mode" . "b0ec0047aaae071ad1647159613166a253410a63")
  ("annalist.el" . "134fa3f0fb91a636a1c005c483516d4b64905a6d")
  ("avy" . "e92cb37457b43336b765630dbfbea8ba4be601fa")
  ("browse-at-remote" . "e02ad2189c87da33f80bf4967a968772ce3e4431")
