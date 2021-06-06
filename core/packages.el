@@ -36,13 +36,7 @@
   (set-face-attribute 'evil-ex-lazy-highlight nil :background "#006501")
   (defalias 'e 'evil-edit))
 
-(use-package evil-mc
-  :config
-  (global-evil-mc-mode 1))
-
-(use-package dash
-  :config
-  (global-evil-mc-mode 1))
+(use-package dash)
 
 (use-package general
   :config

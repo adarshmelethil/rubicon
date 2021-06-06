@@ -50,7 +50,6 @@
       visible-bell -1
       ring-bell-function 'ignore
       display-line-numbers-type 'relative
-      +ivy-buffer-preview t
       wdired-allow-to-change-permissions t
       show-paren-style 'parenthesis)
 
@@ -228,4 +227,3 @@
 
 (provide 'config)
 ;;; config.el ends here
-
