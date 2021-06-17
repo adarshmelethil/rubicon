@@ -61,6 +61,7 @@
     "N" #'replel-overview
     "D" #'docker
     "s" #'save-buffer
+    "S" #'dashboard-refresh-buffer
     "t" 'rubicon/eshell-here
 
     "T" #'vterm
