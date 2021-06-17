@@ -10,42 +10,6 @@
  :states rubicon/nvm-states
  :keymaps 'override
 
- "+" 'evil-window-increase-width
- "_" 'evil-window-decrease-width
- "M-=" 'evil-window-increase-height
- "M--" 'evil-window-decrease-height
-
- "L"  (ilm (right-char 10))
- "H"  (ilm (left-char 10))
-
- "*" 'evil-embrace-evil-surround-region
- "z g" 'evil-scroll-line-to-bottom
- ;; "<DEL>" 'counsel-M-x
- ;; [backspace] 'counsel-M-x
-
- "S-<SPC>"    'counsel-rg
- "s-<SPC>"    'counsel-locate
-
- ;; navigation
- "("          'evil-scroll-down
- ")"          'evil-scroll-up
-
- ;; split
- "<down>"     'evil-window-down
- "<left>"     'evil-window-left
- "<up>"       'evil-window-up
- "<right>"    'evil-window-right)
-
-(general-nmap
- "TAB" 'evil-jump-item
-  "u" 'undo-fu-only-undo
-  "r" 'undo-fu-only-redo
-  "g c" 'evilnc-comment-operator)
-
-(general-define-key
- :states rubicon/nvm-states
- :keymaps 'override
-
  "#" 'swiper-isearch-thing-at-point
 
  "+" 'evil-window-increase-width
