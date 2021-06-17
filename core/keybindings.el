@@ -147,9 +147,7 @@
     "<f1> e" #'evil-embrace-evil-surround-change
     "<f1> d" #'evil-embrace-evil-surround-delete
     "<f1> r" #'evil-embrace-evil-surround-region
-     
-    ;; python venv 
-    "TAB v" #'pyvenv-activate
+    
 
     "i" #'rubicon/edit-last-kill
 
@@ -358,6 +356,7 @@
 (general-define-key
  :keymaps 'python-mode-map
  :prefix "<f14>"
+ "v" #'pyvenv-activate
  "s" 'py-isort
  "i" 'pyimport-insert-missing
  "r" 'pyimport-remove-unused)
