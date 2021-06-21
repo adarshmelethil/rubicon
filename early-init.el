@@ -2,6 +2,6 @@
 
 (setq gc-cons-threshold most-positive-fixnum)
 
-(load-theme 'wheatgrass)
+(load-theme 'tango-dark)
 
 (setq-default mode-line-format nil)

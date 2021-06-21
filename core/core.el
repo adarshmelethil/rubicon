@@ -139,6 +139,10 @@ the only window, use evil-window-move-* (e.g. `evil-window-move-far-left')."
     (message "Can't delete last workspace buffer")))
 
 ;;;###autoload
+(defun rubicon/workspace-new ()
+  )
+
+;;;###autoload
 (defun rubicon/workspace-quit-window ()
   (interactive)
   (if (not (rubicon/workspace-is-last-buffer?))
@@ -222,7 +226,6 @@ the only window, use evil-window-move-* (e.g. `evil-window-move-far-left')."
 	  (fn-name (intern fn-name-str)))
      (defalias fn-name (ilm (e ,file-path)))
      (rubicon/leader-<f15> ,shortcut fn-name)))
-
 
 ;;;###autoload
 (defun +ivy/projectile-find-file ()

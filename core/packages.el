@@ -231,7 +231,8 @@ to `magit-dispatch'."
 (use-package  highlight-thing
   :hook (prog-mode . highlight-thing-mode)
   :config
-  (setq highlight-thing-delay-seconds 0))
+  (setq highlight-thing-delay-seconds 0)
+  (set-face-attribute 'hi-yellow nil :background "#bfb904" :foreground "#070494"))
 
 (use-package treemacs
   :config

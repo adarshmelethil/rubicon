@@ -58,6 +58,9 @@
 (add-hook 'conf-mode-hook #'display-line-numbers-mode)
 
 (set-face-attribute 'cursor nil :background "#fff")
+(blink-cursor-mode 0)
+(setq-default cursor-type 'hollow)
+(set-cursor-color "#ffffff")
 (set-face-attribute 'window-divider nil :foreground "#222933")
 (customize-set-variable 'horizontal-scroll-bar-mode nil)
 (menu-bar-bottom-and-right-window-divider)

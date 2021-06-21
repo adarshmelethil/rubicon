@@ -25,6 +25,7 @@
  "*" 'evil-embrace-evil-surround-region
  "z g" 'evil-scroll-line-to-bottom
  "<DEL>" 'counsel-M-x
+ "M-x" 'counsel-M-x
  [backspace] 'counsel-M-x
 
  "S-<SPC>"    'counsel-rg
@@ -42,7 +43,8 @@
 
 (eval
  `(rubicon/leader-SPC
-    "<ESC>" #'delete-window
+    ;; TODO: w q
+    "w d" #'delete-window
 
     "q q" 'restart-emacs
 
@@ -54,13 +56,14 @@
     "O" 'rubicon/workspace-kill-other-buffers
 
     ,@(-flatten-n 1 (--map (let ((str-num (number-to-string it)))
-			     (list str-num `(ilm (rubicon/workspace-switch ,str-num))))
+			     (list (concat "TAB " str-num) `(ilm (rubicon/workspace-switch ,str-num))))
 			   (number-sequence 1 9)))
+
     
     "n" #'replel-start-repl
     "N" #'replel-overview
     "D" #'docker
-    "s" #'save-buffer
+    ;; "s" #'save-buffer
     "S" #'dashboard-refresh-buffer
     "t" 'rubicon/eshell-here
 
@@ -215,17 +218,17 @@
  :states '(normal insert)
  :keymaps 'vterm-mode-map
  "<f1>" 'my-vterm-clear
- "<f15> e" (ilm (vt-insert-command "echo "))
- "<f15> x" 'vt-add-chmod
- "<f15> C" 'vterm-copy-mode-map
- "<f15> s" 'vt-add-sudo
- "<f15> H" (ilm (vt-cd-to "~") (vt-ls))
- "<f15> P" (ilm (vt-cd-to "~/projects") (vt-ls))
- "<f15> e" (ilm (vt-insert-command "echo "))
- "<f15> R" (ilm (vt-cd-to "~/repos") (vt-ls))
- "<f15> O" (ilm (vt-cd-to "~/org") (vt-ls))
- "<f15> B" (ilm (vt-cd-to "~/notebooks") (vt-ls))
- "<f15> S" (ilm (vt-cd-to "~/scrap") (vt-ls)))
+ "<f14> e" (ilm (vt-insert-command "echo "))
+ "<f14> x" 'vt-add-chmod
+ "<f14> C" 'vterm-copy-mode-map
+ "<f14> s" 'vt-add-sudo
+ "<f14> H" (ilm (vt-cd-to "~") (vt-ls))
+ "<f14> P" (ilm (vt-cd-to "~/projects") (vt-ls))
+ "<f14> e" (ilm (vt-insert-command "echo "))
+ "<f14> R" (ilm (vt-cd-to "~/repos") (vt-ls))
+ "<f14> O" (ilm (vt-cd-to "~/org") (vt-ls))
+ "<f14> B" (ilm (vt-cd-to "~/notebooks") (vt-ls))
+ "<f14> S" (ilm (vt-cd-to "~/scrap") (vt-ls)))
 
 (general-define-key
  :states 'normal
@@ -295,6 +298,7 @@
 ;;;; dirs/files navigation
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; f15 maping
 (rubicon/create-fs-map "Q" "~/repos")
 (rubicon/create-fs-map "H" "~/" )
 (rubicon/create-fs-map "P" "~/projects/" )
@@ -317,6 +321,7 @@
 (rubicon/create-fs-map "b" (format "%s/notebooks.org" rubicon/org-dir-path))
 (rubicon/create-fs-map "r" "~/.config/fish/config.fish")
 (rubicon/create-fs-map "C" "~/.emacs.d/core")
+(rubicon/create-fs-map "W" "~/work")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Clojure
