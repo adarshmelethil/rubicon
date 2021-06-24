@@ -140,7 +140,8 @@ the only window, use evil-window-move-* (e.g. `evil-window-move-far-left')."
 
 ;;;###autoload
 (defun rubicon/workspace-new ()
-  )
+  (interactive)
+  (persp-switch (number-to-string (+ 1 (length (persp-names))))))
 
 ;;;###autoload
 (defun rubicon/workspace-quit-window ()
@@ -251,6 +252,21 @@ The point of this is to avoid Emacs locking up indexing massive file trees."
 		#'projectile-find-file)))
 	   (#'counsel-file-jump)))))
 
+;; projectile new tab
+;;;###autoload
+(defun rubicon/projectile-switch-project (&optional arg)
+  "Switch to a project we have visited before.
+Invokes the command referenced by `projectile-switch-project-action' on switch.
+With a prefix ARG invokes `projectile-commander' instead of
+`projectile-switch-project-action.'"
+  (interactive "P")
+  (let ((projects (projectile-relevant-known-projects)))
+    (if projects
+        (projectile-completing-read
+         "Switch to project: " projects
+         :action (lambda (project)
+                   (projectile-switch-project-by-name project arg)))
+      (user-error "There are no known projects"))))
 
 ;;;###autoload
 (defun rubicon/gen-random-str ()

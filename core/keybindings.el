@@ -43,17 +43,18 @@
 
 (eval
  `(rubicon/leader-SPC
-    ;; TODO: w q
     "w d" #'delete-window
+    "w c" #'delete-window
 
     "q q" 'restart-emacs
 
     ;; Workspaces
     "TAB d" 'rubicon/workspace-delete
     "TAB TAB" 'rubicon/workspace-show-all
-    "TAB s" 'persp-switch 
-    "o" 'rubicon/workspace-kill-invisible-buffers
-    "O" 'rubicon/workspace-kill-other-buffers
+    "TAB ." 'persp-switch 
+    "TAB `" 'persp-switch-last
+    "TAB n" 'rubicon/workspace-new
+    "TAB r" 'persp-rename
 
     ,@(-flatten-n 1 (--map (let ((str-num (number-to-string it)))
 			     (list (concat "TAB " str-num) `(ilm (rubicon/workspace-switch ,str-num))))
@@ -63,23 +64,33 @@
     "n" #'replel-start-repl
     "N" #'replel-overview
     "D" #'docker
-    ;; "s" #'save-buffer
-    "S" #'dashboard-refresh-buffer
-    "t" 'rubicon/eshell-here
-
     "T" #'vterm
     "R" #'ielm
-    "r" #'counsel-recentf
+
+    ;; File
+    "f r" #'counsel-recentf
+
+    ;; Buffer
+    "b n" #'evil-buffer-new
+    "b s" #'save-buffer
+    "b b" 'persp-counsel-switch-buffer
+    "b r" #'dashboard-refresh-buffer
+    "b e" 'rubicon/eshell-here
+    "b k" 'rubicon/workspace-kill-invisible-buffers
+    "b K" 'rubicon/workspace-kill-other-buffers
+
+    ;; TODO: what is this?
+    "r r" #'browse-at-remote
     
-    "B" #'evil-buffer-new
-    "b" #'browse-at-remote
-    "y" 'rubicon/copy-path-to-buffer-file
+    "." 'counsel-find-file
+
+    ;; yanking
+    "y r" 'browse-kill-ring
+    ;; "y 1" (ilm (yank 2))
+    "y f" 'rubicon/copy-path-to-buffer-file
     "Y g" 'git-link-homepage
     "Y y" 'rubicon/copy-git-link-at-point
     
-    "." 'counsel-find-file
-    "," 'persp-counsel-switch-buffer
-
     "h y" 'yas-describe-tables
     "h w" #'what-cursor-position
     "h o" #'find-function-on-key
@@ -105,14 +116,13 @@
     "G" #'magit-dispatch
     "l" #'magit-log-current
 
-    ;; killing and yanking
-    "p p" 'browse-kill-ring
-    "p 1" (ilm (yank 2))
-
     ;; Projectile
     "p a" 'projectile-add-known-project
-    "p s" 'projectile-switch-project
+    "p p" 'projectile-switch-project
+    "p SPC" '+ivy/projectile-find-file
     "p r" 'projectile-replace
+    "p s" 'projectile-save-project-buffers
+    "p d" 'projectile-dired
     "p k" 'projectile-kill-buffers
     
     ;; SMERGE
@@ -125,10 +135,10 @@
 
     "P" #'proced
 
-    "SPC" '+ivy/projectile-find-file
     "'" 'ivy-resume
 
-    "d" 'rubicon/create-disposable-dir
+    ;; Scrape
+    "s d" 'rubicon/create-disposable-dir
 
     ;; Narrow and widen
     "w r" #'narrow-to-region
@@ -155,16 +165,17 @@
     "i" #'rubicon/edit-last-kill
 
     ;; Debugger 
-    "TAB r" #'dap-debug
-    "TAB n" #'dap-next
-    "TAB t" #'dap-disconnect
-    "TAB i" #'dap-step-in
-    "TAB o" #'dap-step-out
-    "TAB c" #'dap-continue
-    "TAB l" #'dap-ui-locals
-    "TAB R" #'dap-ui-repl
-    "TAB B" #'dap-ui-breakpoints-list
-    "TAB b" #'dap-breakpoint-toggle))
+    ;; TODO: abdul - how to use this
+    "d r" #'dap-debug
+    "d n" #'dap-next
+    "d t" #'dap-disconnect
+    "d i" #'dap-step-in
+    "d o" #'dap-step-out
+    "d c" #'dap-continue
+    "d l" #'dap-ui-locals
+    "d R" #'dap-ui-repl
+    "d B" #'dap-ui-breakpoints-list
+    "d b" #'dap-breakpoint-toggle))
 
 
 (rubicon/leader-<f13>
