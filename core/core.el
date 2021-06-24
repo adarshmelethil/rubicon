@@ -265,8 +265,14 @@ With a prefix ARG invokes `projectile-commander' instead of
         (projectile-completing-read
          "Switch to project: " projects
          :action (lambda (project)
-                   (projectile-switch-project-by-name project arg)))
+		   (let ((project-name (file-name-nondirectory (directory-file-name (file-name-directory project)))))
+		     (message "prject = '%s'" project-name)
+		     (if (member project-name (persp-names))
+			 (rubicon/workspace-switch project-name) ;; Already exist
+		       (progn (rubicon/workspace-switch project-name)
+			      (projectile-switch-project-by-name project arg))))))
       (user-error "There are no known projects"))))
+
 
 ;;;###autoload
 (defun rubicon/gen-random-str ()

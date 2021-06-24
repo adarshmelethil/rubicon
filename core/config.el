@@ -3,6 +3,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (set-face-attribute 'fringe nil :background "#000")
+;; (set-face-attribute 'hi-yellow nil :background "#bfb904" :foreground "#070494")
 
 (dolist (enabled-fringe-in-mode '(prog-mode-hook
 				  magit-status-mode-hook

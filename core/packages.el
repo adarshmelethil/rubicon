@@ -233,7 +233,6 @@ to `magit-dispatch'."
   :config
   (setq highlight-thing-delay-seconds 0)
   (global-highlight-thing-mode))
-;; (set-face-attribute 'hi-yellow nil :background "#bfb904" :foreground "#070494")
 
 (use-package treemacs
   :config

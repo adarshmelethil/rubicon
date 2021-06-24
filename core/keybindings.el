@@ -56,6 +56,7 @@
     "TAB n" 'rubicon/workspace-new
     "TAB r" 'persp-rename
 
+    ;; TODO: persp-switch-by-number
     ,@(-flatten-n 1 (--map (let ((str-num (number-to-string it)))
 			     (list (concat "TAB " str-num) `(ilm (rubicon/workspace-switch ,str-num))))
 			   (number-sequence 1 9)))
@@ -118,7 +119,7 @@
 
     ;; Projectile
     "p a" 'projectile-add-known-project
-    "p p" 'projectile-switch-project
+    "p p" 'rubicon/projectile-switch-project
     "p SPC" '+ivy/projectile-find-file
     "p r" 'projectile-replace
     "p s" 'projectile-save-project-buffers
